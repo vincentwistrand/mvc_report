@@ -1,41 +1,75 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather|Source+Sans+Pro');
 
-html {
-    font-size: 100%;
-    height: 100%;
-}
+/* --------------- All --------------- */
 
-body {
-    background-color: #FFFFFF;
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Source Sans Pro', sans-serif;
-    line-height: 1.4;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
-/*Header*/
+.grid { display: grid; }
+
+/* --------------- Layout --------------- */
+
+.wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    grid-template-columns: 0 auto;
+    grid-template-rows: 300px auto 40px;
+}
+
+/* --------------- Header --------------- */
+
 .siteheader {
+    grid-column: 1 / 3;
+    grid-row: 1 / 1;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/headimg.png");
     background-repeat: no-repeat;
     background-position: center;
+    background-attachment: scroll;
     background-size: cover;
-    height: 300px;
     color: #FFFFFF;
+
+
+    grid-template-columns: 0 auto;
+    grid-template-rows: 73px 100px 100px 50px;
 }
 
-.head {
+.head,
+.head2 {
     font-size: 60px;
     text-align: center;
-    position: relative; top: 50px;
     color: #E0FFFF;
 }
 
-/*nav*/
+.kurs {
+  grid-column: 1 / 3;
+  grid-row: 1 / 1;
+}
+
+.head {
+  grid-column: 1 / 3;
+  grid-row: 2 / 2;
+}
+
+.head2 {
+    font-size: 35px;
+    grid-column: 1 / 3;
+    grid-row: 3 / 3;
+}
+
+
+/* --------------- Navbar  --------------- */
+.navbar {
+  grid-column: 1 / 3;
+  grid-row: 4 / 4;
+  text-align: center;
+}
+
 nav {
     text-align: center;
-    position: relative; bottom: 30px;
 }
 
 nav a {
@@ -62,13 +96,17 @@ nav a:hover {
     color: #000000 !important;
 }
 
-/*Homepage*/
+
+/* --------------- Content  --------------- */
+
 .main {
-    padding: 1em 2em;
-    width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 3em;
+    background-color: #FFFFFF;
+    grid-column: 2 / 2;
+    grid-row: 2 / 3;
+    min-height: 630px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 50px 30px;
 }
 
 .homepage_row {
@@ -76,16 +114,55 @@ nav a:hover {
     flex-direction: row;
 }
 
-/*Footer*/
+.php_img {
+    width: 400px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --------------- Footer --------------- */
+
 .sitefooter {
-    margin-top: auto;
-    width: 100%;
-    height: 50px;
+    grid-column: 1 / 3;
+    grid-row: 3 / 3;
+
     background-color: rgba(0, 0, 0, 0.7);
     color: #F5FFFA;
 }
 
 .foot {
     text-align: center;
-    position: relative; top: 15px;
+    position: relative; top: 10px;
+}
+
+/* --------------- Responsiveness --------------- */
+
+@media screen and (max-width: 920px) {
+    .siteheader {
+        grid-template-rows: 50px 140px 65px 50px;
+        padding: 1em;
+    }
+
+    .head {
+        line-height: 3.5rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .head {
+        font-size: 40px;
+    }
+
+    .head2 {
+        font-size: 15px;
+    }
+
+    .homepage_row {
+        flex-direction: column;
+    }
+
+    nav a {
+        margin: 17px 0;
+    }
 }

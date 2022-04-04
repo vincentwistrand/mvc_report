@@ -1,34 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset("css/style.css") }}"/>
-    </head>
-    <body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset("css/style.css") }}"/>
 
-        <div class="siteheader">
-            <p style="margin: 0;">mvc (v2)</p>
-            <div class="head">Objektorienterade webbteknologier</div>
-            <div class="head" style="font-size: 35px;">Vincent Wistrand viai20</div>
+</head>
+<body>
+    <div class="grid wrapper">
+        <div class="grid siteheader">
+            <p class="kurs">mvc (v2)</p>
+            <h1 class="head">Objektorienterade webbteknologier</h1>
+            <h2 class="head2">Vincent Wistrand viai20</h2>
+            <div class="navbar">
+                <nav>
+                   <a href="{{ url("home") }}" {% if app.request.pathinfo == "/" %}class="active"{% endif %}>Home</a>
+                   <a href="{{ path("report") }}" {% if app.request.pathinfo == "/report" %}class="active"{% endif %}>Report</a>
+                   <a href="{{ path("about") }}" {% if app.request.pathinfo == "/about" %}class="active"{% endif %}>About</a>
+                   <a href="{{ path("debug") }}" {% if app.request.pathinfo == "/dev/debug" %}class="active"{% endif %}>Debug</a>
+                </nav>
+            </div>
         </div>
 
-        <div class="navbar">
-            <nav>
-                    <a href="{{ url("home") }}" {% if app.request.pathinfo == "/" %}class="active"{% endif %}>Home</a>
-                    <a href="{{ path("report") }}" {% if app.request.pathinfo == "/report" %}class="active"{% endif %}>Report</a>
-                    <a href="{{ path("about") }}" {% if app.request.pathinfo == "/about" %}class="active"{% endif %}>About</a>
-                    <a href="{{ path("debug") }}" {% if app.request.pathinfo == "/dev/debug" %}class="active"{% endif %}>Debug</a>
-            </nav>
-        </div>
 
         {% block content %}
-        Default content
+            Default content
         {% endblock %}
 
         <div class="sitefooter">
             <div class="foot">Copyright @ viai20</div>
         </div>
-
-    </body>
+    </div>
+</body>
 </html>
