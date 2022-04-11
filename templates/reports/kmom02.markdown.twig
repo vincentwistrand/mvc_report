@@ -1,3 +1,24 @@
 ## kmom02
 
-bra kmom
+Arv i objektsorientering är att en klass kan ärva en annan klass, dvs kopierar dess funktioner. 
+Den ärvande klassen kallas subklass och den ärvda för superklass och man kan sedan bygga vidare i subklassen utifrån superklassen.
+Komposition är en relation mellan klasser där båda klasserna kan existera oberoende av varandra.
+T ex så fortsätter Card-klassen att existera även om Deck-klassen försvinner, man kan skapa nya kortobjekt ändå.
+En Trait är en kodmodul som innehåller medlemsvariabler och metoder.
+Klasser kan använda sig av koden och det fungerar ungerfär som arv där innehållet "kopieras" in i klassen.
+Här är det bra att lägga kod som kan återanvändas av flera klasser så blir det mindre kod.
+Ett Interface innehåller att antal namn på metoder som man vill att en klass ska innehålla.
+När man kopplar interfacet till klassen så är det som att säga att klassen måste innehålla dessa metoder.
+
+Det gick bra att lösa uppgiften förutom att jag glömde commita alla småsteg till github.
+Ska tänka på det vid nästa kmom.
+Jag skapade fyra klasser: Card, Deck, DeckWithTwoJokers and Player.
+Deck och DeckWithTwoJokers använder samma trait men olika interface där DeckWithTwoJokers's interface också innehåller metoden för att lägga till två jokrar.
+Alla routes använder samma kortlek via session och den kan återställas via card/deck/shuffle eller card/api/deck/shuffle.
+För att visa korten grafiskt använde jag CSS-sprite.
+
+TIL:en för detta kmom är CSS-sprite och hur man använder det. 
+Jag började med att använda massor av små enskilda bilder på varje kort men det var ju mycket smidigare att bara använda en stor och kunna använda delar av den.
+
+
+
