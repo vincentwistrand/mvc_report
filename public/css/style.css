@@ -121,6 +121,71 @@ nav a:hover {
     margin-right: auto;
 }
 
+/**
+ * CSS sprite for deck.
+ */
+ .card-sprite {
+    display: inline-block;
+    padding: 0;
+    margin: 0 4px 0 0;
+    width: 131px;
+    height: 180px;
+    background: url(../img/allakort.JPG) no-repeat;
+}
+
+.card-sprite.KloverEss { background-position: -10px -10px; }
+.card-sprite.Klover2 { background-position: -145px -10px; }
+.card-sprite.Klover3 { background-position: -279px -10px; }
+.card-sprite.Klover4 { background-position: -414px -10px; }
+.card-sprite.Klover5 { background-position: -548px -10px; }
+.card-sprite.Klover6 { background-position: -683px -10px; }
+.card-sprite.Klover7 { background-position: -817px -10px; }
+.card-sprite.Klover8 { background-position: -951px -10px; }
+.card-sprite.Klover9 { background-position: -1085px -10px; }
+.card-sprite.Klover10 { background-position: -1220px -10px; }
+.card-sprite.KloverKnekt { background-position: -1355px -10px; }
+.card-sprite.KloverDam { background-position: -1489px -10px; }
+.card-sprite.KloverKung { background-position: -1624px -10px; }
+.card-sprite.SpaderEss { background-position: -10px -190px; }
+.card-sprite.Spader2 { background-position: -145px -190px; }
+.card-sprite.Spader3 { background-position: -279px -190px; }
+.card-sprite.Spader4 { background-position: -414px -190px; }
+.card-sprite.Spader5 { background-position: -548px -190px; }
+.card-sprite.Spader6 { background-position: -683px -190px; }
+.card-sprite.Spader7 { background-position: -817px -190px; }
+.card-sprite.Spader8 { background-position: -951px -190px; }
+.card-sprite.Spader9 { background-position: -1085px -190px; }
+.card-sprite.Spader10 { background-position: -1220px -190px; }
+.card-sprite.SpaderKnekt { background-position: -1355px -190px; }
+.card-sprite.SpaderDam { background-position: -1489px -190px; }
+.card-sprite.SpaderKung { background-position: -1624px -190px; }
+.card-sprite.HjarterEss { background-position: -10px -370px; }
+.card-sprite.Hjarter2 { background-position: -145px -370px; }
+.card-sprite.Hjarter3 { background-position: -279px -370px; }
+.card-sprite.Hjarter4 { background-position: -414px -370px; }
+.card-sprite.Hjarter5 { background-position: -548px -370px; }
+.card-sprite.Hjarter6 { background-position: -683px -370px; }
+.card-sprite.Hjarter7 { background-position: -817px -370px; }
+.card-sprite.Hjarter8 { background-position: -951px -370px; }
+.card-sprite.Hjarter9 { background-position: -1085px -370px; }
+.card-sprite.Hjarter10 { background-position: -1220px -370px; }
+.card-sprite.HjarterKnekt { background-position: -1355px -370px; }
+.card-sprite.HjarterDam { background-position: -1489px -370px; }
+.card-sprite.HjarterKung { background-position: -1624px -370px; }
+.card-sprite.RuterEss { background-position: -10px -550px; }
+.card-sprite.Ruter2 { background-position: -145px -550px; }
+.card-sprite.Ruter3 { background-position: -279px -550px; }
+.card-sprite.Ruter4 { background-position: -414px -550px; }
+.card-sprite.Ruter5 { background-position: -548px -550px; }
+.card-sprite.Ruter6 { background-position: -683px -550px; }
+.card-sprite.Ruter7 { background-position: -817px -550px; }
+.card-sprite.Ruter8 { background-position: -951px -550px; }
+.card-sprite.Ruter9 { background-position: -1085px -550px; }
+.card-sprite.Ruter10 { background-position: -1220px -550px; }
+.card-sprite.RuterKnekt { background-position: -1355px -550px; }
+.card-sprite.RuterDam { background-position: -1489px -550px; }
+.card-sprite.RuterKung { background-position:-1624px -550px; }
+
 /* --------------- Footer --------------- */
 
 .sitefooter {
