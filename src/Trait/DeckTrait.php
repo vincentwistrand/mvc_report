@@ -2,7 +2,7 @@
 
 namespace App\Trait;
 
-use App\Functions\console_log;
+use App\Helpfunctions\console_log;
 use App\Card\Card;
 
 trait DeckTrait

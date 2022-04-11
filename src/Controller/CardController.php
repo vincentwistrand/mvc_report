@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-use App\Functions\console_log;
+use App\Helpfunctions\console_log;
 
 class CardController extends AbstractController
 {
