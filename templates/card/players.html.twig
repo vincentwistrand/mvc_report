@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Players{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<h2>Kort kvar: {{ cards_left }}</h2>
+
+{% for player in all_players %}
+
+    <h3>Player {{ player.player_number }}</h3>
+
+    {% for card in player.getHand %}
+    <i class="card-sprite {{ card.colour }}{{ card.rank }}"></i>
+    {% endfor %}
+    
+{% endfor %}
+
+{% endblock %}

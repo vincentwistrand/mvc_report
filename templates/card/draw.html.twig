@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Draw{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+{% for card in drawn_cards %}
+    {% if card.rank != "Joker" %}
+        <i class="card-sprite {{ card.colour }}{{ card.rank }}"></i>
+    {% endif %}
+    {% if card.rank == "Joker" %}
+        <img src="/img/{{ card.rank }}.JPG" width="135px" height="180px" alt="kort">
+    {% endif %}
+{% endfor %}
+
+<h3>Kort kvar: {{ cards_left }}</h3>
+
+{% endblock %}

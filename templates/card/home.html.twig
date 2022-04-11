@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<p><a href="{{ link_to_card_deck }}">card/deck</a></p>
+<p><a href="{{ link_to_card_shuffle }}">card/deck/shuffle</a></p>
+<p><a href="{{ link_to_card_draw }}">card/deck/draw</a></p>
+<p>card/deck/draw/:number</p>
+<p>card/deck/deal/:player/:cards</p><br>
+<p><a href="{{ link_to_card_deck2 }}">card/deck2</a></p><br>
+<p><a href="{{ link_to_card_api }}">card/api/deck</a></p>
+<p><a href="{{ link_to_card_api_shuffle }}">card/api/deck/shuffle</a></p>
+<p><a href="{{ link_to_card_api_draw }}">card/api/deck/draw</a></p>
+<p>card/api/deck/draw/:number</p>
+<p>card/api/deck/deal/:player/:cards</p><br>
+
+{% endblock %}
