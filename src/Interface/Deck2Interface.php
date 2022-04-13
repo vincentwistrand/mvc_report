@@ -4,7 +4,6 @@ namespace App\Interface;
 
 interface Deck2Interface
 {
-
     /**
      * Get all cards in deck.
      *
@@ -33,7 +32,7 @@ interface Deck2Interface
      */
     public function drawCards(int $number);
 
-        /**
+    /**
      * Add two jokers to the deck.
      *
      * @return void

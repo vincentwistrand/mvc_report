@@ -13,8 +13,8 @@ class CardAPIController extends AbstractController
     /**
     * @Route("/card/api/deck", name="api-deck")
     */
-    public function sortedAPI( SessionInterface $session ): Response
-    {   
+    public function sortedAPI(SessionInterface $session): Response
+    {
         $deck = $session->get('deck');
         $deck->sortCards();
         $json = json_encode($deck->getDeck());
@@ -30,8 +30,8 @@ class CardAPIController extends AbstractController
     /**
     * @Route("/card/api/deck/shuffle", name="api-shuffle")
     */
-    public function shuffleAPI( SessionInterface $session ): Response
-    {   
+    public function shuffleAPI(SessionInterface $session): Response
+    {
         $deck = $session->get('deck');
         $deck->shuffleCards();
         $json = json_encode($deck->getDeck());
@@ -47,8 +47,8 @@ class CardAPIController extends AbstractController
     /**
     * @Route("/card/api/deck/draw", name="api-draw")
     */
-    public function drawOne( SessionInterface $session ): Response
-    {   
+    public function drawOne(SessionInterface $session): Response
+    {
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards(1);
 
@@ -67,12 +67,12 @@ class CardAPIController extends AbstractController
      *      "/card/api/deck/draw/{number}",
      *      name="api-draw-number",
      *      methods={"GET","HEAD"})
-     * 
+     *
      */
-    public function drawCards( 
+    public function drawCards(
         int $number,
-        SessionInterface $session ): Response
-    {
+        SessionInterface $session
+    ): Response {
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards($number);
 
@@ -86,23 +86,23 @@ class CardAPIController extends AbstractController
         return $this->render('card/api.html.twig', $data);
     }
 
-            /**
+    /**
      * @Route(
      *      "/card/api/deck/deal/{players}/{cards}",
      *      name="card-api-draw-players-cards",
      *      methods={"GET","HEAD"})
-     * 
+     *
      */
-    public function drawCardsToPlayers( 
+    public function drawCardsToPlayers(
         int $players,
         int $cards,
-        SessionInterface $session ): Response
-    {
+        SessionInterface $session
+    ): Response {
         $session->set('players', array());
         $allPlayers = $session->get('players');
         $deck = $session->get('deck');
 
-        for ($i=1; $i <= $players; $i++) { 
+        for ($i = 1; $i <= $players; $i++) {
             $drawnCards = $deck->drawCards($cards);
 
             $newPlayer = new \App\Card\Player($i);

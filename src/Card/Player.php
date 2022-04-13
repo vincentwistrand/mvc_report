@@ -3,7 +3,7 @@
 namespace App\Card;
 
 class Player
-{   
+{
     public $player_number = "";
     public $hand = "";
 

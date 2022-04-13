@@ -4,7 +4,6 @@ namespace App\Interface;
 
 interface DeckInterface
 {
-
     /**
      * Get all cards in deck.
      *

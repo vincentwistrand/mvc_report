@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
 use App\Helpfunctions\console_log;
 
 class CardController extends AbstractController
@@ -15,14 +14,14 @@ class CardController extends AbstractController
     /**
     * @Route("/card", name="card")
     */
-    public function home( SessionInterface $session ): Response
-    {   
+    public function home(SessionInterface $session): Response
+    {
         if (null === $session->get('deck')) {
             $session->set('deck', new \App\Card\Deck());
             $deck = $session->get('deck');
             $deck->createDeck();
         }
-        
+
         $deck = $session->get('deck');
 
         //\App\Functions\console_log($deckApi->getDeck());
@@ -44,7 +43,7 @@ class CardController extends AbstractController
     /**
     * @Route("/card/deck", name="card-deck")
     */
-    public function allOrdered( SessionInterface $session ): Response
+    public function allOrdered(SessionInterface $session): Response
     {
         $deck = $session->get('deck');
         $deck->sortCards();
@@ -61,8 +60,8 @@ class CardController extends AbstractController
     /**
     * @Route("/card/deck2", name="card-deck2")
     */
-    public function deck2Ordered( SessionInterface $session ): Response
-    {   
+    public function deck2Ordered(SessionInterface $session): Response
+    {
         $session->set('deck', new \App\Card\Deck());
         $deck = $session->get('deck');
         $deck->createDeck();
@@ -80,7 +79,7 @@ class CardController extends AbstractController
     /**
     * @Route("/card/deck/shuffle", name="card-shuffle")
     */
-    public function shuffle( SessionInterface $session ): Response
+    public function shuffle(SessionInterface $session): Response
     {
         $deck = $session->get('deck');
         $deck->shuffleCards();
@@ -97,7 +96,7 @@ class CardController extends AbstractController
     /**
     * @Route("/card/deck/draw", name="card-draw")
     */
-    public function drawOne( SessionInterface $session ): Response
+    public function drawOne(SessionInterface $session): Response
     {
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards(1);
@@ -117,12 +116,12 @@ class CardController extends AbstractController
      *      "/card/deck/draw/{number}",
      *      name="card-draw-number",
      *      methods={"GET","HEAD"})
-     * 
+     *
      */
-    public function drawCards( 
+    public function drawCards(
         int $number,
-        SessionInterface $session ): Response
-    {
+        SessionInterface $session
+    ): Response {
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards($number);
         $cardsLeft = count($deck->getDeck());
@@ -136,23 +135,23 @@ class CardController extends AbstractController
         return $this->render('card/draw.html.twig', $data);
     }
 
-        /**
+    /**
      * @Route(
      *      "/card/deck/deal/{players}/{cards}",
      *      name="card-draw-players-cards",
      *      methods={"GET","HEAD"})
-     * 
+     *
      */
-    public function drawCardsToPlayers( 
+    public function drawCardsToPlayers(
         int $players,
         int $cards,
-        SessionInterface $session ): Response
-    {
+        SessionInterface $session
+    ): Response {
         $session->set('players', array());
         $allPlayers = $session->get('players');
         $deck = $session->get('deck');
 
-        for ($i=1; $i <= $players; $i++) { 
+        for ($i = 1; $i <= $players; $i++) {
             $drawnCards = $deck->drawCards($cards);
 
             $newPlayer = new \App\Card\Player($i);
