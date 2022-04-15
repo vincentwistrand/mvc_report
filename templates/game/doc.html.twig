@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Dokumentation{% endblock %}
+
+{% block content %}
+
+{% apply markdown_to_html %}
+
+# Dokumentation<br><br>
+
+<img class="flowchart" src="../img/flowchart.png" alt="flowchart"><br><br>
+
+{% endapply %}
+
+{% endblock %}
