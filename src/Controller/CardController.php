@@ -155,10 +155,29 @@ class CardController extends AbstractController
             $drawnCards = $deck->drawCards($cards);
 
             $newPlayer = new \App\Card\Player($i);
-            $newPlayer->setHand($drawnCards);
-
+            foreach ($drawnCards as $card) {
+                $newPlayer->addCard($card);
+            }
+            
             $allPlayers[] = $newPlayer;
         }
+
+
+            //$drawnCards = $deck->drawCards($cards);
+
+            //$newPlayer = new \App\Card\Player($i);
+            //$newCardHand = new \App\Card\CardHand();
+            //$newPlayer->setHand($newCardHand);
+
+            //$playerHand = $newPlayer->getHandObject();
+
+            //foreach ($drawnCards as $card) {
+            //    $playerHand->addCard($card);
+            //}
+
+            //$allPlayers[] = $newPlayer;
+            //\App\Functions\console_log($newPlayer->getHandCards());
+        
 
         $cardsLeft = count($deck->getDeck());
 
