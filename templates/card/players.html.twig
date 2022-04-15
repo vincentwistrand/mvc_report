@@ -9,9 +9,9 @@
 
 {% for player in all_players %}
 
-    <h3>Player {{ player.player_number }}</h3>
+    <h3>Player {{ player.player_id }}</h3>
 
-    {% for card in player.getHand %}
+    {% for card in player.getCards %}
     <i class="card-sprite {{ card.colour }}{{ card.rank }}"></i>
     {% endfor %}
     
