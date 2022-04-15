@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Helpfunctions\console_log;
 
 class CardAPIController extends AbstractController
 {
@@ -106,8 +107,10 @@ class CardAPIController extends AbstractController
             $drawnCards = $deck->drawCards($cards);
 
             $newPlayer = new \App\Card\Player($i);
-            $newPlayer->setHand($drawnCards);
-
+            foreach ($drawnCards as $card) {
+                $newPlayer->addCard($card);
+            }
+            
             $allPlayers[] = $newPlayer;
         }
 
