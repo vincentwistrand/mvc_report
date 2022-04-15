@@ -102,27 +102,14 @@ class GameController extends AbstractController
         $game = $session->get("game") ?? 0;
 
         if ($draw) {
-            $card = $game->$this->deck->drawCards(1);
-            $game->set
+            $card = $game->drawCardFromDeck();
 
             $cardPoints = $card->$this->points;
 
 
-
-            $this->addFlash("error", "You rolled 1 and looses your points.");
-            $this->addFlash("info", "You saved $sum points.");
-
         } elseif ($stop) {
-            $this->addFlash("info", "You saved $sum points.");
-            $saved += $sum;
-            $sum = 0;
-            $session->set("saved", $saved);
-            $session->set("sum", 0);
+
         }
-
-        $this->addFlash("info", "You have currently $sum points (not saved).");
-        $this->addFlash("info", "You have currently $saved saved points.");
-
-        return $this->redirectToRoute('form-session');
+        return $this->redirectToRoute('game-start');
     }
 }
