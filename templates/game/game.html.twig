@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<h2>Kortpoäng: {{ player_points }}</h2>
+
+<div>
+    <div>
+        <h3>player</h3>
+        <form method="post">
+        <p><input type="submit" name="draw" value="draw"></p>
+        {% if player_points != 0 %}
+        <p><input type="submit" name="stop" value="stop"></p>
+        {% endif %}
+        </form>
+        {{ include('block/flash-message.html.twig') }}
+        {% for card in player_hand %}
+            <i class="card-sprite {{ card.colour }}{{ card.rank }}"></i>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
