@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Game{% endblock %}
+
+{% block content %}
+
+{% apply markdown_to_html %}
+
+# Om spelet
+
+Jag har valt kortspelet "21". Spelaren tilldelas ett kort åt gången och kan få max tre kort.
+För varje kort spelaren får så kan hen välja om hen vill stanna eller få nästa kort.
+Därefter är det bankens tur att göra likadant utan att ha sett spelarens kort.
+Om spelarens kort tillsammans överstiger 21 vinner banken och vice versa.
+Om båda parternas händer är mindre än 22 så vinner den som har högst poäng och vid lika poäng vinner banken.
+Knektar = 11poäng, damer = 12 poäng, kungar = 13 poäng, ess = 14 eller 1 poäng och resten av korten = sitt värde.<br><br>
+
+<div><a role="button" href="{{ link_to_game_doc }}">Game doc</a></div>
+
+{% endapply %}
+
+<div class="start_button"><a role="button" href="{{ link_to_game_start }}">Start game</a></div>
+
+{% endblock %}
