@@ -2,23 +2,23 @@
 
 namespace App\Card;
 
-class Player
+class Player extends CardHand
 {
-    public $player_number = "";
-    public $hand = "";
+    public $player_id;
+    private $points = 0;
 
-    public function __construct(int $player_number)
+    public function __construct(string $player_name)
     {
-        $this->player_number = $player_number;
+        $this->player_id = $player_name;
     }
 
-    public function getHand(): array
-    {
-        return $this->hand;
+    public function getPoints(): int
+    {   
+        return $this->points;
     }
 
-    public function setHand(array $cards)
-    {
-        $this->hand = $cards;
+    public function addPoints(int $points): void
+    {   
+        $this->points +=$points;
     }
 }
