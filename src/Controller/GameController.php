@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use App\Helpfunctions\console_log;
 
 class GameController extends AbstractController
 {
@@ -19,8 +18,17 @@ class GameController extends AbstractController
      *      name="game",
      *      methods={"GET","HEAD"})
      */
-    public function home(): Response
+    public function home(SessionInterface $session): Response
     {
+        $session->set('game', new \App\Card\Game());
+        $game = $session->get('game');
+        $game->newRound();
+
+        if (null === $session->get('player_points') or null === $session->get('bank_points')) {
+            $session->set('player_points', 0);
+            $session->set('bank_points', 0);
+        }
+
         $data = [
             'title' => 'Game',
             'link_to_game_start' => $this->generateUrl('game-start'),
@@ -49,37 +57,40 @@ class GameController extends AbstractController
      *      name="game-start",
      *      methods={"GET","HEAD"})
      */
-    public function startGame( 
-        SessionInterface $session 
-        ): Response
-    {   
+    public function startGame(
+        SessionInterface $session
+    ): Response {
         if (null === $session->get('game')) {
             $session->set('game', new \App\Card\Game());
             $game = $session->get('game');
-
-            $game = new \App\Card\Game();
-            $bank = new \App\Card\Player("Bank");
-            $player = new \App\Card\Player("Player");
-            $deck = new \App\Card\Deck();
-
-            $game->setBank($bank);
-            $game->setPlayer($player);
-            $game->setDeck($deck);
+            $game->newRound();
         }
 
         $game = $session->get('game');
 
-        //\App\Functions\console_log($game->getBankId());
-
         $player_hand = $game->getPlayerCards();
-        $player_points = $game->getPlayerPoints();
-        $drawCount = $game->getPlayerCardCount();
+        $bank_hand = $game->getBankCards();
+
+        $player_hand_points = $game->getPlayerPoints();
+        $bank_hand_points = $game->getBankPoints();
+
+        $player_points = $session->get('player_points');
+        $bank_points = $session->get('bank_points');
+
+        $gameEnd = $game->getGameEnd();
+
+        //\App\Helpfunctions\console_log($player_points);
 
         $data = [
             'title' => 'Kortspel 21',
-            'number_of_draws' => $drawCount,
+            'game_end' => $gameEnd,
             'player_hand' => $player_hand,
-            'player_points' => $player_points
+            'bank_hand' => $bank_hand,
+            'player_hand_points' => $player_hand_points,
+            'bank_hand_points' => $bank_hand_points,
+            'player_points' => $player_points,
+            'bank_points' => $bank_points
+
         ];
         return $this->render('game/game.html.twig', $data);
     }
@@ -92,24 +103,23 @@ class GameController extends AbstractController
      *      methods={"POST"}
      * )
      */
-    public function sessionProcess(
+    public function startGamePost(
         Request $request,
         SessionInterface $session
     ): Response {
         $draw  = $request->request->get('draw');
         $stop  = $request->request->get('stop');
+        $new_round  = $request->request->get('new_round');
+        $reset  = $request->request->get('reset');
 
-        $game = $session->get("game") ?? 0;
+        $result = \app\helpfunctions\check_input($draw, $stop, $new_round, $reset, $session);
 
-        if ($draw) {
-            $card = $game->drawCardFromDeck();
-
-            $cardPoints = $card->$this->points;
-
-
-        } elseif ($stop) {
-
+        if ($result === "player") {
+            $this->addFlash("info", "You Win!");
+        } elseif ($result === "bank") {
+            $this->addFlash("info", "Bank Win!");
         }
+
         return $this->redirectToRoute('game-start');
     }
 }
