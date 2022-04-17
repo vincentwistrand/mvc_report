@@ -7,13 +7,22 @@ use App\Card\Card;
 
 trait DeckTrait
 {
-    protected $cards = array();
+    /**
+    * @var array<object>
+    */
+    private array $cards = array();
 
+    /**
+    * @return array<object>
+    */
     public function getDeck(): array
     {
         return $this->cards;
     }
 
+    /**
+    * @return void
+    */
     public function createDeck(): void
     {
         $points = array('2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14');
@@ -30,12 +39,18 @@ trait DeckTrait
         }
     }
 
+    /**
+    * @return void
+    */
     public function sortCards(): void
     {
         asort($this->cards);
         $this->cards = array_values($this->cards);
     }
 
+    /**
+    * @return void
+    */
     public function shuffleCards(): void
     {
         $this->cards = array();
@@ -51,6 +66,9 @@ trait DeckTrait
         }
     }
 
+    /**
+    * @return array<object>
+    */
     public function drawCards(int $number): array
     {
         $cards = array();
@@ -65,6 +83,21 @@ trait DeckTrait
         return $cards;
     }
 
+    /**
+    * @return object
+    */
+    public function drawCard(): object
+    {
+        $card = $this->cards[0];
+        unset($this->cards[0]);
+        $this->cards = array_values($this->cards);
+
+        return $card;
+    }
+
+    /**
+    * @return void
+    */
     public function addJokers(): void
     {
         $this->cards[] = new \App\Card\Card("Joker");
