@@ -99,7 +99,7 @@ nav a:hover {
 }
 
 
-/* --------------- Content  --------------- */
+/* --------------- Home  --------------- */
 
 .main {
     background-color: #FFFFFF;
@@ -116,6 +116,8 @@ nav a:hover {
     flex-direction: row;
 }
 
+/* --------------- About  --------------- */
+
 .php_img {
     width: 400px;
     height: 200px;
@@ -123,10 +125,21 @@ nav a:hover {
     margin-right: auto;
 }
 
+/* --------------- Game  --------------- */
+
 .flowchart {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.game_ground {
+    display: flex;
+    flex-direction: row;
+}
+
+.game_ground div {
+    margin-right: 50px;
 }
 
 .start_button {
@@ -135,7 +148,8 @@ nav a:hover {
     width: 130px;
 }
 
-.start_button a {
+.start_button a,
+.game_buttons div input {
     appearance: none;
     background-color: #000000;
     border: 2px solid #1A1A1A;
@@ -163,18 +177,29 @@ nav a:hover {
     will-change: transform;
 }
 
-.start_button a:disabled {
+.start_button a:disabled,
+.game_buttons div input:disabled  {
     pointer-events: none;
 }
 
-.start_button a:hover {
+.start_button a:hover,
+.game_buttons div input:hover  {
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
     transform: translateY(-2px);
 }
 
-.start_button a:active {
+.start_button a:active,
+.game_buttons div input:active  {
     box-shadow: none;
     transform: translateY(0);
+}
+
+.game_buttons {
+    margin-top: 30px;
+}
+
+.game_buttons div {
+    margin: 10px 10px 10px 0;
 }
 
 /**
