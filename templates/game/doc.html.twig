@@ -12,12 +12,39 @@
 <blockquote>
     <pre>
         <code>
-            [if condition]
-                fsdjaeig
-            [endif]
+            <b>Player draws one card at a time:</b><br>
+                    [if total card points > 21]
+                            Bank wins
+                    [endif]<br>
+                    [if total number of cards >= 3]
+                            Bank's turn
+                    [endif]<br>
+
+            <b>Bank draws one card at a time:</b><br>
+                    [if total card points > 21]
+                            Player wins
+                    [endif]<br>
+                    [if second card = 17 or less]
+                            End of game
+                    [endif]<br>
+                    [if total number of cards >= 3]
+                            End of game
+                    [endif]<br>
+
+            <b>End of game:</b><br>
+                    [if player points > bank points]
+                            Player wins
+                    [else]
+                            Bank wins
+                    [endif]
         </code>
     </pre>
 </blockquote>
+
+Det behövs en Game-klass med variabler såsom deck, player, bank, player_points, bank_points och game_end. Syftet med Game-klassen är att hantera spelet.
+Det behövs en Deck-klass som kan skapa och sortera en kortlek som Game-klassen kan använda.
+Det behövs en Player-klass som kan representera spelarna. Player-klassen kan använda sig av en CardHand-klass som kan hålla ett antal kort.
+
 
 {% endapply %}
 
