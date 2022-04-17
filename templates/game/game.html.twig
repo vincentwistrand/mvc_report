@@ -3,24 +3,52 @@
 {% block title %}Card{% endblock %}
 
 {% block content %}
-<h1>{{ title }}</h1>
-
-<h2>Kortpoäng: {{ player_points }}</h2>
-
-<div>
+<div class="game_ground">
     <div>
-        <h3>player</h3>
-        <form method="post">
-        <p><input type="submit" name="draw" value="draw"></p>
-        {% if player_points != 0 %}
-        <p><input type="submit" name="stop" value="stop"></p>
-        {% endif %}
+        <h1 style="font-size: 40px;">{{ title }}</h1>
+
+        <h2>Din poäng: {{ player_points }}</h2>
+        <h2>Bankens poäng: {{ bank_points }}</h2>
+
+        <form method="post" class="game_buttons">
+            {% if game_end == false %}
+                <div><input type="submit" name="draw" value="Draw"></div>
+                {% if player_hand_points != 0 %}
+                    <div><input type="submit" name="stop" value="Stop"></div>
+                {% endif %}
+            {% endif %}
+            {% if game_end == true %}
+                <div><input type="submit" name="new_round" value="New round"></div>
+            {% endif %}
+            <div><input type="submit" name="reset" value="Reset Game"></div>
         </form>
-        {{ include('block/flash-message.html.twig') }}
-        {% for card in player_hand %}
-            <i class="card-sprite {{ card.colour }}{{ card.rank }}"></i>
-        {% endfor %}
+    </div>
+
+    <div>
+        <h1 style="font-size: 50px;">{{ include('block/flash-message.html.twig') }}</h1>
+        {% if player_hand_points != 0 %}
+            <h2>Dina kortpoäng: {{ player_hand_points }}</h2>
+        {% endif %}
+
+        <div>
+            <div>
+                {% for card in player_hand %}
+                    <i class="card-sprite {{ card.colour }}{{ card.rank }}"></i>
+             {% endfor %}
+            </div>
+        </div>
+
+        {% if bank_hand_points != 0 %}
+            <h2>Bankens kortpoäng: {{ bank_hand_points }}</h2>
+        {% endif %}
+
+        <div>
+            <div>
+                {% for card in bank_hand %}
+                    <i class="card-sprite {{ card.colour }}{{ card.rank }}"></i>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
-
 {% endblock %}
