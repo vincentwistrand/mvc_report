@@ -75,7 +75,7 @@ trait DeckTrait
 
         for ($i = 0; $i < $number; $i++) {
             $card = $this->cards[0];
-            $cards[] = $card;
+            $this->cards[] = $card;
             unset($this->cards[0]);
             $this->cards = array_values($this->cards);
         }

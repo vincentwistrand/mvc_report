@@ -2,7 +2,7 @@
 
 namespace App\Helpfunctions;
 
-function check_input($draw, $stop, $new_round, $reset, $session): string
+function check_input(mixed $draw, mixed $stop, mixed $new_round, mixed $reset, object $session): string
 {
     $game = $session->get("game") ?? 0;
     $player_point = $session->get('player_points');
@@ -29,7 +29,6 @@ function check_input($draw, $stop, $new_round, $reset, $session): string
                     return "bank";
                 }
             }
-            return "continue";
         }
     } elseif ($stop) {
         $game->drawCardsToBank();
@@ -49,12 +48,12 @@ function check_input($draw, $stop, $new_round, $reset, $session): string
                 return "bank";
             }
         }
+
     } elseif ($new_round) {
         $session->set('game', new \App\Card\Game());
         $game = $session->get('game');
         $game->newRound();
 
-        return "continue";
     } elseif ($reset) {
         $session->set('game', new \App\Card\Game());
         $game = $session->get('game');
@@ -64,7 +63,6 @@ function check_input($draw, $stop, $new_round, $reset, $session): string
         $bank_point = 0;
         $session->set('player_points', $player_point);
         $session->set('bank_points', $bank_point);
-
-        return "continue";
     }
+    return "continue";
 }
