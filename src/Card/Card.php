@@ -4,11 +4,11 @@ namespace App\Card;
 
 class Card
 {
-    public $colour = "";
-    public $points = "";
-    public $rank = "";
+    public ?string $colour = "";
+    public ?string $points = "";
+    public ?string $rank = "";
 
-    public function __construct($rank = "", $colour = "", $points = "")
+    public function __construct(?string $rank = "", ?string $colour = "", ?string $points = "")
     {
         $this->colour = $colour;
         $this->rank = $rank;
