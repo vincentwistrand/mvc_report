@@ -3,63 +3,154 @@
 namespace App\Card;
 
 class Game
-{
-    private $bank;
-    private $player;
-    private $deck;
+{   
+    private object $bank;
+    private object $player;
+    private object $deck;
+    private int $playerPoints = 0;
+    private int $bankPoints = 0;
+    private bool $gameEnd = false;
 
-    public function setBank(object $bank): void
+    /**
+    * @return void
+    */
+    public function newRound(): void
     {
-        $this->bank = $bank;
+        $this->bank = new \App\Card\Player("Bank");
+        $this->player = new \App\Card\Player("Player");
+        $this->deck = new \App\Card\Deck();
+        $this->deck->shuffleCards();
     }
 
-    public function setPlayer(object $player): void
-    {   
-        $this->player = $player;
+    /**
+    * @return void
+    */
+    public function drawCardToPlayer(): void
+    {
+        $card = $this->deck->drawCard();
+        $this->player->addCard($card);
+        $this->playerPoints += $card->points;
     }
 
-    public function setDeck(object $deck): void
-    {   
-        $this->deck = $deck;
+    /**
+    * @return void
+    */
+    public function drawCardsToBank(): void
+    {
+        $card = $this->deck->drawCard();
+        $this->bank->addCard($card);
+        $this->bankPoints += $card->points;
+
+        if ($this->bankPoints <= 21) {
+            $card = $this->deck->drawCard();
+            $this->bank->addCard($card);
+            $this->bankPoints += $card->points;
+
+            if ($this->bankPoints <= 17) {
+                $card = $this->deck->drawCard();
+                $this->bank->addCard($card);
+                $this->bankPoints += $card->points;
+            }
+        }
     }
 
-    public function drawCardFromDeck(): object
-    {   
-        return $this->deck->drawCards(1);
+    /**
+    * @return bool
+    */
+    public function checkPlayerPoints(): bool
+    {
+        if ($this->playerPoints > 21) {
+            $this->gameEnd = true;
+            return true;
+        }
+        return false;
     }
 
-    public function addPlayerCard(object $card): void
-    {   
+    /**
+    * @return bool
+    */
+    public function checkBankPoints(): bool
+    {
+        if ($this->bankPoints > 21) {
+            $this->gameEnd = true;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * @return bool
+    */
+    public function playerWin(): bool
+    {
+        $this->gameEnd = true;
+        if ($this->playerPoints > $this->bankPoints) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * @return bool
+    */
+    public function getGameEnd(): bool
+    {
+        return $this->gameEnd;
+    }
+
+    /**
+    * @return void
+    */
+    public function addCardToPlayerHand(object $card): void
+    {
         $this->player->addCard($card);
     }
 
-    public function addPlayerPoints(int $points): void
-    {   
-        $this->player->addPoints($points);
+    /**
+    * @return void
+    */
+    public function addCardToBankHand(object $card): void
+    {
+        $this->bank->addCard($card);
     }
 
+    /**
+    * @return int
+    */
     public function getPlayerCardCount(): int
-    {   
+    {
         return $this->player->getCardCount();
     }
 
-    public function getBankCards(): string
-    {   
-        return $this->bank->getCards();
-    }
-
-    public function getPlayerId(): string
-    {   
-        return $this->player->player_id;
-    }
-
+    /**
+    * @return array<object>
+    */
     public function getPlayerCards(): array
-    {   
+    {
         return $this->player->getCards();
     }
 
+    /**
+    * @return int
+    */
     public function getPlayerPoints(): int
-    {   
-        return $this->player->getPoints();
+    {
+        return $this->playerPoints;
+    }
+
+    /**
+    * @return array<object>
+    */
+    public function getBankCards(): array
+    {
+        return $this->bank->getCards();
+    }
+
+    /**
+    * @return int
+    */
+    public function getBankPoints(): int
+    {
+        return $this->bankPoints;
     }
 }
