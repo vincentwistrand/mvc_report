@@ -5,7 +5,7 @@ namespace App\Dice;
 use App\Dice\Dice;
 
 class DiceHand
-{   
+{
     /**
     * @var array<object>
     */
@@ -29,7 +29,7 @@ class DiceHand
         }
     }
 
-        /**
+    /**
     * @return int
     */
     public function getNumberDices(): int

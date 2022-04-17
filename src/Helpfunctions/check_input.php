@@ -3,7 +3,7 @@
 namespace App\Helpfunctions;
 
 function check_input($draw, $stop, $new_round, $reset, $session): string
-{   
+{
     $game = $session->get("game") ?? 0;
     $player_point = $session->get('player_points');
     $bank_point = $session->get('bank_points');
@@ -55,7 +55,6 @@ function check_input($draw, $stop, $new_round, $reset, $session): string
         $game->newRound();
 
         return "continue";
-
     } elseif ($reset) {
         $session->set('game', new \App\Card\Game());
         $game = $session->get('game');
@@ -67,6 +66,5 @@ function check_input($draw, $stop, $new_round, $reset, $session): string
         $session->set('bank_points', $bank_point);
 
         return "continue";
-
     }
 }

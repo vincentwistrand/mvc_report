@@ -3,7 +3,7 @@
 namespace App\Card;
 
 class Game
-{   
+{
     private object $bank;
     private object $player;
     private object $deck;

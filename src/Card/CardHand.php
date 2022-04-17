@@ -3,7 +3,7 @@
 namespace App\Card;
 
 class CardHand
-{   
+{
     /**
     * @var array<object>
     */
