@@ -3,6 +3,23 @@
 Jag tycker det var bra att göra ett flödesdiagram och lite pseudokod innan jag satta igång och koda.
 Det gjorde att jag hade en bild av hur det ska se ut i slutändan.
 Att tänka igenom vilka klasser som kommer behövas tycker jag är svårare och det känns som att det är först när jag börjar skriva koden som jag ser vad som kommer behövas.
-Det är nog bra att göra det här förarbetet och att skapa sig en helhetsbild och kunna se hur slutprodukten ser ut.
+Det är nog bra att göra det här förarbetet och att skapa sig en helhetsbild och kunna se hur slutprodukten ser ut.<br><br>
 
-Mitt spel använder routerna GET /game/start/ och POST /game/start/. 
+Jag gjorde skapade kortspelet 21 enligt instruktionerna.
+Spelet använder routerna GET /game/start och POST /game/start och de använder samma template-fil.
+Post /game/start fick mycket kod i sig så jag flyttade den till en egen funktion "check_input.php".
+I routen /game/doc finns ett flödesdiagram, lite pseudokod och text som jag skrev innan jag satte igång.
+Jag har kört composer csfix och lint.
+När jag körde composer lint så fick jag en del fel som jag försökte fixa så gott det gick.
+Det finns ett fel som jag inte får bort vilket är "Cannot call method on mixed".
+Det finns även fel på exempelkoden och min egen kod från kmom02 som jag inte brydde mig om.<br><br>
+
+Jag tycker koden ser ok ut och den gör jobbet, sedan kan man väl alltid fortsätta att jobba på att göra den finare men tiden tog slut.
+Jag försökte ha så lite kod som möjligt i controllern och istället lägga koden i klasser och andra funktioner.
+Jag kunde ha utvecklat spelet mer men kände att det var bättre att lägga den tiden på att göra bättre kod och förstå och fixa fel.<br><br>
+
+Jag tycker det går bra att jobba med symfony, känns ungefär som express/node.
+Jag känner att jag ännu inte riktigt förstår hur och varför man specifierar olika värden.
+T ex så förstod jag inte felet "Cannot call method on mixed" även efter massa googlande.
+Men överlag känns det bra.
+TIL:en för detta kmom är hur man kan skissa på ett program med hjälp av flödesdiagram och pseudokod innan man sätter igång och kodar.
