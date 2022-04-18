@@ -8,12 +8,12 @@ use App\Card\Card;
 trait DeckTrait
 {
     /**
-    * @var array<object>
+    * @var array<Card>
     */
     private array $cards = array();
 
     /**
-    * @return array<object>
+    * @return array<Card>
     */
     public function getDeck(): array
     {
@@ -67,7 +67,7 @@ trait DeckTrait
     }
 
     /**
-    * @return array<object>
+    * @return array<Card>
     */
     public function drawCards(int $number): array
     {
@@ -84,7 +84,7 @@ trait DeckTrait
     }
 
     /**
-    * @return object
+    * @return Card
     */
     public function drawCard(): object
     {

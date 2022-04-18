@@ -33,7 +33,7 @@
         <div>
             <div>
                 {% for card in player_hand %}
-                    <i class="card-sprite {{ card.colour }}{{ card.rank }}"></i>
+                    <i class="card-sprite {{ card.getColour }}{{ card.getRank }}"></i>
              {% endfor %}
             </div>
         </div>
@@ -45,7 +45,7 @@
         <div>
             <div>
                 {% for card in bank_hand %}
-                    <i class="card-sprite {{ card.colour }}{{ card.rank }}"></i>
+                    <i class="card-sprite {{ card.getColour }}{{ card.getRank }}"></i>
                 {% endfor %}
             </div>
         </div>

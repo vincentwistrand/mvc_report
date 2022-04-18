@@ -2,11 +2,15 @@
 
 namespace App\Card;
 
+use App\Card\Player;
+use App\Card\Deck;
+use App\Card\Card;
+
 class Game
 {
-    private object $bank;
-    private object $player;
-    private object $deck;
+    private Player $bank;
+    private Player $player;
+    private Deck $deck;
     private int $playerPoints = 0;
     private int $bankPoints = 0;
     private bool $gameEnd = false;
@@ -29,7 +33,7 @@ class Game
     {
         $card = $this->deck->drawCard();
         $this->player->addCard($card);
-        $this->playerPoints += $card->points;
+        $this->playerPoints += intval($card->getPoints());
     }
 
     /**
@@ -39,17 +43,17 @@ class Game
     {
         $card = $this->deck->drawCard();
         $this->bank->addCard($card);
-        $this->bankPoints += $card->points;
+        $this->bankPoints += intval($card->getPoints());
 
         if ($this->bankPoints <= 21) {
             $card = $this->deck->drawCard();
             $this->bank->addCard($card);
-            $this->bankPoints += $card->points;
+            $this->bankPoints += intval($card->getPoints());
 
             if ($this->bankPoints <= 17) {
                 $card = $this->deck->drawCard();
                 $this->bank->addCard($card);
-                $this->bankPoints += $card->points;
+                $this->bankPoints += intval($card->getPoints());
             }
         }
     }

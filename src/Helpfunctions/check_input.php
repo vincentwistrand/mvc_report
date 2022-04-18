@@ -2,7 +2,9 @@
 
 namespace App\Helpfunctions;
 
-function check_input(mixed $draw, mixed $stop, mixed $new_round, mixed $reset, object $session): string
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+function check_input(mixed $draw, mixed $stop, mixed $new_round, mixed $reset, SessionInterface $session): string
 {
     $game = $session->get("game") ?? 0;
     $player_point = $session->get('player_points');
