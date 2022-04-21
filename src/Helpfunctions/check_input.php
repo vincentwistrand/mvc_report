@@ -50,12 +50,10 @@ function check_input(mixed $draw, mixed $stop, mixed $new_round, mixed $reset, S
                 return "bank";
             }
         }
-
     } elseif ($new_round) {
         $session->set('game', new \App\Card\Game());
         $game = $session->get('game');
         $game->newRound();
-
     } elseif ($reset) {
         $session->set('game', new \App\Card\Game());
         $game = $session->get('game');
