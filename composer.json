@@ -89,6 +89,8 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "phpdoc": "tools/phpdoc/phpdoc",
+        "phpunit": "XDEBUG_MODE=coverage bin/phpunit",
         "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src",
         "phpcs": "tools/php-codesniffer/vendor/bin/phpcs --standard=PSR12 src",
         "phpcbf": "tools/php-codesniffer/vendor/bin/phpcbf --standard=PSR12 src",
@@ -111,8 +113,12 @@
         }
     },
     "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "6.0.*",
+        "symfony/css-selector": "6.0.*",
         "symfony/debug-bundle": "6.0.*",
         "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^6.0",
         "symfony/stopwatch": "6.0.*",
         "symfony/web-profiler-bundle": "6.0.*"
     }
