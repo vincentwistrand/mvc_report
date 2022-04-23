@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Classfunctions\check_input;
 
 class GameController extends AbstractController
 {
@@ -112,7 +113,7 @@ class GameController extends AbstractController
         $new_round  = $request->request->get('new_round');
         $reset  = $request->request->get('reset');
 
-        $result = \app\helpfunctions\check_input($draw, $stop, $new_round, $reset, $session);
+        $result = \app\classfunctions\check_input($draw, $stop, $new_round, $reset, $session);
 
         if ($result === "player") {
             $this->addFlash("info", "You Win!");
