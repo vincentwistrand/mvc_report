@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Card;
-use App\Card\Deck;
+use App\Card\DeckTDD;
 use App\Card\Card;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test cases for class CardTDD.
+ * Test cases for class DeckTDD.
  */
 class DeckTest extends TestCase
 {
