@@ -28,7 +28,21 @@ class DeckTest extends TestCase
     public function testGetDeck()
     {   
         $deck = new Deck();
-        $card = new Card("Dam", "Spader", "12");
-        $this->assertInstanceOf("\App\Card\Deck", $deck);
+        $deck->createDeck();
+        $this->assertEquals(52, count($deck->getDeck()));
+    }
+
+    /**
+     * Draw cards from deck and verify that it works.
+     * Use number as arguments.
+     */
+    public function testDrawCards()
+    {   
+        $deck = new Deck();
+        $deck->createDeck();
+        $deck->drawCard();
+        $this->assertEquals(51, count($deck->getDeck()));
+        $cards = $deck->drawCards(6);
+        $this->assertEquals(45, count($deck->getDeck()));
     }
 }
