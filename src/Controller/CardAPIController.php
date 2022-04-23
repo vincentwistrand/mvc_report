@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Classfunctions\to_json;
+use App\Classfunctions\player_to_json;
 
 class CardAPIController extends AbstractController
 {
@@ -17,11 +19,12 @@ class CardAPIController extends AbstractController
     {
         $deck = $session->get('deck');
         $deck->sortCards();
-        $json = json_encode($deck->getDeck());
-        $json_pretty = json_encode(json_decode($json), JSON_PRETTY_PRINT);
+
+        $cards = $deck->getDeck();
+        $cardsToJSON = \app\classfunctions\to_json($cards);
 
         $data = [
-            'api' => $json_pretty
+            'api' => $cardsToJSON
         ];
 
         return $this->render('card/api.html.twig', $data);
@@ -34,11 +37,12 @@ class CardAPIController extends AbstractController
     {
         $deck = $session->get('deck');
         $deck->shuffleCards();
-        $json = json_encode($deck->getDeck());
-        $json_pretty = json_encode(json_decode($json), JSON_PRETTY_PRINT);
+
+        $cards = $deck->getDeck();
+        $cardsToJSON = \app\classfunctions\to_json($cards);
 
         $data = [
-            'api' => $json_pretty
+            'api' => $cardsToJSON
         ];
 
         return $this->render('card/api.html.twig', $data);
@@ -52,11 +56,10 @@ class CardAPIController extends AbstractController
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards(1);
 
-        $json = json_encode($drawnCards);
-        $json_pretty = json_encode(json_decode($json), JSON_PRETTY_PRINT);
+        $cardsToJSON = \app\classfunctions\to_json($drawnCards);
 
         $data = [
-            'api' => $json_pretty
+            'api' => $cardsToJSON
         ];
 
         return $this->render('card/api.html.twig', $data);
@@ -76,11 +79,10 @@ class CardAPIController extends AbstractController
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards($number);
 
-        $json = json_encode($drawnCards);
-        $json_pretty = json_encode(json_decode($json), JSON_PRETTY_PRINT);
+        $cardsToJSON = \app\classfunctions\to_json($drawnCards);
 
         $data = [
-            'api' => $json_pretty
+            'api' => $cardsToJSON
         ];
 
         return $this->render('card/api.html.twig', $data);
@@ -102,22 +104,10 @@ class CardAPIController extends AbstractController
         $allPlayers = $session->get('players');
         $deck = $session->get('deck');
 
-        for ($i = 1; $i <= $players; $i++) {
-            $drawnCards = $deck->drawCards($cards);
-
-            $newPlayer = new \App\Card\Player($i);
-            foreach ($drawnCards as $card) {
-                $newPlayer->addCard($card);
-            }
-
-            $allPlayers[] = $newPlayer;
-        }
-
-        $json = json_encode($allPlayers);
-        $json_pretty = json_encode(json_decode($json), JSON_PRETTY_PRINT);
+        $playersToJSON = \app\classfunctions\players_to_json($deck, $players, $cards);
 
         $data = [
-            'api' => $json_pretty
+            'api' => $playersToJSON
         ];
 
         return $this->render('card/api.html.twig', $data);
