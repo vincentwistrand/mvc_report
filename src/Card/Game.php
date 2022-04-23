@@ -27,35 +27,43 @@ class Game
     }
 
     /**
-    * @return void
+    * @return object
     */
-    public function drawCardToPlayer(): void
+    public function drawCardToPlayer(): object
     {
         $card = $this->deck->drawCard();
         $this->player->addCard($card);
         $this->playerPoints += intval($card->getPoints());
+
+        return $card;
     }
 
     /**
-    * @return void
+    * @return array
     */
-    public function drawCardsToBank(): void
-    {
+    public function drawCardsToBank(): array
+    {   
+        $cards = array();
+
         $card = $this->deck->drawCard();
         $this->bank->addCard($card);
         $this->bankPoints += intval($card->getPoints());
+        $cards[] = $card;
 
         if ($this->bankPoints <= 21) {
             $card = $this->deck->drawCard();
             $this->bank->addCard($card);
             $this->bankPoints += intval($card->getPoints());
+            $cards[] = $card;
 
             if ($this->bankPoints <= 17) {
                 $card = $this->deck->drawCard();
                 $this->bank->addCard($card);
                 $this->bankPoints += intval($card->getPoints());
+                $cards[] = $card;
             }
         }
+        return $cards;
     }
 
     /**
