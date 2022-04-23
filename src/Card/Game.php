@@ -103,19 +103,11 @@ class Game
     }
 
     /**
-    * @return void
+    * @return object
     */
-    public function addCardToPlayerHand(object $card): void
+    public function getDeck(): object
     {
-        $this->player->addCard($card);
-    }
-
-    /**
-    * @return void
-    */
-    public function addCardToBankHand(object $card): void
-    {
-        $this->bank->addCard($card);
+        return $this->deck;
     }
 
     /**
