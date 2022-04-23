@@ -49,4 +49,18 @@ class CardTest extends TestCase
         $card = new Card("Kung", "Spader", "13");
         $this->assertEquals("13", $card->getPoints());
     }
+
+    /**
+     * See if method getAttributes return an array with all attributes.
+     * Use no arguments.
+     */
+    public function testGetAttributes()
+    {
+        $card = new Card("Kung", "Spader", "13");
+        $attributeArray = $card->getAttributes();
+        $this->assertIsArray($attributeArray);
+        $this->assertEquals("Spader", $attributeArray["Colour"]);
+        $this->assertEquals("Kung", $attributeArray["Rank"]);
+        $this->assertEquals("13", $attributeArray["Points"]);
+    }
 }
