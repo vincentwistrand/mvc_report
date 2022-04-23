@@ -71,16 +71,16 @@ trait DeckTrait
     */
     public function drawCards(int $number): array
     {
-        $cards = array();
+        $drawnCards = array();
 
         for ($i = 0; $i < $number; $i++) {
             $card = $this->cards[0];
-            $this->cards[] = $card;
+            $drawnCards[] = $card;
             unset($this->cards[0]);
             $this->cards = array_values($this->cards);
         }
 
-        return $cards;
+        return $drawnCards;
     }
 
     /**
