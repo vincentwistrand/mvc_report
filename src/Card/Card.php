@@ -38,4 +38,17 @@ class Card
     {
         return $this->rank;
     }
+
+    /**
+    * @return array
+    */
+    public function getAttributes(): array
+    {   
+        $attributes = array(
+            "Colour"=>$this->colour,
+            "Rank"=>$this->rank,
+            "Points"=>$this->points
+        );
+        return $attributes;
+    }
 }
