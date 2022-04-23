@@ -103,11 +103,11 @@ class Game
     }
 
     /**
-    * @return object
+    * @return array
     */
-    public function getDeck(): object
+    public function getDeckCards(): array
     {
-        return $this->deck;
+        return $this->deck->getDeck();
     }
 
     /**
