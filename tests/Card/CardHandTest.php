@@ -2,12 +2,12 @@
 
 namespace App\Card;
 use App\Card\Card;
-use App\Card\CardHand;
+use App\Card\CardHandTTD;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test cases for class CardTDD.
+ * Test cases for class CardHandTDD.
  */
 class CardHandTest extends TestCase
 {
