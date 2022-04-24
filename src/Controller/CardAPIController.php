@@ -7,8 +7,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use App\Classfunctions\to_json;
-use App\Classfunctions\player_to_json;
+use App\CardFunctions\cardsToJson;
+use App\CardFunctions\player_to_json;
 
 class CardAPIController extends AbstractController
 {
@@ -21,7 +21,7 @@ class CardAPIController extends AbstractController
         $deck->sortCards();
 
         $cards = $deck->getDeck();
-        $cardsToJSON = \app\classfunctions\to_json($cards);
+        $cardsToJSON = \app\CardFunctions\cardsToJson($cards);
 
         $data = [
             'api' => $cardsToJSON
@@ -39,7 +39,7 @@ class CardAPIController extends AbstractController
         $deck->shuffleCards();
 
         $cards = $deck->getDeck();
-        $cardsToJSON = \app\classfunctions\to_json($cards);
+        $cardsToJSON = \app\CardFunctions\cardsToJson($cards);
 
         $data = [
             'api' => $cardsToJSON
@@ -56,7 +56,7 @@ class CardAPIController extends AbstractController
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards(1);
 
-        $cardsToJSON = \app\classfunctions\to_json($drawnCards);
+        $cardsToJSON = \app\CardFunctions\cardsToJson($drawnCards);
 
         $data = [
             'api' => $cardsToJSON
@@ -79,7 +79,7 @@ class CardAPIController extends AbstractController
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards($number);
 
-        $cardsToJSON = \app\classfunctions\to_json($drawnCards);
+        $cardsToJSON = \app\CardFunctions\cardsToJson($drawnCards);
 
         $data = [
             'api' => $cardsToJSON
@@ -104,7 +104,7 @@ class CardAPIController extends AbstractController
         $allPlayers = $session->get('players');
         $deck = $session->get('deck');
 
-        $playersToJSON = \app\classfunctions\players_to_json($deck, $players, $cards);
+        $playersToJSON = \app\CardFunctions\playersToJson($deck, $players, $cards);
 
         $data = [
             'api' => $playersToJSON
