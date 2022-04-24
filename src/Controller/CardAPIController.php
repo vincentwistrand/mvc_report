@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use App\CardFunctions\cardsToJson;
-use App\CardFunctions\player_to_json;
 
 class CardAPIController extends AbstractController
 {
@@ -21,7 +19,7 @@ class CardAPIController extends AbstractController
         $deck->sortCards();
 
         $cards = $deck->getDeck();
-        $cardsToJSON = \app\CardFunctions\cardsToJson($cards);
+        $cardsToJSON = $this->cardsToJson($cards);
 
         $data = [
             'api' => $cardsToJSON
@@ -39,7 +37,7 @@ class CardAPIController extends AbstractController
         $deck->shuffleCards();
 
         $cards = $deck->getDeck();
-        $cardsToJSON = \app\CardFunctions\cardsToJson($cards);
+        $cardsToJSON = $this->cardsToJson($cards);
 
         $data = [
             'api' => $cardsToJSON
@@ -56,7 +54,7 @@ class CardAPIController extends AbstractController
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards(1);
 
-        $cardsToJSON = \app\CardFunctions\cardsToJson($drawnCards);
+        $cardsToJSON = $this->cardsToJson($drawnCards);
 
         $data = [
             'api' => $cardsToJSON
@@ -79,7 +77,7 @@ class CardAPIController extends AbstractController
         $deck = $session->get('deck');
         $drawnCards = $deck->drawCards($number);
 
-        $cardsToJSON = \app\CardFunctions\cardsToJson($drawnCards);
+        $cardsToJSON = $this->cardsToJson($drawnCards);
 
         $data = [
             'api' => $cardsToJSON
@@ -104,12 +102,59 @@ class CardAPIController extends AbstractController
         $allPlayers = $session->get('players');
         $deck = $session->get('deck');
 
-        $playersToJSON = \app\CardFunctions\playersToJson($deck, $players, $cards);
+        $playersToJSON = $this->playersToJson($deck, $players, $cards);
 
         $data = [
             'api' => $playersToJSON
         ];
 
         return $this->render('card/api.html.twig', $data);
+    }
+
+    /**
+    * Used in CardApiController to convert array of card objects to json string. 
+    * @return string
+    */
+    function cardsToJson(array $cards): string 
+    {
+        $cardProperties = [];
+        foreach ($cards as $card) {
+            $cardProperties[] = $card->getProperties();
+        }
+    
+        $json_pretty = json_encode(json_decode(json_encode($cardProperties)), JSON_PRETTY_PRINT);
+
+        return $json_pretty;
+    }
+
+    /**
+    * Used in CardApiController to convert array of player objects containing card objects to json string. 
+    * @return string
+    */
+    function playersToJson(object $deck, int $players, int $cards): string
+    {
+        for ($i = 1; $i <= $players; $i++) {
+            $drawnCards = $deck->drawCards($cards);
+            $newPlayer = new \App\Card\Player($i);
+            foreach ($drawnCards as $card) {
+                $newPlayer->addCard($card);
+            }
+
+            $allPlayers[] = $newPlayer;
+        }
+
+        $players = array();
+
+        foreach ($allPlayers as $player) {
+            $playerCards = array();
+            foreach ($player->getCards() as $card) {
+                $playerCards[] = $card->getProperties();
+            }
+            $playerName = "Player " . $player->getPlayerId();
+            $players[$playerName] = $playerCards;
+        }
+        $json_pretty = json_encode(json_decode(json_encode($players)), JSON_PRETTY_PRINT);
+
+        return $json_pretty;
     }
 }
