@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Card;
+
 use App\Card\CardTDD;
 
 use PHPUnit\Framework\TestCase;
@@ -54,10 +55,10 @@ class CardTest extends TestCase
      * See if method getAttributes return an array with all attributes.
      * Use no arguments.
      */
-    public function testGetAttributes()
+    public function testGetProperties()
     {
         $card = new Card("Kung", "Spader", "13");
-        $attributeArray = $card->getAttributes();
+        $attributeArray = $card->getProperties();
         $this->assertIsArray($attributeArray);
         $this->assertEquals("Spader", $attributeArray["Colour"]);
         $this->assertEquals("Kung", $attributeArray["Rank"]);
