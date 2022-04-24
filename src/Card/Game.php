@@ -45,24 +45,20 @@ class Game
     {
         $cards = array();
 
-        $card = $this->deck->drawCard();
-        $this->bank->addCard($card);
-        $this->bankPoints += intval($card->getPoints());
-        $cards[] = $card;
-
-        if ($this->bankPoints <= 21) {
+        for ($i=0; $i < 2; $i++) { 
             $card = $this->deck->drawCard();
             $this->bank->addCard($card);
             $this->bankPoints += intval($card->getPoints());
             $cards[] = $card;
-
-            if ($this->bankPoints <= 17) {
-                $card = $this->deck->drawCard();
-                $this->bank->addCard($card);
-                $this->bankPoints += intval($card->getPoints());
-                $cards[] = $card;
-            }
         }
+
+        if ($this->bankPoints <= 17) {
+            $card = $this->deck->drawCard();
+            $this->bank->addCard($card);
+            $this->bankPoints += intval($card->getPoints());
+            $cards[] = $card;
+        }
+        
         return $cards;
     }
 
