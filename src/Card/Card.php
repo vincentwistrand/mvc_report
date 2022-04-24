@@ -42,13 +42,13 @@ class Card
     /**
     * @return array
     */
-    public function getAttributes(): array
-    {   
-        $attributes = array(
+    public function getProperties(): array
+    {
+        $properties = array(
             "Colour"=>$this->colour,
             "Rank"=>$this->rank,
             "Points"=>$this->points
         );
-        return $attributes;
+        return $properties;
     }
 }
