@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Card;
+
 use App\Card\Card;
 use App\Card\CardHandTTD;
 
@@ -26,7 +27,7 @@ class CardHandTest extends TestCase
      * addCard() passes a Card object as argument.
      */
     public function testAddAndGetCard()
-    {   
+    {
         $card = new Card("Kung", "Ruter", "13");
         $cardHand = new CardHand();
         $cardHand->addCard($card);
@@ -38,11 +39,11 @@ class CardHandTest extends TestCase
      * Use no arguments.
      */
     public function testGetCardCount()
-    {   
+    {
         $cardHand = new CardHand();
         $card = new Card();
         $cardCount = 3;
-        for ($i=0; $i < $cardCount; $i++) { 
+        for ($i=0; $i < $cardCount; $i++) {
             $cardHand->addCard($card);
         }
         $this->assertSame($cardCount, $cardHand->getCardCount());
