@@ -40,7 +40,7 @@ class Card
     }
 
     /**
-    * @return array
+    * @return array<string>
     */
     public function getProperties(): array
     {
