@@ -42,7 +42,7 @@ class Game
     * @return array
     */
     public function drawCardsToBank(): array
-    {   
+    {
         $cards = array();
 
         $card = $this->deck->drawCard();
