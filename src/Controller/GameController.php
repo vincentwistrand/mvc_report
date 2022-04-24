@@ -124,7 +124,7 @@ class GameController extends AbstractController
     }
 
     /**
-    * Used in Class Game to see if there is a winner or if game should continue. 
+    * Used in method startGamePost() and processes the input from $request. 
     * @return string
     */
     function checkInput(mixed $draw, mixed $stop, mixed $new_round, mixed $reset, SessionInterface $session): string
