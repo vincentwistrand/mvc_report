@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Card;
+
 use App\Card\DeckTDD;
 use App\Card\Card;
 
@@ -26,7 +27,7 @@ class DeckTest extends TestCase
      * Use no arguments.
      */
     public function testGetDeck()
-    {   
+    {
         $deck = new Deck();
         $this->assertEquals(null, $deck->createDeck());
         $this->assertEquals(52, count($deck->getDeck()));
@@ -37,7 +38,7 @@ class DeckTest extends TestCase
      * Use number as arguments.
      */
     public function testDrawCards()
-    {   
+    {
         $deck = new Deck();
         $deck->createDeck();
         $deck->drawCard();
@@ -51,7 +52,7 @@ class DeckTest extends TestCase
      * Use no arguments.
      */
     public function testSortCards()
-    {   
+    {
         $deck = new Deck();
         $deck->createDeck();
         $deck->sortCards();
@@ -70,15 +71,16 @@ class DeckTest extends TestCase
      * Use no arguments.
      */
     public function testShuffleCards()
-    {   
+    {
         $deck = new Deck();
         $deck->createDeck();
         $deck->shuffleCards();
-        $rankString = strval($deck->getDeck()[0]->getRank()) . 
-                    strval($deck->getDeck()[1]->getRank()) . 
-                    strval($deck->getDeck()[2]->getRank()) . 
-                    strval($deck->getDeck()[3]->getRank()
-                );
+        $rankString = strval($deck->getDeck()[0]->getRank()) .
+                    strval($deck->getDeck()[1]->getRank()) .
+                    strval($deck->getDeck()[2]->getRank()) .
+                    strval(
+                        $deck->getDeck()[3]->getRank()
+                    );
         $this->assertNotEquals("2345", $rankString);
     }
 
@@ -87,7 +89,7 @@ class DeckTest extends TestCase
      * Use no arguments.
      */
     public function testAddJokers()
-    {   
+    {
         $deck = new Deck();
         $deck->createDeck();
         $deck->addJokers();
