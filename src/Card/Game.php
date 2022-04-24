@@ -39,13 +39,13 @@ class Game
     }
 
     /**
-    * @return array
+    * @return array<object>
     */
     public function drawCardsToBank(): array
     {
         $cards = array();
 
-        for ($i=0; $i < 2; $i++) { 
+        for ($i=0; $i < 2; $i++) {
             $card = $this->deck->drawCard();
             $this->bank->addCard($card);
             $this->bankPoints += intval($card->getPoints());
@@ -58,7 +58,7 @@ class Game
             $this->bankPoints += intval($card->getPoints());
             $cards[] = $card;
         }
-        
+
         return $cards;
     }
 
@@ -107,7 +107,7 @@ class Game
     }
 
     /**
-    * @return array
+    * @return array<object>
     */
     public function getDeckCards(): array
     {
