@@ -112,7 +112,7 @@ class CardAPIController extends AbstractController
     }
 
     /**
-    * Used in CardApiController to convert array of card objects to json string. 
+    * Convert array of card objects to json string. 
     * @return string
     */
     function cardsToJson(array $cards): string 
@@ -128,7 +128,7 @@ class CardAPIController extends AbstractController
     }
 
     /**
-    * Used in CardApiController to convert array of player objects containing card objects to json string. 
+    * Convert array of player objects to json string. 
     * @return string
     */
     function playersToJson(object $deck, int $players, int $cards): string
