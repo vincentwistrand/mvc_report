@@ -1,3 +1,23 @@
 ## kmom04
 
-bra kmom
+Jag tyckte det funkade bra att jobba med PHPUnit. Det var inga problem att komma igång och i manualen fanns många olika assertion-alternativ.
+Jag gillar att man kan gå in i coverage och se statistik och kodtäckning, och att man kan se exakt vilka rader man testar.<br><br>
+
+Jag lyckades få 87% kodtäckning i Cardmappen men koden för Deckklassen ligger i DeckTrait.php som ligger i App\Trait och räknas inte in de 87%.
+Det ligger ganska mycket kod där och testerna har 100% kodtäckning så totalt kom jag nog en bit över 90% kodtäckning tror jag...<br><br>
+
+Kortspelskoden var inte så bra förberedd för testning. 
+Medlemsvariablerna är privata och metoderna är bara till för själva spelet så det är svårt att få tag i information från klasserna att jämföra med resultatet i testerna.
+I vissa klasser lade jag till några get() metoder för att få tillgång till medlemsvariablerna.
+Det underlättar också om metoderna returnerar vissa värden även fast det inte behövs i själva programmet, för att kunna använda informationen i testerna.
+I en del tester var jag tvungen att använda fler metoder utöver den som skulle testas. 
+Det tror jag är mindre bra då man blir beroende av att "hjälpmetoderna" fungerar som de ska, annars kan ju de fördärva testet och man vet inte var felet kommer ifrån.<br><br>
+
+Så man kan ju ha allt detta i åtanke när man skriver koden från början.
+Sedan tror jag att ju renare och mer igenomtänkt koden är desto lättare blir den att testa.
+Min kod kan absolut bli bättre och det känns som en bra utmaning att alltid försöka skriva så ren och testbar kod som möjligt.<br><br>
+
+Jag lyckades inte få kommandot "composer lint" att fungera när jag lade till det i scripts i composer.json men det är tydligen problem med det.
+Jag har lyckats få lite olika format på mina taggar (v4.0.0 , v4.0.0 , 4.0.0), såg i dbwebb test att den ville ha utan v.
+TIL:en för detta kmom är att tänka på att skriva testbar kod som är ren och genomtänkt.<br><br>
+
