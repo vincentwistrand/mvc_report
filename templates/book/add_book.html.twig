@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block content %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="main" style="text-align: center;">
+    <h1>{{ title }}</h1><br>
+
+<form class="form_book" method="post">
+    <p>
+        <label><b>Titel</b></label><br>
+        <input class="input_book" type="text" name="title" value="" Required><br><br>
+    </p>
+    <p>
+        <label><b>Författare</b></label><br>
+        <input class="input_book" type="text" name="author" value="" Required><br><br>
+    </p>
+    <p>
+        <label><b>ISBN (13 siffror)</b></label><br>
+        <input class="input_book" type="string" minlength="13" maxlength="13" name="ISBN" value="" Required><br><br>
+    </p>
+    <p>
+        <label><b>Webbadress till bild</b></label><br>
+        <input class="input_book" type="url" name="Image" value=""><br><br>
+    </p>
+    <p>
+        <input class="input_book_submit" type="submit" value="Create">
+    </p>
+</form>
+
+</div>
+{% endblock %}
