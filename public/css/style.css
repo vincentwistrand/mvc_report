@@ -9,9 +9,9 @@
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.grid { display: grid; }
-
 /* --------------- Layout --------------- */
+
+.grid { display: grid; }
 
 .wrapper {
     max-width: 100%;
@@ -106,7 +106,7 @@ nav a:hover {
     grid-column: 2 / 2;
     grid-row: 2 / 3;
     min-height: 630px;
-    max-width: 1000px;
+    max-width: 1010px;
     margin: 0 auto;
     padding: 50px 30px;
 }
@@ -136,6 +136,7 @@ nav a:hover {
 .game_ground {
     display: flex;
     flex-direction: row;
+    width: 800px;
 }
 
 .game_ground div {
@@ -151,8 +152,8 @@ nav a:hover {
 .start_button a,
 .game_buttons div input {
     appearance: none;
-    background-color: #000000;
-    border: 2px solid #1A1A1A;
+    background-color: hsl(131, 68%, 29%);
+    /*border: 2px solid #1A1A1A;*/
     border-radius: 15px;
     box-sizing: border-box;
     color: #FFFFFF;
@@ -266,6 +267,51 @@ nav a:hover {
 .card-sprite.RuterKnekt { background-position: -1355px -550px; }
 .card-sprite.RuterDam { background-position: -1489px -550px; }
 .card-sprite.RuterKung { background-position:-1624px -550px; }
+
+/* --------------- Bibliotek  --------------- */
+
+.books_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.book_item {
+    max-width: 200px;
+}
+
+.form_book {
+    text-align: left;
+    width: 600px;
+}
+
+.input_book,
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input_book_submit {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .input_book_submit:hover {
+    background-color: #45a049;
+  }
 
 /* --------------- Footer --------------- */
 
