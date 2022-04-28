@@ -15,12 +15,13 @@
             <h2 class="head2">Vincent Wistrand viai20</h2>
             <div class="navbar">
                 <nav>
-                   <a href="{{ url("home") }}" {% if app.request.pathinfo == "/" %}class="active"{% endif %}>Home</a>
+                   <a href="{{ url("home") }}" {% if app.request.pathinfo == "/" %}class="active"{% endif %}>Hem</a>
                    <a href="{{ path("report") }}" {% if app.request.pathinfo == "/report" %}class="active"{% endif %}>Report</a>
-                   <a href="{{ path("about") }}" {% if app.request.pathinfo == "/about" %}class="active"{% endif %}>About</a>
+                   <a href="{{ path("about") }}" {% if app.request.pathinfo == "/about" %}class="active"{% endif %}>Om</a>
                    <a href="{{ path("debug") }}" {% if app.request.pathinfo == "/dev/debug" %}class="active"{% endif %}>Debug</a>
-                   <a href="{{ path("card") }}" {% if app.request.pathinfo == "/card" %}class="active"{% endif %}>Card</a>
-                   <a href="{{ path("game") }}" {% if app.request.pathinfo == "/game" %}class="active"{% endif %}>Game</a>
+                   <a href="{{ path("card") }}" {% if app.request.pathinfo == "/card" %}class="active"{% endif %}>Kortlek</a>
+                   <a href="{{ path("game") }}" {% if app.request.pathinfo == "/game" %}class="active"{% endif %}>Kortspel</a>
+                   <a href="{{ path("book") }}" {% if app.request.pathinfo == "/book" %}class="active"{% endif %}>Bibliotek</a>
                 </nav>
             </div>
         </div>
