@@ -115,46 +115,58 @@ class BookController extends AbstractController
     }
 
     /**
-    * @Route("/book/update/{id}", name="book_update")
+    * @Route(
+    *   "/book/update/{id}", 
+    *    name="book_update",
+    *    methods={"GET","HEAD"}
+    * )
         */
     public function updateBook(
-        ManagerRegistry $doctrine,
+        bookRepository $bookRepository,
         int $id
     ): Response {
         $book = $bookRepository
             ->find($id);
 
-        return $this->render('book/one_book.html.twig', [
+        return $this->render('book/update_book.html.twig', [
+            'title' => 'Uppdatera bok',
             'book' => $book
         ]);
     }
 
         /**
         * @Route(
-        *       "/book/update/{id}/{title}/{author}/{isbn}/{image}", 
+        *       "/book/update/{id}", 
         *       name="book_update_process",
         *       methods={"POST"}
         * )
         */
         public function updateBookProcess(
-            ManagerRegistry $doctrine,
-            int $id,
-            string $title,
-            string $author,
-            string $image
+            Request $request,
+            ManagerRegistry $doctrine
         ): Response {
-            //$entityManager = $doctrine->getManager();
-            //$book = $entityManager->getRepository(Book::class)->find($id);
+
+            $id = $request->request->get('id');
+            $title = $request->request->get('title');
+            $author  = $request->request->get('author');
+            $isbn  = $request->request->get('ISBN');
+            $image  = $request->request->get('Image');
+
+            $entityManager = $doctrine->getManager();
+            $book = $entityManager->getRepository(Book::class)->find($id);
     
-            //if (!$book) {
-            //    throw $this->createNotFoundException(
-            //        'No book found for id '.$id
-            //    );
-            //}
+            if (!$book) {
+                throw $this->createNotFoundException(
+                    'No book found for id '.$id
+                );
+            }
     
-            //$book->setValue($value);
-            //$entityManager->flush();
+            $book->setTitle($title);
+            $book->setAuthor($author);
+            $book->setISBN($isbn);
+            $book->setImage($image);
+            $entityManager->flush();
     
-            //return $this->redirectToRoute('book_show_all');
+            return $this->redirectToRoute('book');
         }
 }
