@@ -281,6 +281,11 @@ nav a:hover {
     max-width: 200px;
 }
 
+.book_item a {
+    text-decoration: none;
+    color: black;
+}
+
 .form_book {
     text-align: left;
     width: 600px;
@@ -297,7 +302,7 @@ select {
     box-sizing: border-box;
 }
 
-.input_book_submit {
+#library_button {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -309,9 +314,25 @@ select {
     text-decoration: none;
   }
 
-  .input_book_submit:hover {
+  #library_button:hover {
     background-color: #45a049;
   }
+
+  #library_button.blue_button {
+    background-color: #008ee1 !important;
+  }
+
+  #library_button.red_button {
+    background-color: #e10000 !important;
+  }
+
+  .update_delete_buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-evenly;
+}
 
 /* --------------- Footer --------------- */
 
