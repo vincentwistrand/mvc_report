@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookController!{% endblock %}
+
+{% block content %}
+
+<div class="main">
+    <h1 style="text-align: center;">{{ title }}</h1><br>
+
+    <div class="books_container">
+        {% for book in books %}
+            <div class="book_item">
+                <a href="{{ path('book_by_id', {id: book.id}) }}">
+                    {% if book.image == null %}
+                        <img src="{{ asset("img/no_image.JPG") }}">
+                    {% endif %}
+                    <img src="{{ book.image }}">
+                    <h4>{{ book.title }}</h4>
+                    <p>{{ book.author }}</p>
+                    <p>ISBN: {{ book.ISBN }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div><br><br>
+
+    <div style="text-align: center;"><a id="library_button" href="{{ link_to_create_book }}">Lägg till bok</a></div>
+</div>
+
+{% endblock %}
