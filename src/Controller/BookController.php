@@ -21,10 +21,10 @@ class BookController extends AbstractController
         $books = $bookRepository
             ->findAll();
 
-        return $this->render('book/index.html.twig', [
+        return $this->render('book/all_books.html.twig', [
             'title' => 'Bibliotek',
             'books' => $books,
-            'link_to_create_book' => $this->generateUrl('add_book'),
+            'link_to_create_book' => $this->generateUrl('add_book')
         ]);
     }
 
@@ -39,21 +39,6 @@ class BookController extends AbstractController
         ManagerRegistry $doctrine
     ): Response {
         $entityManager = $doctrine->getManager();
-
-        //$book = new Book();
-        //$book->setTitle('Harry Potter och Fången från Azkaban');
-        //$book->setISBN('9789129704211');
-        //$book->setAuthor('J.K. Rowlings');
-        //$book->setImage('https://image.bokus.com/images/9789129723953_200x_harry-potter-och-fangen-fran-azkaban');
-
-        // tell Doctrine you want to (eventually) save the book
-        // (no queries yet)
-        //$entityManager->persist($book);
-
-        // actually executes the queries (i.e. the INSERT query)
-        //$entityManager->flush();
-
-        //return new Response('Saved new book with id '.$book->getId());
 
         return $this->render('book/add_book.html.twig', [
             'title' => 'Lägg till bok'
@@ -102,7 +87,9 @@ class BookController extends AbstractController
         $book = $bookRepository
             ->find($id);
 
-        return $this->json($book);
+        return $this->render('book/one_book.html.twig', [
+            'book' => $book
+        ]);
     }
 
     /**
@@ -124,29 +111,50 @@ class BookController extends AbstractController
         $entityManager->remove($book);
         $entityManager->flush();
 
-        return $this->redirectToRoute('book_show_all');
+        return $this->redirectToRoute('book');
     }
 
     /**
-    * @Route("/book/update/{id}/{value}", name="book_update")
+    * @Route("/book/update/{id}", name="book_update")
         */
     public function updateBook(
         ManagerRegistry $doctrine,
-        int $id,
-        int $value
+        int $id
     ): Response {
-        $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Book::class)->find($id);
+        $book = $bookRepository
+            ->find($id);
 
-        if (!$book) {
-            throw $this->createNotFoundException(
-                'No book found for id '.$id
-            );
-        }
-
-        $book->setValue($value);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('book_show_all');
+        return $this->render('book/one_book.html.twig', [
+            'book' => $book
+        ]);
     }
+
+        /**
+        * @Route(
+        *       "/book/update/{id}/{title}/{author}/{isbn}/{image}", 
+        *       name="book_update_process",
+        *       methods={"POST"}
+        * )
+        */
+        public function updateBookProcess(
+            ManagerRegistry $doctrine,
+            int $id,
+            string $title,
+            string $author,
+            string $image
+        ): Response {
+            //$entityManager = $doctrine->getManager();
+            //$book = $entityManager->getRepository(Book::class)->find($id);
+    
+            //if (!$book) {
+            //    throw $this->createNotFoundException(
+            //        'No book found for id '.$id
+            //    );
+            //}
+    
+            //$book->setValue($value);
+            //$entityManager->flush();
+    
+            //return $this->redirectToRoute('book_show_all');
+        }
 }
