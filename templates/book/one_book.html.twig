@@ -9,15 +9,13 @@
 
     <div class="books_container" style="justify-content: center;">
         <div class="book_item">
-            <a href="{{ path('book_by_id', {id: book.id}) }}">
-                {% if book.image == null %}
-                    <img src="{{ asset("img/no_image.JPG") }}">
-                {% endif %}
-                <img src="{{ book.image }}">
-                <h4>{{ book.title }}</h4>
-                <p>{{ book.author }}</p>
-                <p>ISBN: {{ book.ISBN }}</p>
-            </a>
+            {% if book.image == null %}
+                <img src="{{ asset("img/no_image.JPG") }}">
+            {% endif %}
+            <img src="{{ book.image }}">
+            <h4>{{ book.title }}</h4>
+            <p>{{ book.author }}</p>
+            <p>ISBN: {{ book.ISBN }}</p>
         </div>
     </div><br><br>
 
