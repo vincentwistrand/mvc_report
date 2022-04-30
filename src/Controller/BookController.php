@@ -134,39 +134,39 @@ class BookController extends AbstractController
         ]);
     }
 
-        /**
-        * @Route(
-        *       "/book/update/{id}", 
-        *       name="book_update_process",
-        *       methods={"POST"}
-        * )
-        */
-        public function updateBookProcess(
-            Request $request,
-            ManagerRegistry $doctrine
-        ): Response {
+    /**
+    * @Route(
+    *       "/book/update/{id}", 
+    *       name="book_update_process",
+    *       methods={"POST"}
+    * )
+    */
+    public function updateBookProcess(
+        Request $request,
+        ManagerRegistry $doctrine
+    ): Response {
 
-            $id = $request->request->get('id');
-            $title = $request->request->get('title');
-            $author  = $request->request->get('author');
-            $isbn  = $request->request->get('ISBN');
-            $image  = $request->request->get('Image');
+        $id = $request->request->get('id');
+        $title = $request->request->get('title');
+        $author  = $request->request->get('author');
+        $isbn  = $request->request->get('ISBN');
+        $image  = $request->request->get('Image');
 
-            $entityManager = $doctrine->getManager();
-            $book = $entityManager->getRepository(Book::class)->find($id);
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Book::class)->find($id);
     
-            if (!$book) {
-                throw $this->createNotFoundException(
-                    'No book found for id '.$id
-                );
-            }
-    
-            $book->setTitle($title);
-            $book->setAuthor($author);
-            $book->setISBN($isbn);
-            $book->setImage($image);
-            $entityManager->flush();
-    
-            return $this->redirectToRoute('book');
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No book found for id '.$id
+            );
         }
+    
+        $book->setTitle($title);
+        $book->setAuthor($author);
+        $book->setISBN($isbn);
+        $book->setImage($image);
+        $entityManager->flush();
+    
+        return $this->redirectToRoute('book');
+    }
 }
