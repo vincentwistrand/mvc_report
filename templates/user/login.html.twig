@@ -9,7 +9,7 @@
         <h1>Logga in</h1><br>
     {% endif %}
     {% if user == null %}
-    <form class="form_book" method="post">
+    <form class="form_user" method="post">
         <p>
             <label><b>Användarenamn</b></label><br>
             {% if message == "wrong username" %}
@@ -27,7 +27,7 @@
         <p>
             <input style="font-size: 16px;" id="library_button" type="submit" value="Logga in">
         </p>
-        <div style="text-align: center;" id="library_button" class="blue_button"><a id="library_button" class="blue_button" href="{{ path('create_user') }}">Skapa ny användare</a></div>
+        <div style="text-align: center;" id="user_button" class="blue_button"><a id="user_button" class="blue_button" href="{{ path('create_user') }}">Skapa ny användare</a></div>
     </form>
     {% endif %}
 
@@ -35,16 +35,16 @@
         {% if user.getType == 'admin' %}
             <h2>Du är inloggad som {{ user.name }}!</h2><br><br>
             <div class="update_delete_buttons">
-                <div style="text-align: center;"><a id="library_button" href="{{ path('user') }}">Alla användare</a></div>
-                <div style="text-align: center;"><a id="library_button" href="{{ path('logout') }}">Logga ut</a></div>
+                <div style="text-align: center;"><a id="user_button" href="{{ path('user') }}">Alla användare</a></div>
+                <div style="text-align: center;"><a id="user_button" href="{{ path('logout') }}">Logga ut</a></div>
             </div>
         {% endif %}
 
         {% if user.getType == 'ordinary' %}
             <h2>Du är inloggad som {{ user.name }}!</h2><br><br>
             <div class="update_delete_buttons">
-                <div style="text-align: center;"><a id="library_button" href="{{ path('user_by_id', {id: user.getId}) }}">Profilsida</a></div>
-                <div style="text-align: center;"><a id="library_button" href="{{ path('logout') }}">Logga ut</a></div>
+                <div style="text-align: center;"><a id="user_button" href="{{ path('user_by_id', {id: user.getId}) }}">Profilsida</a></div>
+                <div style="text-align: center;"><a id="user_button" href="{{ path('logout') }}">Logga ut</a></div>
             </div>
         {% endif %}
     {% endif %}

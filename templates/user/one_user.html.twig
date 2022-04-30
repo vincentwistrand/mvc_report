@@ -5,10 +5,11 @@
 {% block content %}
 
 <div class="main">
+    <a href="{{ path('logout') }}">Logga ut</a>
     <h1 style="text-align: center;">{{ user.name }}</h1>
 
-    <div class="books_container" style="justify-content: center;">
-        <div class="book_item">
+    <div class="user_container" style="justify-content: center;">
+        <div class="user_item">
             <img src="{{ asset("img/no_image.JPG") }}">
             <h4>Användarnamn:</h4>
             <p>{{ user.username }}</p>
@@ -21,10 +22,12 @@
         </div>
     </div><br><br><br>
 
-    <div class="update_delete_buttons">
-        <div style="text-align: center;"><a id="library_button" class="blue_button" href="{{ path('user_update', {id: user.id}) }}">Uppdatera användare</a></div>
-        <div style="text-align: center;"><a id="library_button" class="red_button" href="{{ path('user_delete_by_id', {id: user.id}) }}">Radera användare</a></div>
-    </div>
+    {% if user.username != 'admin' %}
+        <div class="update_delete_buttons">
+            <div style="text-align: center;"><a id="user_button" class="blue_button" href="{{ path('user_update', {id: user.id}) }}">Uppdatera användare</a></div>
+            <div style="text-align: center;"><a id="user_button" class="red_button" href="{{ path('user_delete_by_id', {id: user.id}) }}">Radera användare</a></div>
+        </div>
+    {% endif %}
 </div>
 
 {% endblock %}

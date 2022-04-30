@@ -8,12 +8,13 @@
 
     {% if current_user.getType == 'admin' %}
         <div class="main">
+            <a href="{{ path('logout') }}">Logga ut</a>
             <h1 style="text-align: center;">{{ title }}</h1>
             <p style="text-align: center;">Inloggad som {{ current_user.getName }} ({{ current_user.getType }})</p>
 
-            <div class="books_container">
+            <div class="user_container">
                 {% for user in users %}
-                    <div class="book_item" style="border">
+                    <div class="user_item" style="border">
                         <a href="{{ path('user_by_id', {id: user.id}) }}">
                             <img src="{{ asset("img/no_image.JPG") }}">
                             <h4>Användarnamn:</h4>
@@ -29,7 +30,7 @@
                 {% endfor %}
             </div><br><br><br>
 
-            <div style="text-align: center;"><a id="library_button" href="{{ link_to_create_user }}">Skapa användare</a></div>
+            <div style="text-align: center;"><a id="user_button" href="{{ link_to_create_user }}">Skapa användare</a></div>
         </div>
     {% endif %}
 
