@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create user{% endblock %}
+
+{% block content %}
+
+<div class="main" style="text-align: center;">
+    <h1>{{ title }}</h1><br>
+
+<form class="form_book" method="post">
+    <p>
+        <label><b>Användarenamn</b></label><br>
+        <input class="input" type="text" name="username" value="" Required><br><br>
+    </p>
+    <p>
+        <label><b>Lösenord</b></label><br>
+        <input class="input" type="text" name="password" value="" Required><br><br>
+    </p>
+    <p>
+        <label><b>Namn</b></label><br>
+        <input class="input" type="string" name="name" value="" Required><br><br>
+    </p>
+    <p>
+        <label><b>Email</b></label><br>
+        <input class="input" type="email" name="email" value="" Required><br><br>
+    </p>
+    <p>
+         <p>Kryssa i vilken behörihet användare ska ha.</b></p><br>
+        <div>
+            <label for="admin">Admin</label>
+            <input type="radio" name="type" id="admin" value="admin" Required>
+        </div>
+        <div>
+            <label for="ordinary">Vanlig användare</label>
+            <input type="radio" name="type" id="ordinary" value="ordinary" Required>
+        </div><br>
+    </p>
+    <p>
+        <input id="library_button" type="submit" value="Skapa">
+    </p>
+</form>
+
+</div>
+{% endblock %}

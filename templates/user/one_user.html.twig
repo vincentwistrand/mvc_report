@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.name }}{% endblock %}
+
+{% block content %}
+
+<div class="main">
+    <h1 style="text-align: center;">{{ user.name }}</h1>
+
+    <div class="books_container" style="justify-content: center;">
+        <div class="book_item">
+            <img src="{{ asset("img/no_image.JPG") }}">
+            <h4>Användarnamn:</h4>
+            <p>{{ user.username }}</p>
+            <h4>Namn:</h4>
+            <p>{{ user.name }}</p>
+            <h4>Email:</h4>
+            <p>{{ user.email }}</p>
+            <h4>Behörighet: </h4>
+            <p>{{ user.type }}</p>
+        </div>
+    </div><br><br><br>
+
+    <div class="update_delete_buttons">
+        <div style="text-align: center;"><a id="library_button" class="blue_button" href="{{ path('user_update', {id: user.id}) }}">Uppdatera användare</a></div>
+        <div style="text-align: center;"><a id="library_button" class="red_button" href="{{ path('user_delete_by_id', {id: user.id}) }}">Radera användare</a></div>
+    </div>
+</div>
+
+{% endblock %}

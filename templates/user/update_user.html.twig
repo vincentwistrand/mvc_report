@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update user{% endblock %}
+
+{% block content %}
+
+<div class="main" style="text-align: center;">
+    <h1>{{ title }}</h1><br>
+
+<form class="form_book" method="post">
+    <p>
+        <input type="hidden" name="id" value="{{ user.id }}" Required><br><br>
+    </p>
+    <p>
+        <label><b>Användarenamn</b></label><br>
+        <input class="input" type="text" name="username" value="{{ user.username }}" Required><br><br>
+    </p>
+    <p>
+        <label><b>Nytt lösenord</b></label><br>
+        <input class="input" type="text" name="password" value="" Required><br><br>
+    </p>
+    <p>
+        <label><b>Namn</b></label><br>
+        <input class="input" type="string" name="name" value="{{ user.name }}" Required><br><br>
+    </p>
+    <p>
+        <label><b>Email</b></label><br>
+        <input class="input" type="email" name="email" value="{{ user.email }}" Required><br><br>
+    </p>
+    <p>
+         <p>Användaren är för nuvarande: <b>{{ user.type }}</b></p>
+         <p>Kryssa i nedan om du vill ändra.</b></p><br>
+        
+        {% if user.type == "admin" %}
+            <div>
+                <label for="admin">Admin</label>
+                <input type="radio" name="type" id="admin" value="admin" checked>
+            </div>
+            <div>
+                <label for="ordinary">Vanlig användare</label>
+                <input type="radio" name="type" id="ordinary" value="ordinary">
+            </div><br>
+        {% endif %}
+        {% if user.type == "ordinary" %}
+            <div>
+                <label for="admin">Admin</label>
+                <input type="radio" name="type" id="admin" value="admin">
+            </div>
+            <div>
+                <label for="ordinary">Vanlig användare</label>
+                <input type="radio" name="type" id="ordinary" value="ordinary" checked>
+            </div><br>
+        {% endif %}
+    </p>
+    <p>
+        <input id="library_button" type="submit" value="Uppdatera">
+    </p>
+</form>
+
+</div>
+{% endblock %}

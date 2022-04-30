@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All users{% endblock %}
+
+{% block content %}
+
+{% if current_user %}
+
+    {% if current_user.getType == 'admin' %}
+        <div class="main">
+            <h1 style="text-align: center;">{{ title }}</h1>
+            <p style="text-align: center;">Inloggad som {{ current_user.getName }} ({{ current_user.getType }})</p>
+
+            <div class="books_container">
+                {% for user in users %}
+                    <div class="book_item" style="border">
+                        <a href="{{ path('user_by_id', {id: user.id}) }}">
+                            <img src="{{ asset("img/no_image.JPG") }}">
+                            <h4>Användarnamn:</h4>
+                            <p>{{ user.username }}</p>
+                            <h4>Namn:</h4>
+                            <p>{{ user.name }}</p>
+                            <h4>Email:</h4>
+                            <p>{{ user.email }}</p>
+                            <h4>Behörighet: </h4>
+                            <p>{{ user.type }}</p>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div><br><br><br>
+
+            <div style="text-align: center;"><a id="library_button" href="{{ link_to_create_user }}">Skapa användare</a></div>
+        </div>
+    {% endif %}
+
+    {% if current_user.getType == 'ordinary' %}
+        <h2>Logg in as admin to see content</h2>
+    {% endif %}
+
+{% endif %}
+
+{% if current_user == null %}
+        <h2>Logg in as admin to see content</h2>
+{% endif %}
+
+{% endblock %}
