@@ -22,6 +22,7 @@
                    <a href="{{ path("card") }}" {% if app.request.pathinfo == "/card" %}class="active"{% endif %}>Kortlek</a>
                    <a href="{{ path("game") }}" {% if app.request.pathinfo == "/game" %}class="active"{% endif %}>Kortspel</a>
                    <a href="{{ path("book") }}" {% if app.request.pathinfo == "/book" %}class="active"{% endif %}>Bibliotek</a>
+                   <a href="{{ path("login") }}" {% if app.request.pathinfo == "/login" %}class="active"{% endif %}>Användare</a>
                 </nav>
             </div>
         </div>
