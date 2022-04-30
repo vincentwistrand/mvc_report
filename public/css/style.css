@@ -291,7 +291,7 @@ nav a:hover {
     width: 600px;
 }
 
-.input_book,
+.input,
 select {
     width: 100%;
     padding: 12px 20px;
@@ -322,8 +322,16 @@ select {
     background-color: #008ee1 !important;
   }
 
+  #library_button.blue_button:hover {
+    background-color: #0077bb !important;
+  }
+
   #library_button.red_button {
     background-color: #e10000 !important;
+  }
+
+  #library_button.red_button:hover {
+    background-color: #b10000 !important;
   }
 
   .update_delete_buttons {
