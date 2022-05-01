@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CardAPIController extends AbstractController
@@ -52,6 +53,11 @@ class CardAPIController extends AbstractController
     public function drawOne(SessionInterface $session): Response
     {
         $deck = $session->get('deck');
+
+        if (count($deck->getDeck()) === 0) {
+            return $this->render('card/api.html.twig', ['api' => null]);
+        }
+
         $drawnCards = $deck->drawCards(1);
 
         $cardsToJSON = $this->cardsToJson($drawnCards);
@@ -65,16 +71,23 @@ class CardAPIController extends AbstractController
 
     /**
      * @Route(
-     *      "/card/api/deck/draw/{number}",
+     *      "/card/api/deck/draw/number",
      *      name="api-draw-number",
-     *      methods={"GET","HEAD"})
+     *      methods={"POST"})
      *
      */
     public function drawCards(
-        int $number,
+        Request $request,
         SessionInterface $session
     ): Response {
         $deck = $session->get('deck');
+
+        $number = $request->request->get('number');
+
+        if (count($deck->getDeck()) < $number) {
+            return $this->render('card/api.html.twig', ['api' => null]);
+        }
+
         $drawnCards = $deck->drawCards($number);
 
         $cardsToJSON = $this->cardsToJson($drawnCards);
@@ -88,19 +101,25 @@ class CardAPIController extends AbstractController
 
     /**
      * @Route(
-     *      "/card/api/deck/deal/{players}/{cards}",
+     *      "/card/api/deck/deal/toplayers",
      *      name="card-api-draw-players-cards",
-     *      methods={"GET","HEAD"})
+     *      methods={"POST"})
      *
      */
     public function drawCardsToPlayers(
-        int $players,
-        int $cards,
+        Request $request,
         SessionInterface $session
     ): Response {
         $session->set('players', array());
         $allPlayers = $session->get('players');
         $deck = $session->get('deck');
+
+        $cards = $request->request->get('cards');
+        $players = $request->request->get('players');
+
+        if (count($deck->getDeck()) < $players * $cards) {
+            return $this->render('card/draw.html.twig', ['title' => null]);
+        }
 
         $playersToJSON = $this->playersToJson($deck, $players, $cards);
 
