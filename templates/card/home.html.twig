@@ -5,16 +5,48 @@
 {% block content %}
 <h1>{{ title }}</h1>
 
-<p><a href="{{ link_to_card_deck }}">card/deck</a></p>
-<p><a href="{{ link_to_card_shuffle }}">card/deck/shuffle</a></p>
-<p><a href="{{ link_to_card_draw }}">card/deck/draw</a></p>
-<p>card/deck/draw/:number</p>
-<p>card/deck/deal/:player/:cards</p><br>
-<p><a href="{{ link_to_card_deck2 }}">card/deck2</a></p><br>
-<p><a href="{{ link_to_card_api }}">card/api/deck</a></p>
-<p><a href="{{ link_to_card_api_shuffle }}">card/api/deck/shuffle</a></p>
-<p><a href="{{ link_to_card_api_draw }}">card/api/deck/draw</a></p>
-<p>card/api/deck/draw/:number</p>
-<p>card/api/deck/deal/:player/:cards</p><br>
+<p><a href="{{ link_to_card_deck }}">Sortera kortlek</a></p>
+<p><a href="{{ link_to_card_shuffle }}">Återställ kortlek och blanda</a></p>
+<p><a href="{{ link_to_card_draw }}">Dra ett kort ur kortleken</a></p>
+<p><a href="{{ link_to_card_deck2 }}">Återställ kortlek, blanda och lägg till två jokrar</a></p><br>
+<form class="form_user" method="post" action="/card/deck/draw/number">
+    <p>
+        <label><b>Dra ett antal kort:</b></label><br>
+        <input type="text" name="number" value="" Required>
+        <input type="submit" value="Dra">
+    </p>
+</form><br>
+<form class="form_user" method="post" action="/card/deck/deal/toplayers">
+    <p>
+        <label><b>Dra ett antal kort till ett antal spelare:</b></label><br>
+        <p>Antal kort:</p>
+        <input type="text" name="cards" value="" Required>
+        <p>till antal spelare:</p>
+        <input type="text" name="players" value="" Required><br>
+        <input type="submit" value="Ge">
+    </p>
+</form><br>
+
+<h2>Json</h2>
+<p><a href="{{ link_to_card_api }}">Sortera kortlek</a></p>
+<p><a href="{{ link_to_card_api_shuffle }}">Återställ kortlek och blanda</a></p>
+<p><a href="{{ link_to_card_api_draw }}">Dra ett kort ur kortleken</a></p>
+<form class="form_user" method="post" action="/card/api/deck/draw/number">
+    <p>
+        <label><b>Dra ett antal kort:</b></label><br>
+        <input type="text" name="number" value="" Required>
+        <input type="submit" value="Dra">
+    </p>
+</form><br>
+<form class="form_user" method="post" action="/card/api/deck/deal/toplayers">
+    <p>
+        <label><b>Dra ett antal kort till ett antal spelare:</b></label><br>
+        <p>Antal kort:</p>
+        <input type="text" name="cards" value="" Required>
+        <p>till antal spelare:</p>
+        <input type="text" name="players" value="" Required><br>
+        <input type="submit" value="Ge">
+    </p>
+</form><br>
 
 {% endblock %}
