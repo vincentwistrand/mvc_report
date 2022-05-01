@@ -291,17 +291,6 @@ nav a:hover {
     width: 600px;
 }
 
-.input,
-select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
 #library_button {
     width: 100%;
     background-color: #4CAF50;
@@ -334,7 +323,79 @@ select {
     background-color: #b10000 !important;
   }
 
-  .update_delete_buttons {
+/* --------------- Användare  --------------- */
+
+.user_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.user_item {
+    max-width: 200px;
+    /*text-align: center;*/
+}
+
+.user_item a {
+    text-decoration: none;
+    color: black;
+}
+
+.form_user {
+    text-align: left;
+    width: 600px;
+}
+
+#user_button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  #user_button:hover {
+    background-color: #45a049;
+  }
+
+  #user_button.blue_button {
+    background-color: #008ee1 !important;
+  }
+
+  #user_button.blue_button:hover {
+    background-color: #0077bb !important;
+  }
+
+  #user_button.red_button {
+    background-color: #e10000 !important;
+  }
+
+  #user_button.red_button:hover {
+    background-color: #b10000 !important;
+  }
+
+/* --------------- Bibliotek & Användare --------------- */
+
+.input,
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.update_delete_buttons {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
