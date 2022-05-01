@@ -4,6 +4,13 @@
 
 {% block content %}
 
-<pre>{{ api }}</pre>
+{% if api == null %}
+    <h2>Korten tog slut!</h2>
+    <a href="{{ path('api-shuffle') }}">Dra nya</a>
+{% endif %}
+
+{% if api != null %}
+    <pre>{{ api }}</pre>
+{% endif %}
 
 {% endblock %}
