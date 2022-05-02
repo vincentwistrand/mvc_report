@@ -5,8 +5,8 @@
 {% block content %}
 
 <div class="main">
-    <a href="{{ path('logout') }}">Logga ut</a>
-    <h1 style="text-align: center;">{{ user.name }}</h1>
+    <a href="{{ path('logout') }}">Logga ut</a><br><br>
+    <h1 style="text-align: center;">{{ user.name }}</h1><br>
 
     <div class="user_container" style="justify-content: center;">
         <div class="user_item">
@@ -20,13 +20,11 @@
             <h4>Behörighet: </h4>
             <p>{{ user.type }}</p>
         </div>
-    </div><br><br><br>
+    </div><br><br>
 
     {% if user.username != 'admin' %}
-        <div class="update_delete_buttons">
-            <div style="text-align: center;"><a id="user_button" class="blue_button" href="{{ path('user_update', {id: user.id}) }}">Uppdatera användare</a></div>
-            <div style="text-align: center;"><a id="user_button" class="red_button" href="{{ path('user_delete_by_id', {id: user.id}) }}">Radera användare</a></div>
-        </div>
+        <div style="text-align: center;"><a id="user_button" class="blue_button" href="{{ path('user_update', {id: user.id}) }}">Uppdatera användare</a></div>
+        <div style="text-align: center;"><a id="user_button" class="red_button" href="{{ path('user_delete_by_id', {id: user.id}) }}">Radera användare</a></div>
     {% endif %}
 </div>
 
