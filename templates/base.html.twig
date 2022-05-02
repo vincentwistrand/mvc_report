@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset("css/style.css") }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+</script>
 
 </head>
 <body>
@@ -13,17 +24,21 @@
             <a href="https://github.com/vincentwistrand/mvc_report.git"class="gitlink">My GitHub</a>
             <h1 class="head">Objektorienterade webbteknologier</h1>
             <h2 class="head2">Vincent Wistrand viai20</h2>
-            <div class="navbar">
-                <nav>
-                   <a href="{{ url("home") }}" {% if app.request.pathinfo == "/" %}class="active"{% endif %}>Hem</a>
-                   <a href="{{ path("report") }}" {% if app.request.pathinfo == "/report" %}class="active"{% endif %}>Report</a>
-                   <a href="{{ path("about") }}" {% if app.request.pathinfo == "/about" %}class="active"{% endif %}>Om</a>
-                   <a href="{{ path("debug") }}" {% if app.request.pathinfo == "/dev/debug" %}class="active"{% endif %}>Debug</a>
-                   <a href="{{ path("card") }}" {% if app.request.pathinfo == "/card" %}class="active"{% endif %}>Kortlek</a>
-                   <a href="{{ path("game") }}" {% if app.request.pathinfo == "/game" %}class="active"{% endif %}>Kortspel</a>
-                   <a href="{{ path("book") }}" {% if app.request.pathinfo == "/book" %}class="active"{% endif %}>Bibliotek</a>
-                   <a href="{{ path("login") }}" {% if app.request.pathinfo == "/login" %}class="active"{% endif %}>Användare</a>
-                </nav>
+        </div>
+
+        <div class="topnav" id="myTopnav">
+            <div style="display: block; margin-left: auto; margin-right: auto;">
+                <a href="{{ url("home") }}" {% if app.request.pathinfo == "/" %}class="active"{% endif %}>Hem</a>
+                <a href="{{ path("report") }}" {% if app.request.pathinfo == "/report" %}class="active"{% endif %}>Report</a>
+                <a href="{{ path("about") }}" {% if app.request.pathinfo == "/about" %}class="active"{% endif %}>Om</a>
+                <a href="{{ path("debug") }}" {% if app.request.pathinfo == "/dev/debug" %}class="active"{% endif %}>Debug</a>
+                <a href="{{ path("card") }}" {% if app.request.pathinfo == "/card" %}class="active"{% endif %}>Kortlek</a>
+                <a href="{{ path("game") }}" {% if app.request.pathinfo == "/game" %}class="active"{% endif %}>Kortspel</a>
+                <a href="{{ path("book") }}" {% if app.request.pathinfo == "/book" %}class="active"{% endif %}>Bibliotek</a>
+                <a href="{{ path("login") }}" {% if app.request.pathinfo == "/login" %}class="active"{% endif %}>Användare</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
             </div>
         </div>
 
@@ -37,5 +52,15 @@
             <div class="foot">Copyright @ viai20</div>
         </div>
     </div>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
 </body>
 </html>

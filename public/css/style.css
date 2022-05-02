@@ -16,14 +16,14 @@
 .wrapper {
     max-width: 100%;
     margin: 0 auto;
-    grid-template-columns: 0 auto;
-    grid-template-rows: 300px auto 40px;
+    grid-template-columns: auto auto;
+    grid-template-rows: 300px auto auto 40px;
 }
 
 /* --------------- Header --------------- */
 
 .siteheader {
-    grid-column: 1 / 3;
+    grid-column: 1 / 4;
     grid-row: 1 / 1;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/headimg.png");
     background-repeat: no-repeat;
@@ -64,48 +64,49 @@
 
 
 /* --------------- Navbar  --------------- */
-.navbar {
-  grid-column: 1 / 3;
-  grid-row: 4 / 4;
-  text-align: center;
-}
 
-nav {
+.topnav {
+    display: grid;
+    background-color: rgba(51, 51, 51, 0);
+    overflow: hidden;
+    grid-column: 1 / 4;
+    grid-row: 2 / 2;
     text-align: center;
+    position: relative;
+    bottom: 50px;
+  }
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
-nav a {
-    margin: 17px 10px;
-    text-decoration: none;
-    padding: 10px;
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
 }
 
-nav a:link {
-    color: #F0FFF0;
+.topnav a.active {
+  /*background-color: #4CAF50;*/
+  color: white;
 }
 
-nav a:visited {
-    color: #FFFFFF;
+.topnav .icon {
+  display: none;
 }
-
-nav a:hover {
-    background-color: #FFFFFF;
-    color: #000000;
-}
-
-.active {
-    background-color: #FFFFFF;
-    color: #000000 !important;
-}
-
 
 /* --------------- Home  --------------- */
 
 .main {
     background-color: #FFFFFF;
     grid-column: 2 / 2;
-    grid-row: 2 / 3;
-    min-height: 630px;
+    grid-row: 3 / 4;
+    min-height: 580px;
     max-width: 1010px;
     margin: 0 auto;
     padding: 50px 30px;
@@ -406,8 +407,8 @@ select {
 /* --------------- Footer --------------- */
 
 .sitefooter {
-    grid-column: 1 / 3;
-    grid-row: 3 / 3;
+    grid-row: 4 / 4;
+    grid-column: 1 / 4;
 
     background-color: rgba(0, 0, 0, 0.7);
     color: #F5FFFA;
@@ -446,5 +447,44 @@ select {
 
     nav a {
         margin: 17px 0;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .topnav a {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+
+    .topnav {
+        background-color: rgb(48, 48, 48);
+        position: relative;
+        bottom: 0;
+        display: block;
+    }
+
+    .topnav.responsive {position: relative;}
+    .topnav.responsive a.icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+
+    .topnav a.active {
+        background-color: #008ee1;
+        color: white !important;
+      }
+}
+
+  @media screen and (max-width: 730px) {
+    .form_user {
+        width: 270px;
     }
 }
