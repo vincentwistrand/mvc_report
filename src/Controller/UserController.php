@@ -25,6 +25,12 @@ class UserController extends AbstractController
         
         $current_user = $session->get('user');
 
+        if (!$current_user || $current_user->getType() != 'admin') {
+            return $this->render('user/no_access.html.twig', [
+                'Message' =>'You need to be logged in as admin to perform this action'
+            ]);
+        }
+
         return $this->render('user/all_users.html.twig', [
             'title' => 'Alla användare',
             'users' => $users,
@@ -38,11 +44,20 @@ class UserController extends AbstractController
     */
     public function showUserById(
         userRepository $userRepository,
+        SessionInterface $session,
         int $id
     ): Response {
         $user = $userRepository
             ->find($id);
         
+        $loggedIn = $session->get('user');
+        
+        if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
+            return $this->render('user/no_access.html.twig', [
+                'Message' =>'You need to be logged in as admin to perform this action'
+            ]);
+        }
+
         return $this->render('user/one_user.html.twig', [
             'user' => $user
         ]);
@@ -104,6 +119,7 @@ class UserController extends AbstractController
     */
     public function deleteUserById(
         ManagerRegistry $doctrine,
+        SessionInterface $session,
         int $id
     ): Response {
         $entityManager = $doctrine->getManager();
@@ -113,6 +129,14 @@ class UserController extends AbstractController
             throw $this->createNotFoundException(
                 'No user found for id '.$id
             );
+        }
+
+        $loggedIn = $session->get('user');
+
+        if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
+            return $this->render('user/no_access.html.twig', [
+                'Message' =>'You need to be logged in as admin to perform this action'
+            ]);
         }
 
         $entityManager->remove($user);
@@ -130,10 +154,19 @@ class UserController extends AbstractController
     */
     public function updateUser(
         userRepository $userRepository,
+        SessionInterface $session,
         int $id
     ): Response {
         $user = $userRepository
             ->find($id);
+        
+        $loggedIn = $session->get('user');
+
+        if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
+            return $this->render('user/no_access.html.twig', [
+                'Message' =>'You need to be logged in as admin to perform this action'
+            ]);
+        }
     
         return $this->render('user/update_user.html.twig', [
             'title' => 'Uppdatera användarinformation',
