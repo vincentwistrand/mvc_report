@@ -31,10 +31,14 @@ class CardController extends AbstractController
             'link_to_card_deck' => $this->generateUrl('card-deck'),
             'link_to_card_shuffle' => $this->generateUrl('card-shuffle'),
             'link_to_card_draw' => $this->generateUrl('card-draw'),
+            'link_to_draw_cards' => $this->generateUrl('card-draw-number'),
+            'link_to_draw_to_players' => $this->generateUrl('card-draw-players-cards'),
             'link_to_card_deck2' => $this->generateUrl('card-deck2'),
             'link_to_card_api' => $this->generateUrl('api-deck'),
             'link_to_card_api_shuffle' => $this->generateUrl('api-shuffle'),
-            'link_to_card_api_draw' => $this->generateUrl('api-draw')
+            'link_to_card_api_draw' => $this->generateUrl('api-draw'),
+            'link_to_api_draw_number' => $this->generateUrl('api-draw-number'),
+            'link_to_card_api_draw_players_cards' => $this->generateUrl('card-api-draw-players-cards')
         ];
 
         return $this->render('card/home.html.twig', $data);
