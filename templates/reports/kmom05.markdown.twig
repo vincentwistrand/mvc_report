@@ -1,3 +1,28 @@
 ## kmom05
 
-bra kmom
+Det gick bra att jobba med symfony och doctrine. 
+Doctrine verkar vara ett smidigt sätt att skapa och jobba med en databas.
+Jag valde att göra ett bibliotek och försökte hålla designen stilren och enkel.
+Jag stylade formulären och knapparna.
+Jag utgick från övningen och skapade en boktabell och och bokcontroller.
+Förstasidan visar alla böcker och om man klickar på en bok kan man uppdatera och radera den.
+På förstasidan kan man också lägga till en bok.
+
+Jag skapade också en användarsida där man kan skapa en användare och logga in.
+Om man skapar en adminanvändare så kan man se, redigera och ta bort alla användare när man loggat in.
+Om man skapar en vanlig användare så kan man bara se och redigera sin egen profil.
+Jag lade till kolumnen "type" i user-tabellen som antingen är admin eller ordinary beroende på vad det är för användare.
+Man kan bara få tillgång till sidan med alla användare om man är inloggad som admin.
+När man loggar in så läggs användaren i session ($user = $session->set('user', $user)) och sidan man besöker kan då se vilken typ av användare som är inloggad.
+Jag vet inte om detta är det bästa sättet att göra det på men det var det som låg närmast till hands.
+Om man inte är inloggad kommer man inte åt några sidor.
+Om man är inloggad som vanlig användare så kommer man bara åt sina egna profilsidor.
+Om man är inloggad som admin kommer man åt alla sidor.
+
+Jag använde en lokal databas bara för att lära mig hur det funkar.
+Jag läste om hur det fungerar att använda skolans så jag har koll på det också.
+Det är ungefär som det fungerar när man använder ett webbhotell verkar det som.
+
+TIL:en för detta kursmoment är nog hur det fungerar att jobba med en databas på t ex ett webbhotell även fast jag bara använde ett lokalt i uppgiften.
+
+
