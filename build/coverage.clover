@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650828620">
-  <project timestamp="1650828620">
+<coverage generated="1650890172">
+  <project timestamp="1650890172">
     <file name="C:\Users\vince\dbwebb-kurser\mvc\me\report\src\Card\Card.php">
       <class name="App\Card\Card" namespace="global">
         <metrics complexity="5" methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="16" coveredelements="16"/>
@@ -107,13 +107,13 @@
     </file>
     <file name="C:\Users\vince\dbwebb-kurser\mvc\me\report\src\Card\Player.php">
       <class name="App\Card\Player" namespace="global">
-        <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="4" coveredelements="2"/>
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
       </class>
-      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="7"/>
-      <line num="11" type="stmt" count="7"/>
-      <line num="17" type="method" name="getPlayerId" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <metrics loc="22" ncloc="19" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="4" coveredelements="2"/>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
+      <line num="11" type="stmt" count="8"/>
+      <line num="17" type="method" name="getPlayerId" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="19" type="stmt" count="1"/>
+      <metrics loc="22" ncloc="19" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="4" coveredelements="4"/>
     </file>
     <file name="C:\Users\vince\dbwebb-kurser\mvc\me\report\src\Controller\CardAPIController.php">
       <class name="App\Controller\CardAPIController" namespace="global">
@@ -595,6 +595,6 @@
       <line num="104" type="stmt" count="1"/>
       <metrics loc="107" ncloc="82" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="33" coveredstatements="33" elements="40" coveredelements="40"/>
     </file>
-    <metrics files="23" loc="1523" ncloc="1193" classes="18" methods="74" coveredmethods="25" conditionals="0" coveredconditionals="0" statements="388" coveredstatements="80" elements="462" coveredelements="105"/>
+    <metrics files="23" loc="1523" ncloc="1193" classes="18" methods="74" coveredmethods="26" conditionals="0" coveredconditionals="0" statements="388" coveredstatements="81" elements="462" coveredelements="107"/>
   </project>
 </coverage>
