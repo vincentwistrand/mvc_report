@@ -9,14 +9,14 @@
 <p><a href="{{ link_to_card_shuffle }}">Återställ kortlek och blanda</a></p>
 <p><a href="{{ link_to_card_draw }}">Dra ett kort ur kortleken</a></p>
 <p><a href="{{ link_to_card_deck2 }}">Återställ kortlek, blanda och lägg till två jokrar</a></p><br>
-<form class="form_user" method="post" action="/card/deck/draw/number">
+<form class="form_user" method="post" action="{{ link_to_draw_cards }}">
     <p>
         <label><b>Dra ett antal kort:</b></label><br>
         <input type="text" name="number" value="" Required>
         <input type="submit" value="Dra">
     </p>
 </form><br>
-<form class="form_user" method="post" action="/card/deck/deal/toplayers">
+<form class="form_user" method="post" action="{{ link_to_draw_to_players }}">
     <p>
         <label><b>Dra ett antal kort till ett antal spelare:</b></label><br>
         <p>Antal kort:</p>
@@ -31,14 +31,14 @@
 <p><a href="{{ link_to_card_api }}">Sortera kortlek</a></p>
 <p><a href="{{ link_to_card_api_shuffle }}">Återställ kortlek och blanda</a></p>
 <p><a href="{{ link_to_card_api_draw }}">Dra ett kort ur kortleken</a></p>
-<form class="form_user" method="post" action="/card/api/deck/draw/number">
+<form class="form_user" method="post" action="{{ link_to_api_draw_number }}">
     <p>
         <label><b>Dra ett antal kort:</b></label><br>
         <input type="text" name="number" value="" Required>
         <input type="submit" value="Dra">
     </p>
 </form><br>
-<form class="form_user" method="post" action="/card/api/deck/deal/toplayers">
+<form class="form_user" method="post" action="{{ link_to_card_api_draw_players_cards }}">
     <p>
         <label><b>Dra ett antal kort till ett antal spelare:</b></label><br>
         <p>Antal kort:</p>
