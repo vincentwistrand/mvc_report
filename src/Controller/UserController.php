@@ -52,7 +52,7 @@ class UserController extends AbstractController
         
         $loggedIn = $session->get('user');
         
-        if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
+        if (!$loggedIn || !$user || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
             return $this->render('user/no_access.html.twig', [
                 'Message' =>'You need to be logged in as admin to perform this action'
             ]);
