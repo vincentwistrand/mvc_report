@@ -26,6 +26,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-Card.html#method_getRank"
         },                {
+            "fqsen": "\\App\\Card\\Card\u003A\u003AgetProperties\u0028\u0029",
+            "name": "getProperties",
+            "summary": "",
+            "url": "classes/App-Card-Card.html#method_getProperties"
+        },                {
             "fqsen": "\\App\\Card\\Card\u003A\u003A\u0024colour",
             "name": "colour",
             "summary": "",
@@ -116,15 +121,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-Game.html#method_getGameEnd"
         },                {
-            "fqsen": "\\App\\Card\\Game\u003A\u003AaddCardToPlayerHand\u0028\u0029",
-            "name": "addCardToPlayerHand",
+            "fqsen": "\\App\\Card\\Game\u003A\u003AgetDeckCards\u0028\u0029",
+            "name": "getDeckCards",
             "summary": "",
-            "url": "classes/App-Card-Game.html#method_addCardToPlayerHand"
-        },                {
-            "fqsen": "\\App\\Card\\Game\u003A\u003AaddCardToBankHand\u0028\u0029",
-            "name": "addCardToBankHand",
-            "summary": "",
-            "url": "classes/App-Card-Game.html#method_addCardToBankHand"
+            "url": "classes/App-Card-Game.html#method_getDeckCards"
         },                {
             "fqsen": "\\App\\Card\\Game\u003A\u003AgetPlayerCardCount\u0028\u0029",
             "name": "getPlayerCardCount",
@@ -191,6 +191,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Card-Player.html#method___construct"
         },                {
+            "fqsen": "\\App\\Card\\Player\u003A\u003AgetPlayerId\u0028\u0029",
+            "name": "getPlayerId",
+            "summary": "",
+            "url": "classes/App-Card-Player.html#method_getPlayerId"
+        },                {
             "fqsen": "\\App\\Card\\Player\u003A\u003A\u0024player_id",
             "name": "player_id",
             "summary": "",
@@ -225,6 +230,16 @@ Search.appendIndex(
             "name": "drawCardsToPlayers",
             "summary": "",
             "url": "classes/App-Controller-CardAPIController.html#method_drawCardsToPlayers"
+        },                {
+            "fqsen": "\\App\\Controller\\CardAPIController\u003A\u003AcardsToJson\u0028\u0029",
+            "name": "cardsToJson",
+            "summary": "Convert\u0020array\u0020of\u0020card\u0020objects\u0020to\u0020json\u0020string.",
+            "url": "classes/App-Controller-CardAPIController.html#method_cardsToJson"
+        },                {
+            "fqsen": "\\App\\Controller\\CardAPIController\u003A\u003AplayersToJson\u0028\u0029",
+            "name": "playersToJson",
+            "summary": "Convert\u0020array\u0020of\u0020player\u0020objects\u0020to\u0020json\u0020string.",
+            "url": "classes/App-Controller-CardAPIController.html#method_playersToJson"
         },                {
             "fqsen": "\\App\\Controller\\CardController",
             "name": "CardController",
@@ -376,6 +391,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-GameController.html#method_startGamePost"
         },                {
+            "fqsen": "\\App\\Controller\\GameController\u003A\u003AcheckInput\u0028\u0029",
+            "name": "checkInput",
+            "summary": "Used\u0020in\u0020method\u0020startGamePost\u0028\u0029\u0020and\u0020processes\u0020the\u0020input\u0020from\u0020\u0024request.",
+            "url": "classes/App-Controller-GameController.html#method_checkInput"
+        },                {
             "fqsen": "\\App\\Controller\\ReportController",
             "name": "ReportController",
             "summary": "",
@@ -480,11 +500,6 @@ Search.appendIndex(
             "name": "hand",
             "summary": "",
             "url": "classes/App-Dice-DiceHand.html#property_hand"
-        },                {
-            "fqsen": "\\App\\Helpfunctions\\check_input\u0028\u0029",
-            "name": "check_input",
-            "summary": "",
-            "url": "namespaces/app-helpfunctions.html#function_check_input"
         },                {
             "fqsen": "\\App\\Interface\\Deck2Interface",
             "name": "Deck2Interface",
@@ -610,11 +625,6 @@ Search.appendIndex(
             "name": "Dice",
             "summary": "",
             "url": "namespaces/app-dice.html"
-        },                {
-            "fqsen": "\\App\\Helpfunctions",
-            "name": "Helpfunctions",
-            "summary": "",
-            "url": "namespaces/app-helpfunctions.html"
         },                {
             "fqsen": "\\App\\Interface",
             "name": "Interface",
