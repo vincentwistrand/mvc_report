@@ -4,44 +4,32 @@
 
 {% block content %}
 
-{% if current_user %}
+<div class="main">
+    <a href="{{ path('logout') }}">Logga ut</a>
+    <h1 style="text-align: center;">{{ title }}</h1>
+    <p style="text-align: center;">Inloggad som {{ current_user.getName }} ({{ current_user.getType }})</p><br><br>
 
-    {% if current_user.getType == 'admin' %}
-        <div class="main">
-            <a href="{{ path('logout') }}">Logga ut</a>
-            <h1 style="text-align: center;">{{ title }}</h1>
-            <p style="text-align: center;">Inloggad som {{ current_user.getName }} ({{ current_user.getType }})</p><br><br>
+    <div class="user_container">
+        {% for user in users %}
+            <div class="user_item" style="border">
+                <a href="{{ path('user_by_id', {id: user.id}) }}">
+                    <img src="{{ asset("img/no_image.JPG") }}">
+                    <p>Id:</p>
+                    <h4>{{ user.id }}</h4>
+                    <p>Användarnamn:</p>
+                    <h4>{{ user.username }}</h4>
+                    <p>Namn:</p>
+                    <h4>{{ user.name }}</h4>
+                    <p>Email:</p>
+                    <h4>{{ user.email }}</h4>
+                    <p>Behörighet: </p>
+                    <h4>{{ user.type }}</h4>
+                </a>
+            </div>
+        {% endfor %}
+    </div><br><br><br>
 
-            <div class="user_container">
-                {% for user in users %}
-                    <div class="user_item" style="border">
-                        <a href="{{ path('user_by_id', {id: user.id}) }}">
-                            <img src="{{ asset("img/no_image.JPG") }}">
-                            <p>Användarnamn:</p>
-                            <h4>{{ user.username }}</h4>
-                            <p>Namn:</p>
-                            <h4>{{ user.name }}</h4>
-                            <p>Email:</p>
-                            <h4>{{ user.email }}</h4>
-                            <p>Behörighet: </p>
-                            <h4>{{ user.type }}</h4>
-                        </a>
-                    </div>
-                {% endfor %}
-            </div><br><br><br>
-
-            <div style="text-align: center;"><a id="user_button" href="{{ link_to_create_user }}">Skapa användare</a></div>
-        </div>
-    {% endif %}
-
-    {% if current_user.getType == 'ordinary' %}
-        <h2>Logg in as admin to see content</h2>
-    {% endif %}
-
-{% endif %}
-
-{% if current_user == null %}
-        <h2>Logg in as admin to see content</h2>
-{% endif %}
+    <div style="text-align: center;"><a id="user_button" href="{{ link_to_create_user }}">Skapa användare</a></div>
+</div>
 
 {% endblock %}
