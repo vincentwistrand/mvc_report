@@ -5,6 +5,7 @@
 {% block content %}
 
 <div class="main">
+
     <a href="{{ path('logout') }}">Logga ut</a><br><br>
     <h1 style="text-align: center;">{{ user.name }}</h1><br>
 
@@ -26,6 +27,7 @@
         <div style="text-align: center;"><a id="user_button" class="blue_button" href="{{ path('user_update', {id: user.id}) }}">Uppdatera användare</a></div>
         <div style="text-align: center;"><a id="user_button" class="red_button" href="{{ path('user_delete_by_id', {id: user.id}) }}">Radera användare</a></div>
     {% endif %}
+    
 </div>
 
 {% endblock %}
