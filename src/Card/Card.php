@@ -45,9 +45,9 @@ class Card
     public function getProperties(): array
     {
         $properties = array(
-            "Colour"=>$this->colour,
-            "Rank"=>$this->rank,
-            "Points"=>$this->points
+            "Colour" => $this->colour,
+            "Rank" => $this->rank,
+            "Points" => $this->points
         );
         return $properties;
     }

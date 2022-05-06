@@ -45,7 +45,7 @@ class Game
     {
         $cards = array();
 
-        for ($i=0; $i < 2; $i++) {
+        for ($i = 0; $i < 2; $i++) {
             $card = $this->deck->drawCard();
             $this->bank->addCard($card);
             $this->bankPoints += intval($card->getPoints());

@@ -127,8 +127,13 @@ class GameController extends AbstractController
     * Used in method startGamePost() and processes the input from $request.
     * @return string
     */
-    public function checkInput(mixed $draw, mixed $stop, mixed $new_round, mixed $reset, SessionInterface $session): string
-    {
+    public function checkInput(
+        mixed $draw,
+        mixed $stop,
+        mixed $new_round,
+        mixed $reset,
+        SessionInterface $session
+    ): string {
         $game = $session->get("game") ?? 0;
         $player_point = $session->get('player_points');
         $bank_point = $session->get('bank_points');

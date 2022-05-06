@@ -22,12 +22,12 @@ class UserController extends AbstractController
     ): Response {
         $users = $userRepository
             ->findAll();
-        
+
         $current_user = $session->get('user');
 
         if (!$current_user || $current_user->getType() != 'admin') {
             return $this->render('user/no_access.html.twig', [
-                'Message' =>'You need to be logged in as admin to perform this action'
+                'Message' => 'You need to be logged in as admin to perform this action'
             ]);
         }
 
@@ -49,12 +49,12 @@ class UserController extends AbstractController
     ): Response {
         $user = $userRepository
             ->find($id);
-        
+
         $loggedIn = $session->get('user');
-        
+
         if (!$loggedIn || !$user || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
             return $this->render('user/no_access.html.twig', [
-                'Message' =>'You need to be logged in as admin to perform this action'
+                'Message' => 'You need to be logged in as admin to perform this action'
             ]);
         }
 
@@ -65,7 +65,7 @@ class UserController extends AbstractController
 
     /**
     * @Route(
-    *       "/user/create", 
+    *       "/user/create",
     *       name="create_user",
     *       methods={"GET","HEAD"}
     * )
@@ -88,10 +88,9 @@ class UserController extends AbstractController
     * )
     */
     public function createUserProcess(
-            Request $request,
-            ManagerRegistry $doctrine
-    ): Response
-    {   
+        Request $request,
+        ManagerRegistry $doctrine
+    ): Response {
         $entityManager = $doctrine->getManager();
 
         $username = $request->request->get('username');
@@ -127,7 +126,7 @@ class UserController extends AbstractController
 
         if (!$user) {
             throw $this->createNotFoundException(
-                'No user found for id '.$id
+                'No user found for id ' . $id
             );
         }
 
@@ -135,7 +134,7 @@ class UserController extends AbstractController
 
         if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
             return $this->render('user/no_access.html.twig', [
-                'Message' =>'You need to be logged in as admin to perform this action'
+                'Message' => 'You need to be logged in as admin to perform this action'
             ]);
         }
 
@@ -147,7 +146,7 @@ class UserController extends AbstractController
 
     /**
     * @Route(
-    *   "/user/update/{id}", 
+    *   "/user/update/{id}",
     *    name="user_update",
     *    methods={"GET","HEAD"}
     * )
@@ -159,24 +158,24 @@ class UserController extends AbstractController
     ): Response {
         $user = $userRepository
             ->find($id);
-        
+
         $loggedIn = $session->get('user');
 
         if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
             return $this->render('user/no_access.html.twig', [
-                'Message' =>'You need to be logged in as admin to perform this action'
+                'Message' => 'You need to be logged in as admin to perform this action'
             ]);
         }
-    
+
         return $this->render('user/update_user.html.twig', [
             'title' => 'Uppdatera användarinformation',
             'user' => $user
         ]);
     }
-    
+
     /**
     * @Route(
-    *       "/user/update/{id}", 
+    *       "/user/update/{id}",
     *       name="user_update_process",
     *       methods={"POST"}
     * )
@@ -185,36 +184,35 @@ class UserController extends AbstractController
         Request $request,
         ManagerRegistry $doctrine
     ): Response {
-        
         $id = $request->request->get('id');
         $username = $request->request->get('username');
         $password  = $request->request->get('password');
         $name  = $request->request->get('name');
         $email  = $request->request->get('email');
         $type  = $request->request->get('type');
-    
+
         $entityManager = $doctrine->getManager();
         $user = $entityManager->getRepository(User::class)->find($id);
-        
+
         if (!$user) {
             throw $this->createNotFoundException(
-                'No user found for id '.$id
+                'No user found for id ' . $id
             );
         }
-        
+
         $user->setUsername($username);
         $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
         $user->setName($name);
         $user->setEmail($email);
         $user->setType($type);
         $entityManager->flush();
-        
+
         return $this->redirectToRoute('user');
     }
 
     /**
     * @Route(
-    *       "/login", 
+    *       "/login",
     *       name="login",
     *       methods={"GET","HEAD"}
     * )
@@ -235,7 +233,7 @@ class UserController extends AbstractController
 
     /**
     * @Route(
-    *       "/login", 
+    *       "/login",
     *       name="login_process",
     *       methods={"POST"}
     * )
@@ -246,7 +244,6 @@ class UserController extends AbstractController
         ManagerRegistry $doctrine,
         SessionInterface $session
     ): Response {
-
         $username = $request->request->get('username');
         $password  = $request->request->get('password');
 
@@ -266,25 +263,22 @@ class UserController extends AbstractController
                 'user' => null
             ]);
         }
-    
+
         $entityManager = $doctrine->getManager();
         $user = $entityManager->getRepository(User::class)->find($id);
-        
+
         if (!$user) {
             throw $this->createNotFoundException(
-                'No user found for id '.$id
+                'No user found for id ' . $id
             );
         }
 
         if (password_verify($password, $user->getPassword())) {
             if ($user->getType() === 'admin') {
-
                 $session->set('user', $user);
 
                 return $this->redirectToRoute('user');
-
             } elseif ($user->getType() === 'ordinary') {
-
                 $session->set('user', $user);
 
                 return $this->redirectToRoute('user_by_id', [
@@ -301,7 +295,7 @@ class UserController extends AbstractController
 
     /**
     * @Route(
-    *       "/logout", 
+    *       "/logout",
     *       name="logout",
     *       methods={"GET","HEAD"}
     * )
@@ -309,7 +303,6 @@ class UserController extends AbstractController
     public function logoutUser(
         SessionInterface $session
     ): Response {
-
         $session->set('user', null);
 
         $user = $session->get('user');

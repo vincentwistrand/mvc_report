@@ -11,7 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\BookRepository;
 
 class BookController extends AbstractController
-{   
+{
     /**
     * @Route("/book", name="book")
     */
@@ -30,7 +30,7 @@ class BookController extends AbstractController
 
     /**
     * @Route(
-    *       "/book/create", 
+    *       "/book/create",
     *       name="add_book",
     *       methods={"GET","HEAD"}
     * )
@@ -53,10 +53,9 @@ class BookController extends AbstractController
     * )
     */
     public function createBookProcess(
-            Request $request,
-            ManagerRegistry $doctrine
-    ): Response
-    {   
+        Request $request,
+        ManagerRegistry $doctrine
+    ): Response {
         $entityManager = $doctrine->getManager();
 
         $title = $request->request->get('title');
@@ -104,7 +103,7 @@ class BookController extends AbstractController
 
         if (!$book) {
             throw $this->createNotFoundException(
-                'No book found for id '.$id
+                'No book found for id ' . $id
             );
         }
 
@@ -116,7 +115,7 @@ class BookController extends AbstractController
 
     /**
     * @Route(
-    *   "/book/update/{id}", 
+    *   "/book/update/{id}",
     *    name="book_update",
     *    methods={"GET","HEAD"}
     * )
@@ -136,7 +135,7 @@ class BookController extends AbstractController
 
     /**
     * @Route(
-    *       "/book/update/{id}", 
+    *       "/book/update/{id}",
     *       name="book_update_process",
     *       methods={"POST"}
     * )
@@ -145,7 +144,6 @@ class BookController extends AbstractController
         Request $request,
         ManagerRegistry $doctrine
     ): Response {
-
         $id = $request->request->get('id');
         $title = $request->request->get('title');
         $author  = $request->request->get('author');
@@ -154,19 +152,19 @@ class BookController extends AbstractController
 
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Book::class)->find($id);
-    
+
         if (!$book) {
             throw $this->createNotFoundException(
-                'No book found for id '.$id
+                'No book found for id ' . $id
             );
         }
-    
+
         $book->setTitle($title);
         $book->setAuthor($author);
         $book->setISBN($isbn);
         $book->setImage($image);
         $entityManager->flush();
-    
+
         return $this->redirectToRoute('book');
     }
 }
