@@ -70,11 +70,8 @@ class UserController extends AbstractController
     *       methods={"GET","HEAD"}
     * )
     */
-    public function createUser(
-        ManagerRegistry $doctrine
-    ): Response {
-        $entityManager = $doctrine->getManager();
-
+    public function createUser(): Response
+    {
         return $this->render('user/create_user.html.twig', [
             'title' => 'Skapa användare'
         ]);
@@ -184,28 +181,13 @@ class UserController extends AbstractController
         Request $request,
         ManagerRegistry $doctrine
     ): Response {
-        $id = $request->request->get('id');
-        $username = $request->request->get('username');
-        $password  = $request->request->get('password');
-        $name  = $request->request->get('name');
-        $email  = $request->request->get('email');
-        $type  = $request->request->get('type');
+        $result = makeUpdate($request, $doctrine);
 
-        $entityManager = $doctrine->getManager();
-        $user = $entityManager->getRepository(User::class)->find($id);
-
-        if (!$user) {
+        if ($result['user'] === 'dont exist') {
             throw $this->createNotFoundException(
-                'No user found for id ' . $id
+                'No user found for id ' . $result['id']
             );
         }
-
-        $user->setUsername($username);
-        $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
-        $user->setName($name);
-        $user->setEmail($email);
-        $user->setType($type);
-        $entityManager->flush();
 
         return $this->redirectToRoute('user');
     }
@@ -221,8 +203,6 @@ class UserController extends AbstractController
         ManagerRegistry $doctrine,
         SessionInterface $session
     ): Response {
-        $entityManager = $doctrine->getManager();
-
         $user = $session->get('user');
 
         return $this->render('user/login.html.twig', [
@@ -244,51 +224,23 @@ class UserController extends AbstractController
         ManagerRegistry $doctrine,
         SessionInterface $session
     ): Response {
-        $username = $request->request->get('username');
-        $password  = $request->request->get('password');
+        $result = checkLogin($request, $userRepository, $doctrine, $session);
 
-        $users = $userRepository
-        ->findAll();
-
-        $id = null;
-        foreach ($users as $user) {
-            if ($user->getUsername() === $username) {
-                $id = $user->getId();
-            }
-        }
-
-        if (!$id) {
+        if ($result[0] === 'wrong username') {
             return $this->render('user/login.html.twig', [
                 'message' => 'wrong username',
                 'user' => null
             ]);
-        }
-
-        $entityManager = $doctrine->getManager();
-        $user = $entityManager->getRepository(User::class)->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException(
-                'No user found for id ' . $id
-            );
-        }
-
-        if (password_verify($password, $user->getPassword())) {
-            if ($user->getType() === 'admin') {
-                $session->set('user', $user);
-
-                return $this->redirectToRoute('user');
-            } elseif ($user->getType() === 'ordinary') {
-                $session->set('user', $user);
-
-                return $this->redirectToRoute('user_by_id', [
-                    'id' => $user->getId()
-                ]);
-            }
-        } else {
+        } elseif ($result[0] === 'wrong password') {
             return $this->render('user/login.html.twig', [
                 'message' => 'wrong password',
                 'user' => null
+            ]);
+        } elseif ($result[0] === 'admin') {
+            return $this->redirectToRoute('user');
+        } elseif ($result[0] === 'ordinary') {
+            return $this->redirectToRoute('user_by_id', [
+                'id' => $result[1]->getId()
             ]);
         }
     }
@@ -305,8 +257,90 @@ class UserController extends AbstractController
     ): Response {
         $session->set('user', null);
 
-        $user = $session->get('user');
-
         return $this->redirectToRoute('login');
+    }
+}
+
+/**
+ * Used in updateUserProcess in UserController
+ */
+function makeUpdate(
+    $request,
+    $doctrine
+) {
+    $id = $request->request->get('id');
+    $username = $request->request->get('username');
+    $password  = $request->request->get('password');
+    $name  = $request->request->get('name');
+    $email  = $request->request->get('email');
+    $type  = $request->request->get('type');
+
+    $entityManager = $doctrine->getManager();
+    $user = $entityManager->getRepository(User::class)->find($id);
+
+    if (!$user) {
+        $no_user = array('user' => 'dont exist', 'id' => $id);
+
+        return $no_user;
+    }
+
+    $user->setUsername($username);
+    $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+    $user->setName($name);
+    $user->setEmail($email);
+    $user->setType($type);
+    $entityManager->flush();
+
+    $user = array('user' => 'exist', 'id' => $id);
+
+    return $user;
+}
+
+/**
+ * Used in method loginProcess in UserController
+ */
+function checkLogin(
+    $request,
+    $userRepository,
+    $doctrine,
+    $session
+) {
+    $username = $request->request->get('username');
+    $password  = $request->request->get('password');
+
+    $users = $userRepository
+    ->findAll();
+
+    $id = null;
+    foreach ($users as $user) {
+        if ($user->getUsername() === $username) {
+            $id = $user->getId();
+        }
+    }
+
+    if (!$id) {
+        $message = ['wrong username', $user];
+        return $message;
+    }
+
+    $entityManager = $doctrine->getManager();
+    $user = $entityManager->getRepository(User::class)->find($id);
+
+    if (password_verify($password, $user->getPassword())) {
+        if ($user->getType() === 'admin') {
+            $session->set('user', $user);
+
+            $message = ['admin', $user];
+
+            return $message;
+        } elseif ($user->getType() === 'ordinary') {
+            $session->set('user', $user);
+            $message = ['ordinary', $user];
+
+            return $message;
+        }
+    } else {
+        $message = ['wrong password', $user];
+        return $message;
     }
 }
