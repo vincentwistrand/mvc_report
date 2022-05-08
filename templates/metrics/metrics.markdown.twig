@@ -1,0 +1,59 @@
+# Introduktion
+
+Inom kodkvalité brukar man prata man om de fyra C:na (4C).<br><br>
+
+**Coverage**
+
+Kodtäckning innebär hur stor del av koden som testerna täcker. Hög täckning kan innebära vältestad kod och mindre risk för problem i framtiden.
+Klassen Card i min kod har 100% kodtäckning då alla kodraderna gås igenom i mina tester. Klassen Game har bara 78,85% kodtäckning då tre av dess metoder inte testas.<br><br>
+
+**Complexity** 
+
+Ju högre värde desto mer komplex kod vilket kan leda till att programvaran kan vara svårare att uppdatera i framtiden. Man kan då t ex dela in koden i mindre delar.
+I min kod så är UserController den mest komplexa klassen med WMC värdet på 31 vilket jämfört med programmen i övningen inte verkar vara så högt.<br><br>
+
+**Cohesion**
+
+Ett lågt värde innebär klasser med fokuserat innehåll där koden hänger ihop.
+Ett högt värde kan innebära att en klass har många funktionaliteter med kod som inte direkt hänger ihop och därför skulle kunna delas upp i flera klasser.
+Min kods genomsnittliga LCOM är 1.2 vilket inte verkar vara så högt och klassen ProductController har högst värde med 4 vilket gör att man vill ta en titt på den. <br><br>
+
+**Coupling**
+
+Afferent coupling (AC) är hur många klasser som påverkas av den specifika klassen och om klassen har ett högt antal innebär det att klassen använder många andra klasser.
+Efferent coupling (EC) är hur många klasser som använder sig av en specifik klass och om antalet är högt innebär det att klassen används av många andra klasser.
+I min kod verkar det vara Dice-klassen som påverkar flest klasser AC=4.
+UserController verkar vara den klass som påverkas av flest klasser EC=8.<br><br>
+
+# PHPmetrics
+
+Rapporten visar att GameController och UserController har högst **complexity** (WMC = 21 respektive 31).
+Dessa två klasser har också lägst **maintainability** index på runt 65 och är de enda som visar rött.
+De är också de största klasserna av de jag skapat.
+Jag hittar också 9 **violations** varav ett error gällande GameController vilket är "Too complex method code".
+När det gäller **cohesion** så är average LCOM 1.2 och klassernas LCOM ligger mellan 0-2 förutom ProductController där LCOM är 4 men i och med att den tillhör en övning så bryr jag mig inte om den.
+Klassen Dice har högst **Afferent Coupling** på 4 och resten av klasserna håller sig under 4.
+När det gäller **Efferent Coupling** så är det flera klasser som ligger runt 6-7 och UserController har ett värde på 8 vilket betyder att den är beroende av ganska många andra klasser.<br><br>
+
+# Scrutinizer
+
+Rapporten visar en **kodtäckning** på 85,9% på namespacet Card och 100% på namespacet Trait vilket är de ställen jag har gjort tester för.
+När det gäller **cohesion** och **coupling** så verkar det inte gå att se.
+Högst på **CRAP**-topplistan för operations finns två metoder i GameController och UserController.
+Dessa går kanske att kika på lite.
+UserController, GameController och Game är de tre klasserna som är högst **complexity** men de är också de största klasserna.
+Under Issues-taben hittade jag lite unused code.<br><br>
+
+
+# Förbättringar
+
+Jag kommer göra följande förbättringar:<br><br>
+
+- Försöka dela upp koden och minska storleken på UserController.
+- Försöka dela upp koden och minska storleken på GameController.
+- Rensa så gott det går i Issues.
+
+UserController och GameController var de klasser som stack ut mest enligt rapporterna. 
+Efter att ha fixat till dom tror jag att deras complexity och maintainability kommer gå ner och att scrutinizer rating kommer gå upp lite.
+
+
