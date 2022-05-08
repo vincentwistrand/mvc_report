@@ -22,8 +22,6 @@ class CardController extends AbstractController
             $deck->createDeck();
         }
 
-        $deck = $session->get('deck');
-
         //\App\Functions\console_log($deckApi->getDeck());
 
         $data = [

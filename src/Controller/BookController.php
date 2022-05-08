@@ -35,11 +35,8 @@ class BookController extends AbstractController
     *       methods={"GET","HEAD"}
     * )
     */
-    public function createBook(
-        ManagerRegistry $doctrine
-    ): Response {
-        $entityManager = $doctrine->getManager();
-
+    public function createBook(): Response
+    {
         return $this->render('book/add_book.html.twig', [
             'title' => 'Lägg till bok'
         ]);

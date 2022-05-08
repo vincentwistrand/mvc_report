@@ -111,7 +111,6 @@ class CardAPIController extends AbstractController
         SessionInterface $session
     ): Response {
         $session->set('players', array());
-        $allPlayers = $session->get('players');
         $deck = $session->get('deck');
 
         $cards = $request->request->get('cards');
