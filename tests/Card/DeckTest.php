@@ -43,7 +43,7 @@ class DeckTest extends TestCase
         $deck->createDeck();
         $deck->drawCard();
         $this->assertEquals(51, count($deck->getDeck()));
-        $cards = $deck->drawCards(6);
+        $deck->drawCards(6);
         $this->assertEquals(45, count($deck->getDeck()));
     }
 
