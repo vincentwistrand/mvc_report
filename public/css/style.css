@@ -214,6 +214,7 @@
     width: 131px;
     height: 180px;
     background: url(../img/allakort.JPG) no-repeat;
+    border-radius: 5px;
 }
 
 .card-sprite.KloverEss { background-position: -10px -10px; }
@@ -402,6 +403,153 @@ select {
     flex-wrap: wrap;
     gap: 30px;
     justify-content: space-evenly;
+}
+
+/* --------------- Poker --------------- */
+
+.pokerlogin {
+    min-height: 580px;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+}
+
+.pokerhtml { 
+    background: url("../img/pokerimage.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.poker_user_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.poker_user_container a {
+    color: 'white';
+}
+
+.poker_user_item {
+    max-width: 200px;
+    /*text-align: center;*/
+}
+
+.poker_user_item a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.poker_form_user {
+    text-align: left;
+}
+
+#poker_user_button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-size: 16px;
+}
+
+#poker_user_button:hover {
+    background-color: #45a049;
+}
+
+#poker_user_button.poker_blue_button {
+    background-color: #008ee1 !important;
+}
+
+#poker_user_button.poker_blue_button:hover {
+    background-color: #0077bb !important;
+}
+
+#poker_user_button.poker_red_button {
+    background-color: #e10000 !important;
+}
+
+#poker_user_button.poker_red_button:hover {
+    background-color: #b10000 !important;
+}
+
+.input_poker,
+.select_poker {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.update_delete_buttons_poker {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-evenly;
+}
+
+.poker_user {
+    background: url("../img/green-poker.jpg") no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    min-height: 528px;
+    max-width: 1084px;
+    margin: 0 auto;
+    padding: 50px 30px;
+    margin-top: 150px;
+    border-radius: 352px;
+    border-style: solid;
+    border-width: 8px;
+    border-color: black;
+}
+
+.poker_game {
+    background: url("../img/green-poker.jpg") no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    height: 628px;
+    width: 1084px;
+    margin: 0 auto;
+    padding: 0 30px;
+    margin-top: 150px;
+    border-radius: 352px;
+    border-style: solid;
+    border-width: 8px;
+    border-color: black;
+}
+
+.pot_cards {
+    margin: 30px 160px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.game_flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 /* --------------- Footer --------------- */
