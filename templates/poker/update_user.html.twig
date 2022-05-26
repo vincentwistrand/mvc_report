@@ -9,27 +9,35 @@
 
 <form class="poker_form_user" method="post">
     <p>
-        <input type="hidden" name="id" value="{{ user.id }}" Required><br><br>
+        <input type="hidden" name="id" value="{{ user.id }}" Required>
     </p>
     <p>
         <label><b>Användarenamn</b></label><br>
-        <input class="input" type="text" name="username" value="{{ user.username }}" Required><br><br>
+        <input class="input" type="text" name="username" value="{{ user.username }}" Required>
     </p>
     <p>
         <label><b>Nytt lösenord</b></label><br>
-        <input class="input" type="text" name="password" value="" Required><br><br>
+        <input class="input" type="text" name="password" value="">
     </p>
     <p>
         <label><b>Namn</b></label><br>
-        <input class="input" type="string" name="name" value="{{ user.name }}" Required><br><br>
+        <input class="input" type="string" name="name" value="{{ user.name }}" Required>
     </p>
     <p>
         <label><b>Email</b></label><br>
-        <input class="input" type="email" name="email" value="{{ user.email }}" Required><br><br>
+        <input class="input" type="email" name="email" value="{{ user.email }}" Required>
     </p>
     <p>
+        <label><b>Bildaddress till profilbild</b></label><br>
+        <input class="input" type="url" name="picture" value="{{ user.picture }}" Required>
+    </p>
+    <p>
+        <label><b>Pengar</b></label><br>
+        <input class="input" type="number" min="0" name="money" value="{{ user.money }}" Required>
+    </p>
+    <div>
          <p>Användaren är för nuvarande: <b>{{ user.type }}</b></p>
-         <p>Kryssa i nedan om du vill ändra.</b></p><br>
+         <p>Kryssa i nedan om du vill ändra:</b></p>
         
         {% if user.type == "admin" %}
             <div>
@@ -39,7 +47,7 @@
             <div>
                 <label for="ordinary">Vanlig användare</label>
                 <input type="radio" name="type" id="ordinary" value="ordinary">
-            </div><br>
+            </div>
         {% endif %}
         {% if user.type == "ordinary" %}
             <div>
@@ -49,9 +57,9 @@
             <div>
                 <label for="ordinary">Vanlig användare</label>
                 <input type="radio" name="type" id="ordinary" value="ordinary" checked>
-            </div><br>
+            </div>
         {% endif %}
-    </p>
+    </div>
     <p>
         <input id="user_button" type="submit" value="Uppdatera">
     </p>
