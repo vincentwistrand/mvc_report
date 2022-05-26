@@ -4,28 +4,34 @@
 
 {% block content %}
 
-<div class="pokerlogin" style="text-align: center;">
+<div class="poker_user" style="text-align: center;">
     <h1>{{ title }}</h1><br>
 
 <form class="poker_form_user" method="post">
-    <p>
+    <div>
         <label><b>Användarenamn</b></label><br>
-        <input class="input" type="text" name="username" value="" Required><br><br>
-    </p>
-    <p>
+        <input class="input" type="text" name="username" value="" Required>
+    </div>
+    <div>
         <label><b>Lösenord</b></label><br>
-        <input class="input" type="text" name="password" value="" Required><br><br>
-    </p>
-    <p>
+        <input class="input" type="text" name="password" value="" Required>
+    </div>
+    <div>
         <label><b>Namn</b></label><br>
-        <input class="input" type="string" name="name" value="" Required><br><br>
-    </p>
-    <p>
+        <input class="input" type="string" name="name" value="" Required>
+    </div>
+    <div>
         <label><b>Email</b></label><br>
-        <input class="input" type="email" name="email" value="" Required><br><br>
-    </p>
-    <p>
-         <p>Kryssa i vilken behörihet användare ska ha.</b></p><br>
+        <input class="input" type="email" name="email" value="" Required>
+    </div>
+    <div>
+        <label><b>Bildaddress till profilbild</b></label><br>
+        <input class="input" type="url" name="picture" value="">
+    </div>
+    <div>
+        <div>
+            <p>Kryssa i vilken behörihet användare ska ha:</p><br>
+        </div>
         <div>
             <label for="admin">Admin</label>
             <input type="radio" name="type" id="admin" value="admin" Required>
@@ -34,10 +40,10 @@
             <label for="ordinary">Vanlig användare</label>
             <input type="radio" name="type" id="ordinary" value="ordinary" Required>
         </div><br>
-    </p>
-    <p>
+    </div>
+    <div style="margin-left: 100px;">
         <input id="poker_user_button" type="submit" value="Skapa">
-    </p>
+    </div>
 </form>
 
 </div>
