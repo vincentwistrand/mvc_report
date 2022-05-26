@@ -150,7 +150,9 @@ class CardAPIController extends AbstractController
     * @return string
     */
     public function playersToJson(object $deck, int $players, int $cards): string
-    {
+    {   
+        $allPlayers = [];
+
         for ($i = 1; $i <= $players; $i++) {
             $drawnCards = $deck->drawCards($cards);
             $newPlayer = new \App\Card\Player($i);
