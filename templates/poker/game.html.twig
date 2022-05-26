@@ -15,8 +15,12 @@
                     <div style="height: 150px"></div>
                 {% endif %}
                 {% for card in bank_hand %}
-                    <img src="{{ asset("img/card-backside.JPG") }}" width="135px" height="180px" style="border-radius: 5px" alt="kort">
-                    <i class="card-sprite {{ card.getColour }}{{ card.getRank }}"></i>
+                    {% if not game_over %}
+                        <img src="{{ asset("img/card-backside.JPG") }}" width="135px" height="180px" style="border-radius: 5px" alt="kort">
+                    {% endif %}
+                    {% if game_over %}
+                        <i class="card-sprite {{ card.getColour }}{{ card.getRank }}"></i>
+                    {% endif %}
                 {% endfor %}
             </div>
             <h2 style="color: white">Bank</h2>
@@ -26,13 +30,15 @@
 
     <div style="color: yellow">{{ comment }}</div>
 
-    <div style="height: 40px">
+    <div class="game_flex" style="height: 40px; margin: 0 200px;">
+        <a href="{{ path('poker_user_by_id', {id: user_id}) }}">Tillbaka</a>
         {% if not game_over %}
-            <h1 style="color: white;">Game pot: {{ game_pot }}$</h1>
+            <h1 style="color: white; margin-right: 50px;">Game pot: {{ game_pot }}$</h1>
         {% endif %}
         {% if game_over %}
             <h1 style="color: white;">End of game</h1>
         {% endif %}
+        <div></div>
     </div>
 
     {% if player_hand == [] and table_cards == [] %}
@@ -54,18 +60,18 @@
             <div style="height: 140px;"></div>
         {% endif %}
         {% if player_hand != [] and table_cards == [] %}
-            <form style="height: 27px;" method="post" class="game_flex">
+            <form style="height: 27px;" method="post" class="buttons_flex">
                 {% if bank_move != 'raise' %}
-                    <div><input type="submit" name="bet_ten" value="Bet 10$"></div>
+                    <input type="submit" name="bet_ten" value="Bet 10$">
                 {% endif %}
                 {% if bank_move == 'raise' %}
                     <div><input type="submit" name="bet_ten" value="Raise 10$"></div>
                 {% endif %}
-                <div><input type="submit" name="fold" value="Fold"></div>
+                <input type="submit" name="fold" value="Fold">
             </form>
         {% endif %}
         {% if player_hand != [] and table_cards != [] %}
-            <form style="height: 27px;" method="post" class="game_flex">
+            <form style="height: 27px;" method="post" class="buttons_flex">
                 {% if bank_move == 'raise' %}
                     <div><input type="submit" name="check" value="Call"></div>
                     <div><input type="submit" name="bet_ten" value="Raise 10$"></div>
@@ -79,7 +85,7 @@
         {% endif %}
     {% endif %}
     {% if game_over %}
-        <form style="height: 27px;" method="post" class="game_flex">
+        <form style="height: 27px;" method="post" class="buttons_flex">
             <div><input type="submit" name="restart" value="Restart"></div>
             <div><input type="submit" name="go_back" value="Go back"></div>
         </form>
@@ -88,7 +94,7 @@
     <div class="game_flex">
         <div>.</div>
         <div>
-            <h3 style="color: white; margin-bottom: 20px;">Your money: {{ player_money }}$</h3>
+            <h3 style="color: white; margin-bottom: 20px; margin-top: 10px;">Your money: {{ player_money }}$</h3>
             <h2 style="color: white">{{ player_username }}</h2>
             <div>
                 {% if player_hand == [] %}
