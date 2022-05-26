@@ -10,24 +10,24 @@
     {% endif %}
     {% if user == null %}
     <form class="poker_form_user" method="post">
-        <p>
+        <div>
             <label><b>Användarnamn</b></label><br>
             {% if message == "wrong username" %}
                 <p style="color: #e10000;">Fel användarnamn! Tänk på stora och små bokstäver.</p>
             {% endif %}
             <input class="input" type="text" name="username" value="" Required><br><br>
-        </p>
-        <p>
+        </div>
+        <div>
             <label><b>Lösenord</b></label><br>
             {% if message == "wrong password" %}
                 <p style="color: #e10000;">Fel lösenord!</p>
             {% endif %}
             <input class="input" type="password" name="password" value="" Required><br><br>
-        </p>
-        <p>
+        </div>
+        <div style="margin-left: 110px;">
             <input id="poker_user_button" type="submit" value="Logga in">
-        </p>
-        <a id="poker_user_button" class="poker_blue_button" href="{{ path('create_user_poker') }}">Skapa ny användare</a>
+            <a id="poker_user_button" class="poker_blue_button" href="{{ path('create_user_poker') }}">Skapa ny användare</a>
+        </div>
     </form>
     {% endif %}
 
