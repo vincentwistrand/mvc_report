@@ -24,6 +24,8 @@ function makePokerUserUpdate(
     $name  = $request->request->get('name');
     $email  = $request->request->get('email');
     $type  = $request->request->get('type');
+    $money  = $request->request->get('money');
+    $picture  = $request->request->get('picture');
 
     $entityManager = $doctrine->getManager();
     $user = $entityManager->getRepository(PokerUser::class)->find($id);
@@ -35,10 +37,14 @@ function makePokerUserUpdate(
     }
 
     $user->setUsername($username);
-    $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+    if ($password != "") {
+        $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+    }
     $user->setName($name);
     $user->setEmail($email);
     $user->setType($type);
+    $user->setMoney($money);
+    $user->setPicture($picture);
     $entityManager->flush();
 
     $user = array('user' => 'exist', 'id' => $id);
@@ -108,8 +114,9 @@ function getPokerGameInfo(
     $bank_hand = $game->getBankCards();
     $table_cards = $game->getTableCards();
     $game_pot = $game->getPot();
-    $player_username = $game->getplayerUsername();
+    $player_username = $game->getPlayerUsername();
     $user_money = $user->getMoney();
+    $user_id = $user->getId();
 
     $game = $session->get('PokerGame');
     $game_over = $game->getGameOver();
@@ -133,6 +140,7 @@ function getPokerGameInfo(
         'comment' => $comment,
         'bank_move' => $bank_move,
         'player_move' => $player_move,
+        'user_id' => $user_id
     ];
 
     return $data;
@@ -165,6 +173,7 @@ function managePokerInput(
     } else if ($fold) {
         $game = $session->get('PokerGame');
         $game->setGameOver();
+        $session->set('PokerComment', 'You gave up');
         return $fold;   
     } else if ($restart) {
         return $restart;   
@@ -175,7 +184,14 @@ function managePokerInput(
         $game = $session->get('PokerGame');
         $bet = 10;
         $game->addToPot($bet);
-        //$session->set('PlayerMove', 'bet');
+
+        $current_user = $session->get('CurrentPokerUser');
+        $money = $current_user->getMoney();
+        $entityManager = $doctrine->getManager();
+        $user = $entityManager->getRepository(PokerUser::class)->find($current_user->getId());
+        $user->setMoney($money - $bet);
+        $entityManager->flush();
+
         $bank_choice = manageBank(
                             $bet,
                             $session,
@@ -459,6 +475,14 @@ function manageBank(
 
             if ($player_card_points > $bank_card_points) {
                 $session->set('PokerComment', $user->getUsername() . ' wins');
+
+                $current_user = $session->get('CurrentPokerUser');
+                $money = $current_user->getMoney();
+                $entityManager = $doctrine->getManager();
+                $user = $entityManager->getRepository(PokerUser::class)->find($current_user->getId());
+                $winner_money = $game->getPot() + $money;
+                $user->setMoney($winner_money);
+                $entityManager->flush();
             } else {
                 $session->set('PokerComment', 'Bank wins');
             }

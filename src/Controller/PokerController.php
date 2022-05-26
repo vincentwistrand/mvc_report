@@ -57,10 +57,10 @@ class PokerController extends AbstractController
                 'message' => 'wrong password',
                 'user' => null
             ]);
-        } 
-        
-        return $this->render('poker/start.html.twig', [
-            'user' => $result[1]
+        }
+
+        return $this->redirectToRoute('poker_user_by_id', [
+            'id' => $result[1]->getId()
         ]);
     }
 
@@ -102,7 +102,8 @@ class PokerController extends AbstractController
     */
     public function createUserProcess(
         Request $request,
-        ManagerRegistry $doctrine
+        ManagerRegistry $doctrine,
+        SessionInterface $session
     ): Response {
         $entityManager = $doctrine->getManager();
 
@@ -110,6 +111,7 @@ class PokerController extends AbstractController
         $password  = $request->request->get('password');
         $name  = $request->request->get('name');
         $email  = $request->request->get('email');
+        $picture  = $request->request->get('picture');
         $type  = $request->request->get('type');
 
         $user = new PokerUser();
@@ -118,6 +120,7 @@ class PokerController extends AbstractController
         $user->setName($name);
         $user->setEmail($email);
         $user->setType($type);
+        $user->setPicture($picture);
         $user->setMoney(1000);
         $user->setGames(0);
         $user->setWins(0);
@@ -126,7 +129,13 @@ class PokerController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('login_poker');
+        $user = $session->get('CurrentPokerUser');
+
+        if (!$user) {
+            return $this->redirectToRoute('login_poker');
+        }
+
+        return $this->redirectToRoute('poker_user');
     }
 
         /**
@@ -377,10 +386,17 @@ class PokerController extends AbstractController
         Request $request,
         ManagerRegistry $doctrine
     ): Response {
+        $current_user = $session->get('CurrentPokerUser');
+
+        $entityManager = $doctrine->getManager();
+        $user = $entityManager->getRepository(PokerUser::class)->find($current_user->getId());
+
+        $session->set('CurrentPokerUser', $user);
+
         $result = \App\Card\managePokerInput($session, $request, $doctrine);
 
-        $user = $session->get('CurrentPokerUser');
         $game = $session->get('PokerGame');
+
 
         $data = \App\Card\getPokerGameInfo($game, $user, $session);
 
@@ -397,7 +413,11 @@ class PokerController extends AbstractController
                 return $this->render('poker/game.html.twig', $data);
             case 'Raise 10$':
                 return $this->render('poker/game.html.twig', $data);
+            case 'Raise 10$':
+                return $this->render('poker/game.html.twig', $data);
             case 'Check':
+                return $this->render('poker/game.html.twig', $data);
+            case 'Call':
                 return $this->render('poker/game.html.twig', $data);
         }
         return $this->redirectToRoute('pokergame');
