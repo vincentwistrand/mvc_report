@@ -121,7 +121,7 @@ function getGameInfo(
 
     $gameEnd = $game->getGameEnd();
 
-    return $data = [
+    $data = [
         'title' => 'Kortspel 21',
         'game_end' => $gameEnd,
         'player_hand' => $player_hand,
@@ -132,6 +132,8 @@ function getGameInfo(
         'bank_points' => $bank_points
 
     ];
+
+    return $data;
 }
 
 /**
