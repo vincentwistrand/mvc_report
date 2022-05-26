@@ -1,0 +1,108 @@
+{% extends 'pokerbase.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<div class="poker_game">
+
+    <div style="position: relative; bottom: 100px;">
+    <div class="game_flex">
+        <div></div>
+        <div>
+            <div>
+                {% if bank_hand == [] %}
+                    <div style="height: 150px"></div>
+                {% endif %}
+                {% for card in bank_hand %}
+                    <img src="{{ asset("img/card-backside.JPG") }}" width="135px" height="180px" style="border-radius: 5px" alt="kort">
+                    <i class="card-sprite {{ card.getColour }}{{ card.getRank }}"></i>
+                {% endfor %}
+            </div>
+            <h2 style="color: white">Bank</h2>
+        </div>
+        <div></div>
+    </div>
+
+    <div style="color: yellow">{{ comment }}</div>
+
+    <div style="height: 40px">
+        {% if not game_over %}
+            <h1 style="color: white;">Game pot: {{ game_pot }}$</h1>
+        {% endif %}
+        {% if game_over %}
+            <h1 style="color: white;">End of game</h1>
+        {% endif %}
+    </div>
+
+    {% if player_hand == [] and table_cards == [] %}
+        <form method="post" style="height: 130px; position: relative; top: 150px;"><input type="submit" name="deal" value="Deal cards"></form>
+    {% endif %}
+    {% if table_cards == [] and player_hand != [] %}
+        <div style="height: 180px;"></div>
+    {% endif %}
+    <div class="pot_cards">
+        <div>
+            {% for card in table_cards %}
+                <i class="card-sprite {{ card.getColour }}{{ card.getRank }}"></i>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if not game_over %}
+        {% if player_hand == [] %}
+            <div style="height: 140px;"></div>
+        {% endif %}
+        {% if player_hand != [] and table_cards == [] %}
+            <form style="height: 27px;" method="post" class="game_flex">
+                {% if bank_move != 'raise' %}
+                    <div><input type="submit" name="bet_ten" value="Bet 10$"></div>
+                {% endif %}
+                {% if bank_move == 'raise' %}
+                    <div><input type="submit" name="bet_ten" value="Raise 10$"></div>
+                {% endif %}
+                <div><input type="submit" name="fold" value="Fold"></div>
+            </form>
+        {% endif %}
+        {% if player_hand != [] and table_cards != [] %}
+            <form style="height: 27px;" method="post" class="game_flex">
+                {% if bank_move == 'raise' %}
+                    <div><input type="submit" name="check" value="Call"></div>
+                    <div><input type="submit" name="bet_ten" value="Raise 10$"></div>
+                {% endif %}
+                {% if bank_move != 'raise' %}
+                    <div><input type="submit" name="check" value="Check"></div>
+                    <div><input type="submit" name="bet_ten" value="Bet 10$"></div>
+                {% endif %}
+                <div><input type="submit" name="fold" value="Fold"></div>
+            </form>
+        {% endif %}
+    {% endif %}
+    {% if game_over %}
+        <form style="height: 27px;" method="post" class="game_flex">
+            <div><input type="submit" name="restart" value="Restart"></div>
+            <div><input type="submit" name="go_back" value="Go back"></div>
+        </form>
+    {% endif %}
+
+    <div class="game_flex">
+        <div>.</div>
+        <div>
+            <h3 style="color: white; margin-bottom: 20px;">Your money: {{ player_money }}$</h3>
+            <h2 style="color: white">{{ player_username }}</h2>
+            <div>
+                {% if player_hand == [] %}
+                    <div style="height: 150px"></div>
+                {% endif %}
+                {% for card in player_hand %}
+                    <i class="card-sprite {{ card.getColour }}{{ card.getRank }}"></i>
+                {% endfor %}
+            </div>
+        </div>
+        <div></div>
+    </div>
+    </div>
+    
+</div>
+
+{% endblock %}

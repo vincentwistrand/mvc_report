@@ -1,0 +1,24 @@
+{% extends 'pokerbase.html.twig' %}
+
+{% block title %}{{ user.name }}{% endblock %}
+
+{% block content %}
+
+<div class="poker_user">
+
+    <div class="poker_user_container">
+        <a href="{{ path('poker_user_by_id', {id: user.id}) }}">Mitt konto</a><br><br>
+        {% if user.type == 'admin' %}
+            <a href="{{ path('poker_user') }}">Alla konton</a><br><br>
+        {% endif %}
+        <a href="{{ path('logout_poker') }}">Logga ut</a><br><br>
+    </div><br><br>
+
+    <div>
+        <h1>Välkommen<br> {{ user.name }}!</h1><br><br>
+        <a href="{{ path('pokergame') }}">Starta spelet</a>
+    </div><br><br>
+    
+</div>
+
+{% endblock %}

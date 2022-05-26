@@ -1,0 +1,53 @@
+{% extends 'pokerbase.html.twig' %}
+
+{% block title %}Logga in{% endblock %}
+
+{% block content %}
+
+<div class="poker_user" style="text-align: center;">
+    {% if user == null %}
+        <h1>Logga in</h1><br>
+    {% endif %}
+    {% if user == null %}
+    <form class="poker_form_user" method="post">
+        <p>
+            <label><b>Användarnamn</b></label><br>
+            {% if message == "wrong username" %}
+                <p style="color: #e10000;">Fel användarnamn! Tänk på stora och små bokstäver.</p>
+            {% endif %}
+            <input class="input" type="text" name="username" value="" Required><br><br>
+        </p>
+        <p>
+            <label><b>Lösenord</b></label><br>
+            {% if message == "wrong password" %}
+                <p style="color: #e10000;">Fel lösenord!</p>
+            {% endif %}
+            <input class="input" type="password" name="password" value="" Required><br><br>
+        </p>
+        <p>
+            <input id="poker_user_button" type="submit" value="Logga in">
+        </p>
+        <a id="poker_user_button" class="poker_blue_button" href="{{ path('create_user_poker') }}">Skapa ny användare</a>
+    </form>
+    {% endif %}
+
+    {% if user != null %}
+        {% if user.getType == 'admin' %}
+            <h2>Du är inloggad som {{ user.name }}!</h2><br><br>
+            <div class="update_delete_buttons">
+                <div style="text-align: center;"><a id="poker_user_button" href="{{ path('poker_user') }}">Alla användare</a></div>
+                <div style="text-align: center;"><a id="poker_user_button" href="{{ path('logout_poker') }}">Logga ut</a></div>
+            </div>
+        {% endif %}
+
+        {% if user.getType == 'ordinary' %}
+            <h2>Du är inloggad som {{ user.name }}!</h2><br><br>
+            <div class="update_delete_buttons">
+                <div style="text-align: center;"><a id="poker_user_button" href="{{ path('poker_user_by_id', {id: user.getId}) }}">Profilsida</a></div>
+                <div style="text-align: center;"><a id="poker_user_button" href="{{ path('logout_poker') }}">Logga ut</a></div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+</div>
+{% endblock %}

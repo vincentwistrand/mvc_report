@@ -1,0 +1,38 @@
+{% extends 'pokerbase.html.twig' %}
+
+{% block title %}All users{% endblock %}
+
+{% block content %}
+
+<div class="poker_user">
+    <a href="{{ path('logout_poker') }}">Logga ut</a>
+    <h1 style="text-align: center;">{{ title }}</h1>
+    <p style="text-align: center;">Inloggad som {{ current_user.getName }} ({{ current_user.getType }})</p><br><br>
+
+    <div class="user_container">
+        {% for user in users %}
+            <div class="user_item" style="border">
+                <a href="{{ path('poker_user_by_id', {id: user.id}) }}">
+                    {% if user.picture == null %}
+                        <img src="{{ asset("img/no_image.JPG") }}">
+                    {% endif %}
+                    <img src="{{ user.picture }}">
+                    <p>Id:</p>
+                    <h4>{{ user.id }}</h4>
+                    <p>Användarnamn:</p>
+                    <h4>{{ user.username }}</h4>
+                    <p>Namn:</p>
+                    <h4>{{ user.name }}</h4>
+                    <p>Email:</p>
+                    <h4>{{ user.email }}</h4>
+                    <p>Behörighet: </p>
+                    <h4>{{ user.type }}</h4>
+                </a>
+            </div>
+        {% endfor %}
+    </div><br><br><br>
+
+    <div style="text-align: center;"><a id="user_button" href="{{ link_to_create_user }}">Skapa användare</a></div>
+</div>
+
+{% endblock %}
