@@ -6,30 +6,41 @@
 
 <div class="poker_user">
 
-    <a href="{{ path('logout_poker') }}">Logga ut</a><br><br>
-    <h1 style="text-align: center;">{{ user.name }}</h1><br>
+    <div class="poker_user_container">
+        <a href="{{ path('pokergame') }}">Spela</a><br><br>
+        <a href="{{ path('poker_user_by_id', {id: user.id}) }}">Mitt konto</a><br><br>
+        {% if user.type == 'admin' %}
+            <a href="{{ path('poker_user') }}">Alla konton</a><br><br>
+        {% endif %}
+        <a href="{{ path('logout_poker') }}">Logga ut</a><br><br>
+    </div><br><br>
+    <h1 style="text-align: center; color: white;">{{ user.name }}</h1><br>
 
     <div class="user_container" style="justify-content: center;">
-        <div class="user_item">
+        <div class="poker_user_item">
             {% if user.picture == null %}
                 <img src="{{ asset("img/no_image.JPG") }}">
             {% endif %}
-            <img src="{{ user.picture }}">
-            <h4>Användarnamn:</h4>
-            <p>{{ user.username }}</p>
-            <h4>Namn:</h4>
-            <p>{{ user.name }}</p>
-            <h4>Email:</h4>
-            <p>{{ user.email }}</p>
-            <h4>Behörighet: </h4>
-            <p>{{ user.type }}</p>
+            {% if user.picture %}
+                <img src="{{ user.picture }}" width="150px" height="150px">
+            {% endif %}
+            <div style="text-align: left;">
+                <p><b>Användarnamn:</b> {{ user.username }}</p>
+                <p><b>Namn:</b>         {{ user.name }}</p>
+                <p><b>Email:</b>        {{ user.email }}</p>
+                <p><b>Behörighet:</b>   {{ user.type }}</p>
+                <p><b>Pengar:</b>       {{ user.money }}$</p>
+                <p><b>Vinster:</b>      {{ user.wins }}</p>
+            </div>
         </div>
     </div><br><br>
 
-    <div style="text-align: center;"><a id="user_button" class="blue_button" href="{{ path('poker_user_update', {id: user.id}) }}">Uppdatera användare</a></div>
+    <div style="margin-left: 400px;">
+        <div style="text-align: center;"><a id="poker_user_button" class="poker_blue_button" href="{{ path('poker_user_update', {id: user.id}) }}">Uppdatera användare</a></div>
     {% if user.username != 'admin' %}
-        <div style="text-align: center;"><a id="user_button" class="red_button" href="{{ path('poker_user_delete_by_id', {id: user.id}) }}">Radera användare</a></div>
+        <div style="text-align: center;"><a id="poker_user_button" class="poker_red_button" href="{{ path('poker_user_delete_by_id', {id: user.id}) }}">Radera användare</a></div>
     {% endif %}
+    </div>
     
 </div>
 
