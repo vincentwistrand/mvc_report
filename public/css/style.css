@@ -211,64 +211,64 @@
     display: inline-block;
     padding: 0;
     margin: 0 4px 0 0;
-    width: 131px;
-    height: 180px;
+    width: 130px;
+    height: 176px;
     background: url(../img/allakort.JPG) no-repeat;
     border-radius: 5px;
 }
 
-.card-sprite.KloverEss { background-position: -10px -10px; }
-.card-sprite.Klover2 { background-position: -145px -10px; }
-.card-sprite.Klover3 { background-position: -279px -10px; }
-.card-sprite.Klover4 { background-position: -414px -10px; }
-.card-sprite.Klover5 { background-position: -548px -10px; }
-.card-sprite.Klover6 { background-position: -683px -10px; }
-.card-sprite.Klover7 { background-position: -817px -10px; }
-.card-sprite.Klover8 { background-position: -951px -10px; }
-.card-sprite.Klover9 { background-position: -1085px -10px; }
-.card-sprite.Klover10 { background-position: -1220px -10px; }
-.card-sprite.KloverKnekt { background-position: -1355px -10px; }
-.card-sprite.KloverDam { background-position: -1489px -10px; }
-.card-sprite.KloverKung { background-position: -1624px -10px; }
-.card-sprite.SpaderEss { background-position: -10px -190px; }
-.card-sprite.Spader2 { background-position: -145px -190px; }
-.card-sprite.Spader3 { background-position: -279px -190px; }
-.card-sprite.Spader4 { background-position: -414px -190px; }
-.card-sprite.Spader5 { background-position: -548px -190px; }
-.card-sprite.Spader6 { background-position: -683px -190px; }
-.card-sprite.Spader7 { background-position: -817px -190px; }
-.card-sprite.Spader8 { background-position: -951px -190px; }
-.card-sprite.Spader9 { background-position: -1085px -190px; }
-.card-sprite.Spader10 { background-position: -1220px -190px; }
-.card-sprite.SpaderKnekt { background-position: -1355px -190px; }
-.card-sprite.SpaderDam { background-position: -1489px -190px; }
-.card-sprite.SpaderKung { background-position: -1624px -190px; }
-.card-sprite.HjarterEss { background-position: -10px -370px; }
-.card-sprite.Hjarter2 { background-position: -145px -370px; }
-.card-sprite.Hjarter3 { background-position: -279px -370px; }
-.card-sprite.Hjarter4 { background-position: -414px -370px; }
-.card-sprite.Hjarter5 { background-position: -548px -370px; }
-.card-sprite.Hjarter6 { background-position: -683px -370px; }
-.card-sprite.Hjarter7 { background-position: -817px -370px; }
-.card-sprite.Hjarter8 { background-position: -951px -370px; }
-.card-sprite.Hjarter9 { background-position: -1085px -370px; }
-.card-sprite.Hjarter10 { background-position: -1220px -370px; }
-.card-sprite.HjarterKnekt { background-position: -1355px -370px; }
-.card-sprite.HjarterDam { background-position: -1489px -370px; }
-.card-sprite.HjarterKung { background-position: -1624px -370px; }
-.card-sprite.RuterEss { background-position: -10px -550px; }
-.card-sprite.Ruter2 { background-position: -145px -550px; }
-.card-sprite.Ruter3 { background-position: -279px -550px; }
-.card-sprite.Ruter4 { background-position: -414px -550px; }
-.card-sprite.Ruter5 { background-position: -548px -550px; }
-.card-sprite.Ruter6 { background-position: -683px -550px; }
-.card-sprite.Ruter7 { background-position: -817px -550px; }
-.card-sprite.Ruter8 { background-position: -951px -550px; }
-.card-sprite.Ruter9 { background-position: -1085px -550px; }
-.card-sprite.Ruter10 { background-position: -1220px -550px; }
-.card-sprite.RuterKnekt { background-position: -1355px -550px; }
-.card-sprite.RuterDam { background-position: -1489px -550px; }
-.card-sprite.RuterKung { background-position:-1624px -550px; }
+.card-sprite.KloverEss { background-position: -10px -11px; }
+.card-sprite.Klover2 { background-position: -145px -11px; }
+.card-sprite.Klover3 { background-position: -279px -11px; }
+.card-sprite.Klover4 { background-position: -414px -11px; }
+.card-sprite.Klover5 { background-position: -548px -11px; }
+.card-sprite.Klover6 { background-position: -683px -11px; }
+.card-sprite.Klover7 { background-position: -817px -11px; }
+.card-sprite.Klover8 { background-position: -951px -11px; }
+.card-sprite.Klover9 { background-position: -1085px -11px; }
+.card-sprite.Klover10 { background-position: -1220px -11px; }
+.card-sprite.KloverKnekt { background-position: -1355px -11px; }
+.card-sprite.KloverDam { background-position: -1489px -11px; }
+.card-sprite.KloverKung { background-position: -1624px -11px; }
+.card-sprite.SpaderEss { background-position: -10px -191px; }
+.card-sprite.Spader2 { background-position: -145px -191px; }
+.card-sprite.Spader3 { background-position: -279px -191px; }
+.card-sprite.Spader4 { background-position: -414px -191px; }
+.card-sprite.Spader5 { background-position: -548px -191px; }
+.card-sprite.Spader6 { background-position: -683px -191px; }
+.card-sprite.Spader7 { background-position: -817px -191px; }
+.card-sprite.Spader8 { background-position: -951px -191px; }
+.card-sprite.Spader9 { background-position: -1085px -191px; }
+.card-sprite.Spader10 { background-position: -1220px -191px; }
+.card-sprite.SpaderKnekt { background-position: -1355px -191px; }
+.card-sprite.SpaderDam { background-position: -1489px -191px; }
+.card-sprite.SpaderKung { background-position: -1624px -191px; }
+.card-sprite.HjarterEss { background-position: -10px -372px; }
+.card-sprite.Hjarter2 { background-position: -145px -372px; }
+.card-sprite.Hjarter3 { background-position: -279px -372px; }
+.card-sprite.Hjarter4 { background-position: -414px -372px; }
+.card-sprite.Hjarter5 { background-position: -548px -372px; }
+.card-sprite.Hjarter6 { background-position: -683px -372px; }
+.card-sprite.Hjarter7 { background-position: -817px -372px; }
+.card-sprite.Hjarter8 { background-position: -951px -372px; }
+.card-sprite.Hjarter9 { background-position: -1085px -372px; }
+.card-sprite.Hjarter10 { background-position: -1220px -372px; }
+.card-sprite.HjarterKnekt { background-position: -1355px -372px; }
+.card-sprite.HjarterDam { background-position: -1489px -372px; }
+.card-sprite.HjarterKung { background-position: -1624px -372px; }
+.card-sprite.RuterEss { background-position: -10px -552px; }
+.card-sprite.Ruter2 { background-position: -145px -552px; }
+.card-sprite.Ruter3 { background-position: -279px -552px; }
+.card-sprite.Ruter4 { background-position: -414px -552px; }
+.card-sprite.Ruter5 { background-position: -548px -552px; }
+.card-sprite.Ruter6 { background-position: -683px -552px; }
+.card-sprite.Ruter7 { background-position: -817px -552px; }
+.card-sprite.Ruter8 { background-position: -951px -552px; }
+.card-sprite.Ruter9 { background-position: -1085px -552px; }
+.card-sprite.Ruter10 { background-position: -1220px -552px; }
+.card-sprite.RuterKnekt { background-position: -1355px -552px; }
+.card-sprite.RuterDam { background-position: -1489px -552px; }
+.card-sprite.RuterKung { background-position:-1624px -552px; }
 
 /* --------------- Bibliotek  --------------- */
 
@@ -433,24 +433,45 @@ select {
 
 .poker_user_container a {
     color: 'white';
+    text-decoration: none;
+}
+
+.poker_user_container a:visited,
+.game_flex a {
+    color: rgb(242, 242, 20);
+}
+
+.poker_user_container a:hover {
+    color: rgb(255, 255, 255);
 }
 
 .poker_user_item {
-    max-width: 200px;
-    /*text-align: center;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
-.poker_user_item a {
+.poker_user_item div p {
     text-decoration: none;
     color: rgb(255, 255, 255);
 }
 
 .poker_form_user {
     text-align: left;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.poker_form_user p label,
+.poker_form_user div label,
+.poker_form_user div p {
+    color: white;
 }
 
 #poker_user_button {
-    width: 100%;
+    width: 200px;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -549,7 +570,19 @@ select {
 .game_flex {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttons_flex {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
+    gap: 20px;
+}
+
+.game_flex a {
+    color: rgb(153, 153, 153);
+    text-decoration: none;
 }
 
 /* --------------- Footer --------------- */
