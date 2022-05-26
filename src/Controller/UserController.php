@@ -98,7 +98,7 @@ class UserController extends AbstractController
 
         $user = new User();
         $user->setUsername($username);
-        $user->setPassword($password);
+        $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
         $user->setName($name);
         $user->setEmail($email);
         $user->setType($type);
@@ -189,7 +189,9 @@ class UserController extends AbstractController
             );
         }
 
-        return $this->redirectToRoute('user');
+        return $this->redirectToRoute('user_by_id', [
+            'id' => $result['id']
+        ]);
     }
 
     /**
@@ -200,7 +202,6 @@ class UserController extends AbstractController
     * )
     */
     public function loginUser(
-        ManagerRegistry $doctrine,
         SessionInterface $session
     ): Response {
         $user = $session->get('user');
@@ -318,13 +319,13 @@ function checkLogin(
         }
     }
 
+    $entityManager = $doctrine->getManager();
+    $user = $entityManager->getRepository(User::class)->find($id);
+
     if (!$id) {
         $message = ['wrong username', $user];
         return $message;
     }
-
-    $entityManager = $doctrine->getManager();
-    $user = $entityManager->getRepository(User::class)->find($id);
 
     if (password_verify($password, $user->getPassword())) {
         if ($user->getType() === 'admin') {
