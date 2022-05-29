@@ -5,6 +5,7 @@ namespace App\Card;
 use App\Card\Player;
 use App\Card\Deck;
 use App\Card\Card;
+use PlayerClass;
 
 class Game
 {
@@ -20,9 +21,9 @@ class Game
     */
     public function newRound(): void
     {
-        $this->bank = new \App\Card\Player("Bank");
-        $this->player = new \App\Card\Player("Player");
-        $this->deck = new \App\Card\Deck();
+        $this->bank = new Player("Bank");
+        $this->player = new Player("Player");
+        $this->deck = new Deck();
         $this->deck->shuffleCards();
     }
 
@@ -101,7 +102,7 @@ class Game
     /**
     * @return bool
     */
-    public function getGameEnd(): bool
+    public function hasGameEnded(): bool
     {
         return $this->gameEnd;
     }

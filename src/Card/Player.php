@@ -4,11 +4,11 @@ namespace App\Card;
 
 class Player extends CardHand
 {
-    private string $player_id;
+    private string $playerId;
 
-    public function __construct(string $player_name)
+    public function __construct(string $playerName)
     {
-        $this->player_id = $player_name;
+        $this->playerId = $playerName;
     }
 
     /**
@@ -16,6 +16,6 @@ class Player extends CardHand
     */
     public function getPlayerId(): string
     {
-        return $this->player_id;
+        return $this->playerId;
     }
 }

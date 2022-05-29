@@ -12,25 +12,23 @@ class Poker
     private Player $player;
     private Player $table;
     private Deck $deck;
-    private int $playerBets = 0;
-    private int $bankBets = 0;
     private int $pot = 0;
     private bool $gameOver = false;
 
     /**
     * @return void
     */
-    public function newRound(string $player_id): void
+    public function newRound(string $playerId): void
     {
-        $this->bank = new \App\Card\Player("Bank");
-        $this->player = new \App\Card\Player($player_id);
-        $this->table = new \App\Card\Player("Table");
-        $this->deck = new \App\Card\Deck();
+        $this->bank = new Player("Bank");
+        $this->player = new Player($playerId);
+        $this->table = new Player("Table");
+        $this->deck = new Deck();
         $this->deck->shuffleCards();
     }
 
     /**
-    * @return object
+    * @return void
     */
     public function dealCardsToPlayers(): void
     {
@@ -82,7 +80,7 @@ class Poker
     }
 
     /**
-    * @return array
+    * @return array<object>
     */
     public function getBankCards(): array
     {
@@ -90,7 +88,7 @@ class Poker
     }
 
     /**
-    * @return array
+    * @return array<object>
     */
     public function getPlayerCards(): array
     {
@@ -98,19 +96,11 @@ class Poker
     }
 
     /**
-    * @return array
+    * @return array<object>
     */
     public function getTableCards(): array
     {
         return $this->table->getCards();
-    }
-
-    /**
-    * @return array
-    */
-    public function getTableCardCount(): array
-    {
-        return count($this->table->getCards());
     }
 
     /**
@@ -132,7 +122,7 @@ class Poker
     /**
     * @return bool
     */
-    public function getGameOver(): bool
+    public function hasGameEnded(): bool
     {
         return $this->gameOver;
     }

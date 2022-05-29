@@ -4,6 +4,8 @@ namespace App\Trait;
 
 use App\Helpfunctions\console_log;
 use App\Card\Card;
+use App\Card\Player;
+use App\Card\Deck;
 
 trait DeckTrait
 {
@@ -30,7 +32,7 @@ trait DeckTrait
         $colours  = array('Hjarter', 'Ruter', 'Spader', 'Klover');
         for ($i = 0; $i < count($colours); $i++) {
             for ($x = 0; $x < count($ranks); $x++) {
-                $this->cards[] = new \App\Card\Card(
+                $this->cards[] = new Card(
                     $ranks[$x],
                     $colours[$i],
                     $points[$x]
@@ -100,7 +102,7 @@ trait DeckTrait
     */
     public function addJokers(): void
     {
-        $this->cards[] = new \App\Card\Card("Joker");
-        $this->cards[] = new \App\Card\Card("Joker");
+        $this->cards[] = new Card("Joker");
+        $this->cards[] = new Card("Joker");
     }
 }
