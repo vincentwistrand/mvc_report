@@ -51,9 +51,33 @@ Jag kommer göra följande förbättringar:<br><br>
 
 - Försöka dela upp koden och minska storleken på UserController.
 - Försöka dela upp koden och minska storleken på GameController.
-- Rensa så gott det går i Issues.
+- Rensa så gott det går i Issues i scrutinizer.<br><br>
 
 UserController och GameController var de klasser som stack ut mest enligt rapporterna. 
-Efter att ha fixat till dom tror jag att deras complexity och maintainability kommer gå ner och att scrutinizer rating kommer gå upp lite.
+Efter att ha fixat till dom tror jag att deras complexity och maintainability kommer gå ner och att scrutinizer rating kommer gå upp lite.<br><br>
 
+## Resultat Phpmetrics
 
+- Antalet violations har gått från 9 till 7 och det error som fanns tidigare gällande GameController är borta.
+- Average cyclomatic complexity har gått från 3.83 till 3.29.
+- Complexity för UserController har gått från 31 till 28 och maintainability från 63 till 72.
+- Complexity för GameController har gått från 21 till 9 och maintainability från 65 till 83.
+- Coupling är samma och cohesion har gått från 1.20 till 1.19.<br><br>
+
+## Resultat Scrutinizer
+
+- Scrutinizer rating är oförändrad (6.15).
+- UserControllers storlek har gått från 297 till 247 och complexity från 31 till 28.
+- GameControllers storlek har gått från 189 till 88 och complexity från 21 till 9.<br><br>
+
+# Diskussion
+
+När jag tittade på rapporterna före ändringarna så var det UserController och GameController som stack ut när det gäller complexity och maintainability.
+Jag valde att flytta en del kod från dom klasserna till egna funktioner och det verkar ha gjort skillnad om man tittar i rapporten efteråt.
+Complexity och maintainability i dessa klasser har förbättrats ganska mycket och det har även påverkat medelvärden lite här och var.
+Jag tycker nog att Phpmetrics var det bättre verktyget i den här analysen för den visade mer data och var visuellt lättare att läsa.
+
+Man borde ha koll på dessa rapporter från början av sitt projekt för ju större koden blir desto svårare är den att ändra.
+Fördelarna är att man får bättre kod och kod som är lättare att hantera och uppdatera.
+Det finns väl inga direkta nackdelar men det tar ju väldigt mycket tid om man t ex ska sitta och gå igenom 3000 issues.
+Man får nog prioritera och hitta det som sticker ut mest och som gör skillnad.

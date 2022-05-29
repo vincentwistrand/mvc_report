@@ -8,7 +8,7 @@
 
     <div class="poker_user_container">
         <a href="{{ path('pokergame') }}">Spela</a><br><br>
-        <a href="{{ path('poker_user_by_id', {id: user.id}) }}">Mitt konto</a><br><br>
+        <a href="{{ path('poker_user_by_id', {userId: user.id}) }}">Mitt konto</a><br><br>
         {% if user.type == 'admin' %}
             <a href="{{ path('poker_user') }}">Alla konton</a><br><br>
         {% endif %}
@@ -36,9 +36,9 @@
     </div><br><br>
 
     <div style="margin-left: 400px;">
-        <div style="text-align: center;"><a id="poker_user_button" class="poker_blue_button" href="{{ path('poker_user_update', {id: user.id}) }}">Uppdatera användare</a></div>
+        <div style="text-align: center;"><a id="poker_user_button" class="poker_blue_button" href="{{ path('poker_user_update', {userId: user.id}) }}">Uppdatera användare</a></div>
     {% if user.username != 'admin' %}
-        <div style="text-align: center;"><a id="poker_user_button" class="poker_red_button" href="{{ path('poker_user_delete_by_id', {id: user.id}) }}">Radera användare</a></div>
+        <div style="text-align: center;"><a id="poker_user_button" class="poker_red_button" href="{{ path('poker_user_delete_by_id', {userId: user.id}) }}">Radera användare</a></div>
     {% endif %}
     </div>
     

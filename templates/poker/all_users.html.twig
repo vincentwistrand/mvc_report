@@ -7,7 +7,7 @@
 <div class="poker_user">
     <div class="poker_user_container">
         <a href="{{ path('pokergame') }}">Spela</a><br><br>
-        <a href="{{ path('poker_user_by_id', {id: current_user.id}) }}">Mitt konto</a><br><br>
+        <a href="{{ path('poker_user_by_id', {userId: current_user.id}) }}">Mitt konto</a><br><br>
         {% if current_user.type == 'admin' %}
             <a href="{{ path('poker_user') }}">Alla konton</a><br><br>
         {% endif %}
@@ -19,14 +19,14 @@
     <div class="user_container" style="text-align: center; justify-content: center;">
         {% for user in users %}
             <div class="user_item" style="border">
-                <a href="{{ path('poker_user_by_id', {id: user.id}) }}">
+                <a href="{{ path('poker_user_by_id', {userId: user.id}) }}">
                     {% if user.picture == null %}
                         <img src="{{ asset("img/no_image.JPG") }}">
                     {% endif %}
                     {% if user.picture %}
                         <img src="{{ user.picture }}" width="150px" height="150px">
                      {% endif %}
-                    <p style="color: white;"><b>Användarnamn:</b> {{ user.username }}</p>
+                    <p style="color: white;">{{ user.username }}</p>
                 </a>
             </div>
         {% endfor %}
