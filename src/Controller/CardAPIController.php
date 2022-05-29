@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Card\Player;
 
 class CardAPIController extends AbstractController
 {
@@ -132,6 +133,7 @@ class CardAPIController extends AbstractController
     /**
     * Convert array of card objects to json string.
     * @return string
+    * @param array<object> $cards
     */
     public function cardsToJson(array $cards): string
     {
@@ -140,9 +142,9 @@ class CardAPIController extends AbstractController
             $cardProperties[] = $card->getProperties();
         }
 
-        $json_pretty = json_encode(json_decode(json_encode($cardProperties)), JSON_PRETTY_PRINT);
+        $jsonPretty = json_encode(json_decode(json_encode($cardProperties)), JSON_PRETTY_PRINT);
 
-        return $json_pretty;
+        return $jsonPretty;
     }
 
     /**
@@ -150,12 +152,12 @@ class CardAPIController extends AbstractController
     * @return string
     */
     public function playersToJson(object $deck, int $players, int $cards): string
-    {   
+    {
         $allPlayers = [];
 
         for ($i = 1; $i <= $players; $i++) {
             $drawnCards = $deck->drawCards($cards);
-            $newPlayer = new \App\Card\Player($i);
+            $newPlayer = new Player(strval($i));
             foreach ($drawnCards as $card) {
                 $newPlayer->addCard($card);
             }
@@ -173,8 +175,8 @@ class CardAPIController extends AbstractController
             $playerName = "Player " . $player->getPlayerId();
             $players[$playerName] = $playerCards;
         }
-        $json_pretty = json_encode(json_decode(json_encode($players)), JSON_PRETTY_PRINT);
+        $jsonPretty = json_encode(json_decode(json_encode($players)), JSON_PRETTY_PRINT);
 
-        return $json_pretty;
+        return $jsonPretty;
     }
 }

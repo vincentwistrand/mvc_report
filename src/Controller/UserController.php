@@ -23,9 +23,9 @@ class UserController extends AbstractController
         $users = $userRepository
             ->findAll();
 
-        $current_user = $session->get('user');
+        $currentUser = $session->get('user');
 
-        if (!$current_user || $current_user->getType() != 'admin') {
+        if (!$currentUser || $currentUser->getType() != 'admin') {
             return $this->render('user/no_access.html.twig', [
                 'Message' => 'You need to be logged in as admin to perform this action'
             ]);
@@ -34,25 +34,25 @@ class UserController extends AbstractController
         return $this->render('user/all_users.html.twig', [
             'title' => 'Alla användare',
             'users' => $users,
-            'current_user' => $current_user,
+            'current_user' => $currentUser,
             'link_to_create_user' => $this->generateUrl('create_user')
         ]);
     }
 
     /**
-    * @Route("/user/show/{id}", name="user_by_id")
+    * @Route("/user/show/{userId}", name="user_by_id")
     */
     public function showUserById(
         userRepository $userRepository,
         SessionInterface $session,
-        int $id
+        int $userId
     ): Response {
         $user = $userRepository
-            ->find($id);
+            ->find($userId);
 
         $loggedIn = $session->get('user');
 
-        if (!$loggedIn || !$user || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
+        if (!$loggedIn || !$user || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $userId) {
             return $this->render('user/no_access.html.twig', [
                 'Message' => 'You need to be logged in as admin to perform this action'
             ]);
@@ -111,25 +111,25 @@ class UserController extends AbstractController
     }
 
     /**
-    * @Route("/user/delete/{id}", name="user_delete_by_id")
+    * @Route("/user/delete/{userId}", name="user_delete_by_id")
     */
     public function deleteUserById(
         ManagerRegistry $doctrine,
         SessionInterface $session,
-        int $id
+        int $userId
     ): Response {
         $entityManager = $doctrine->getManager();
-        $user = $entityManager->getRepository(user::class)->find($id);
+        $user = $entityManager->getRepository(user::class)->find($userId);
 
         if (!$user) {
             throw $this->createNotFoundException(
-                'No user found for id ' . $id
+                'No user found for id ' . $userId
             );
         }
 
         $loggedIn = $session->get('user');
 
-        if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
+        if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $userId) {
             return $this->render('user/no_access.html.twig', [
                 'Message' => 'You need to be logged in as admin to perform this action'
             ]);
@@ -143,7 +143,7 @@ class UserController extends AbstractController
 
     /**
     * @Route(
-    *   "/user/update/{id}",
+    *   "/user/update/{userId}",
     *    name="user_update",
     *    methods={"GET","HEAD"}
     * )
@@ -151,14 +151,14 @@ class UserController extends AbstractController
     public function updateUser(
         userRepository $userRepository,
         SessionInterface $session,
-        int $id
+        int $userId
     ): Response {
         $user = $userRepository
-            ->find($id);
+            ->find($userId);
 
         $loggedIn = $session->get('user');
 
-        if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $id) {
+        if (!$loggedIn || $loggedIn->getType() === 'ordinary' && $loggedIn->getId() != $userId) {
             return $this->render('user/no_access.html.twig', [
                 'Message' => 'You need to be logged in as admin to perform this action'
             ]);
@@ -172,7 +172,7 @@ class UserController extends AbstractController
 
     /**
     * @Route(
-    *       "/user/update/{id}",
+    *       "/user/update/{userId}",
     *       name="user_update_process",
     *       methods={"POST"}
     * )
@@ -190,7 +190,7 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_by_id', [
-            'id' => $result['id']
+            'userId' => $result['id']
         ]);
     }
 
@@ -244,6 +244,10 @@ class UserController extends AbstractController
                 'id' => $result[1]->getId()
             ]);
         }
+        return $this->render('user/login.html.twig', [
+            'message' => '',
+            'user' => null
+        ]);
     }
 
     /**
@@ -264,12 +268,13 @@ class UserController extends AbstractController
 
 /**
  * Used in updateUserProcess in UserController
+ * @return array<mixed>
  */
 function makeUpdate(
-    $request,
-    $doctrine
-) {
-    $id = $request->request->get('id');
+    Request $request,
+    ManagerRegistry $doctrine
+): array {
+    $userId = $request->request->get('id');
     $username = $request->request->get('username');
     $password  = $request->request->get('password');
     $name  = $request->request->get('name');
@@ -277,12 +282,12 @@ function makeUpdate(
     $type  = $request->request->get('type');
 
     $entityManager = $doctrine->getManager();
-    $user = $entityManager->getRepository(User::class)->find($id);
+    $user = $entityManager->getRepository(User::class)->find($userId);
 
     if (!$user) {
-        $no_user = array('user' => 'dont exist', 'id' => $id);
+        $noUser = array('user' => 'dont exist', 'id' => $userId);
 
-        return $no_user;
+        return $noUser;
     }
 
     $user->setUsername($username);
@@ -292,37 +297,38 @@ function makeUpdate(
     $user->setType($type);
     $entityManager->flush();
 
-    $user = array('user' => 'exist', 'id' => $id);
+    $user = array('user' => 'exist', 'id' => $userId);
 
     return $user;
 }
 
 /**
  * Used in method loginProcess in UserController
+ * @return array<mixed>
  */
 function checkLogin(
-    $request,
-    $userRepository,
-    $doctrine,
-    $session
-) {
+    Request $request,
+    userRepository $userRepository,
+    ManagerRegistry $doctrine,
+    SessionInterface $session
+): array {
     $username = $request->request->get('username');
     $password  = $request->request->get('password');
 
     $users = $userRepository
     ->findAll();
 
-    $id = null;
+    $userId = null;
     foreach ($users as $user) {
         if ($user->getUsername() === $username) {
-            $id = $user->getId();
+            $userId = $user->getId();
         }
     }
 
     $entityManager = $doctrine->getManager();
-    $user = $entityManager->getRepository(User::class)->find($id);
+    $user = $entityManager->getRepository(User::class)->find($userId);
 
-    if (!$id) {
+    if (!$userId) {
         $message = ['wrong username', $user];
         return $message;
     }
@@ -340,8 +346,7 @@ function checkLogin(
 
             return $message;
         }
-    } else {
-        $message = ['wrong password', $user];
-        return $message;
     }
+    $message = ['wrong password', $user];
+    return $message;
 }

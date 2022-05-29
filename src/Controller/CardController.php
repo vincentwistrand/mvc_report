@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Card\Player;
+use App\Card\Deck;
+use App\Card\Card;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +20,7 @@ class CardController extends AbstractController
     public function home(SessionInterface $session): Response
     {
         if (null === $session->get('deck')) {
-            $session->set('deck', new \App\Card\Deck());
+            $session->set('deck', new Deck());
             $deck = $session->get('deck');
             $deck->createDeck();
         }
@@ -64,7 +67,7 @@ class CardController extends AbstractController
     */
     public function deck2Ordered(SessionInterface $session): Response
     {
-        $session->set('deck', new \App\Card\Deck());
+        $session->set('deck', new Deck());
         $deck = $session->get('deck');
         $deck->createDeck();
         $deck->addJokers();
@@ -172,7 +175,7 @@ class CardController extends AbstractController
         for ($i = 1; $i <= $players; $i++) {
             $drawnCards = $deck->drawCards($cards);
 
-            $newPlayer = new \App\Card\Player(strval($i));
+            $newPlayer = new Player(strval($i));
             foreach ($drawnCards as $card) {
                 $newPlayer->addCard($card);
             }

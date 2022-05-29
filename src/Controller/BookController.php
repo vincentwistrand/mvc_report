@@ -78,10 +78,10 @@ class BookController extends AbstractController
     */
     public function showBookById(
         bookRepository $bookRepository,
-        int $id
+        int $userId
     ): Response {
         $book = $bookRepository
-            ->find($id);
+            ->find($userId);
 
         return $this->render('book/one_book.html.twig', [
             'book' => $book
@@ -93,14 +93,14 @@ class BookController extends AbstractController
     */
     public function deleteBookById(
         ManagerRegistry $doctrine,
-        int $id
+        int $userId
     ): Response {
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Book::class)->find($id);
+        $book = $entityManager->getRepository(Book::class)->find($userId);
 
         if (!$book) {
             throw $this->createNotFoundException(
-                'No book found for id ' . $id
+                'No book found for id ' . $userId
             );
         }
 
@@ -119,10 +119,10 @@ class BookController extends AbstractController
         */
     public function updateBook(
         bookRepository $bookRepository,
-        int $id
+        int $userId
     ): Response {
         $book = $bookRepository
-            ->find($id);
+            ->find($userId);
 
         return $this->render('book/update_book.html.twig', [
             'title' => 'Uppdatera bok',
@@ -141,18 +141,18 @@ class BookController extends AbstractController
         Request $request,
         ManagerRegistry $doctrine
     ): Response {
-        $id = $request->request->get('id');
+        $userId = $request->request->get('id');
         $title = $request->request->get('title');
         $author  = $request->request->get('author');
         $isbn  = $request->request->get('ISBN');
         $image  = $request->request->get('Image');
 
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Book::class)->find($id);
+        $book = $entityManager->getRepository(Book::class)->find($userId);
 
         if (!$book) {
             throw $this->createNotFoundException(
-                'No book found for id ' . $id
+                'No book found for id ' . $userId
             );
         }
 

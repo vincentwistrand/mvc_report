@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Card\Player;
+use App\Card\Deck;
+use App\Card\Card;
+use App\Card\Game;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +24,7 @@ class GameController extends AbstractController
      */
     public function home(SessionInterface $session): Response
     {
-        $session->set('game', new \App\Card\Game());
+        $session->set('game', new Game());
         $game = $session->get('game');
         $game->newRound();
 
@@ -61,7 +65,7 @@ class GameController extends AbstractController
         SessionInterface $session
     ): Response {
         if (null === $session->get('game')) {
-            $session->set('game', new \App\Card\Game());
+            $session->set('game', new Game());
             $game = $session->get('game');
             $game->newRound();
         }
@@ -86,10 +90,10 @@ class GameController extends AbstractController
     ): Response {
         $draw  = $request->request->get('draw');
         $stop  = $request->request->get('stop');
-        $new_round  = $request->request->get('new_round');
+        $newRound  = $request->request->get('new_round');
         $reset  = $request->request->get('reset');
 
-        $result = checkInput($draw, $stop, $new_round, $reset, $session);
+        $result = checkInput($draw, $stop, $newRound, $reset, $session);
 
         if ($result === "player") {
             $this->addFlash("info", "You Win!");
@@ -104,32 +108,32 @@ class GameController extends AbstractController
 
 /**
  * Used in StartGame()
- * @return array
+ * @return array<mixed>
  */
 function getGameInfo(
     object $game,
     SessionInterface $session
 ): array {
-    $player_hand = $game->getPlayerCards();
-    $bank_hand = $game->getBankCards();
+    $playerHand = $game->getPlayerCards();
+    $bankHand = $game->getBankCards();
 
-    $player_hand_points = $game->getPlayerPoints();
-    $bank_hand_points = $game->getBankPoints();
+    $playerHandPoints = $game->getPlayerPoints();
+    $bankHandPoints = $game->getBankPoints();
 
-    $player_points = $session->get('player_points');
-    $bank_points = $session->get('bank_points');
+    $playerPoints = $session->get('player_points');
+    $bankPoints = $session->get('bank_points');
 
-    $gameEnd = $game->getGameEnd();
+    $gameEnd = $game->hasGameEnded();
 
     $data = [
         'title' => 'Kortspel 21',
         'game_end' => $gameEnd,
-        'player_hand' => $player_hand,
-        'bank_hand' => $bank_hand,
-        'player_hand_points' => $player_hand_points,
-        'bank_hand_points' => $bank_hand_points,
-        'player_points' => $player_points,
-        'bank_points' => $bank_points
+        'player_hand' => $playerHand,
+        'bank_hand' => $bankHand,
+        'player_hand_points' => $playerHandPoints,
+        'bank_hand_points' => $bankHandPoints,
+        'player_points' => $playerPoints,
+        'bank_points' => $bankPoints
 
     ];
 
@@ -143,73 +147,100 @@ function getGameInfo(
 function checkInput(
     mixed $draw,
     mixed $stop,
-    mixed $new_round,
+    mixed $newRound,
     mixed $reset,
     SessionInterface $session
 ): string {
     $game = $session->get("game") ?? 0;
-    $player_point = $session->get('player_points');
-    $bank_point = $session->get('bank_points');
+    $playerPoint = $session->get('player_points');
+    $bankPoint = $session->get('bank_points');
 
     if ($draw) {
-        $game->drawCardToPlayer();
-        $over21Points = $game->checkPlayerPoints();
-        if ($over21Points === true) {
-            $bank_point += 1;
-            $session->set('bank_points', $bank_point);
-            return "bank";
-        } else {
-            if ($game->getPlayerCardCount() >= 3) {
-                $game->drawCardsToBank();
-
-                $over21Points = $game->checkBankPoints();
-                if ($over21Points === true) {
-                    $player_point += 1;
-                    $session->set('player_points', $player_point);
-                    return "player";
-                }
-                if ($game->playerWin() === true) {
-                    $player_point += 1;
-                    $session->set('player_points', $player_point);
-                    return "player";
-                } else {
-                    $bank_point += 1;
-                    $session->set('bank_points', $bank_point);
-                    return "bank";
-                }
-            }
-        }
+        return ifDraw($session);
     } elseif ($stop) {
-        $game->drawCardsToBank();
-        $over21Points = $game->checkBankPoints();
-        if ($over21Points === true) {
-            $player_point += 1;
-            $session->set('player_points', $player_point);
-            return "player";
-        } else {
-            if ($game->playerWin() === true) {
-                $player_point += 1;
-                $session->set('player_points', $player_point);
-                return "player";
-            } else {
-                $bank_point += 1;
-                $session->set('bank_points', $bank_point);
-                return "bank";
-            }
-        }
-    } elseif ($new_round) {
-        $session->set('game', new \App\Card\Game());
+        return ifStop($session);
+    } elseif ($newRound) {
+        $session->set('game', new Game());
         $game = $session->get('game');
         $game->newRound();
     } elseif ($reset) {
-        $session->set('game', new \App\Card\Game());
+        $session->set('game', new Game());
         $game = $session->get('game');
         $game->newRound();
 
-        $player_point = 0;
-        $bank_point = 0;
-        $session->set('player_points', $player_point);
-        $session->set('bank_points', $bank_point);
+        $playerPoint = 0;
+        $bankPoint = 0;
+        $session->set('player_points', $playerPoint);
+        $session->set('bank_points', $bankPoint);
     }
     return "continue";
+}
+
+/**
+* Used in method startGamePost() and processes the input from $request.
+* @return string
+*/
+function ifDraw(
+    SessionInterface $session
+): string {
+    $game = $session->get("game") ?? 0;
+    $playerPoint = $session->get('player_points');
+    $bankPoint = $session->get('bank_points');
+
+    $game->drawCardToPlayer();
+    $over21Points = $game->checkPlayerPoints();
+    if ($over21Points === true) {
+        $bankPoint += 1;
+        $session->set('bank_points', $bankPoint);
+        return "bank";
+    }
+    if ($game->getPlayerCardCount() >= 3) {
+        $game->drawCardsToBank();
+
+        $over21Points = $game->checkBankPoints();
+        if ($over21Points === true) {
+            $playerPoint += 1;
+            $session->set('player_points', $playerPoint);
+            return "player";
+        }
+        if ($game->playerWin() === true) {
+            $playerPoint += 1;
+            $session->set('player_points', $playerPoint);
+            return "player";
+        }
+        $bankPoint += 1;
+        $session->set('bank_points', $bankPoint);
+        return "bank";
+    }
+
+    return "continue";
+}
+
+/**
+* Used in method startGamePost() and processes the input from $request.
+* @return string
+*/
+function ifStop(
+    SessionInterface $session
+): string {
+    $game = $session->get("game") ?? 0;
+    $playerPoint = $session->get('player_points');
+    $bankPoint = $session->get('bank_points');
+
+    $game->drawCardsToBank();
+    $over21Points = $game->checkBankPoints();
+    if ($over21Points === true) {
+        $playerPoint += 1;
+        $session->set('player_points', $playerPoint);
+        return "player";
+    }
+
+    if ($game->playerWin() === true) {
+        $playerPoint += 1;
+        $session->set('player_points', $playerPoint);
+        return "player";
+    }
+    $bankPoint += 1;
+    $session->set('bank_points', $bankPoint);
+    return "bank";
 }
