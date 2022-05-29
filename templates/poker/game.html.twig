@@ -31,12 +31,12 @@
     <div style="color: yellow">{{ comment }}</div>
 
     <div class="game_flex" style="height: 40px; margin: 0 200px;">
-        <a href="{{ path('poker_user_by_id', {id: user_id}) }}">Tillbaka</a>
+        <a href="{{ path('poker_user_by_id', {userId: user_id}) }}">Tillbaka</a>
         {% if not game_over %}
             <h1 style="color: white; margin-right: 50px;">Game pot: {{ game_pot }}$</h1>
         {% endif %}
         {% if game_over %}
-            <h1 style="color: white;">End of game</h1>
+            <h1 style="color: white; margin-right: 50px;">End of game</h1>
         {% endif %}
         <div></div>
     </div>
@@ -62,10 +62,11 @@
         {% if player_hand != [] and table_cards == [] %}
             <form style="height: 27px;" method="post" class="buttons_flex">
                 {% if bank_move != 'raise' %}
-                    <input type="submit" name="bet_ten" value="Bet 10$">
+                    <input type="submit" name="ten" value="Bet 10$">
                 {% endif %}
                 {% if bank_move == 'raise' %}
-                    <div><input type="submit" name="bet_ten" value="Raise 10$"></div>
+                    <div><input type="submit" name=" call" value="Call"></div>
+                    <div><input type="submit" name="twenty" value="Re-raise 10$"></div>
                 {% endif %}
                 <input type="submit" name="fold" value="Fold">
             </form>
@@ -73,12 +74,16 @@
         {% if player_hand != [] and table_cards != [] %}
             <form style="height: 27px;" method="post" class="buttons_flex">
                 {% if bank_move == 'raise' %}
-                    <div><input type="submit" name="check" value="Call"></div>
-                    <div><input type="submit" name="bet_ten" value="Raise 10$"></div>
+                    <div><input type="submit" name="call" value="Call"></div>
+                    <div><input type="submit" name="twenty" value="Re-raise 10$"></div>
                 {% endif %}
-                {% if bank_move != 'raise' %}
+                {% if bank_move == 're-raise' %}
+                    <div><input type="submit" name="call" value="Call"></div>
+                    <div><input type="submit" name="twenty" value="Re-raise 10$"></div>
+                {% endif %}
+                {% if bank_move != 'raise' and bank_move != 're-raise' %}
                     <div><input type="submit" name="check" value="Check"></div>
-                    <div><input type="submit" name="bet_ten" value="Bet 10$"></div>
+                    <div><input type="submit" name="ten" value="Bet 10$"></div>
                 {% endif %}
                 <div><input type="submit" name="fold" value="Fold"></div>
             </form>
@@ -87,7 +92,6 @@
     {% if game_over %}
         <form style="height: 27px;" method="post" class="buttons_flex">
             <div><input type="submit" name="restart" value="Restart"></div>
-            <div><input type="submit" name="go_back" value="Go back"></div>
         </form>
     {% endif %}
 
