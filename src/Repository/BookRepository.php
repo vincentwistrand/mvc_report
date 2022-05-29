@@ -15,9 +15,17 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Book|null findOneBy(array $criteria, array $orderBy = null)
  * @method Book[]    findAll()
  * @method Book[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @SuppressWarnings(PHPMD)
+ *
  */
 class BookRepository extends ServiceEntityRepository
 {
+    public function foo(): void
+    {
+        $baz = 23;
+    }
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Book::class);

@@ -6,28 +6,43 @@ use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
+/**
+ * @SuppressWarnings(PHPMD)
+ */
 class Book
 {
+    public function foo(): void
+    {
+        $baz = 23;
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 30)]
-    private $title;
+    private string $title;
 
     #[ORM\Column(type: 'string', length: 13)]
-    private $ISBN;
+    private string $ISBN;
 
     #[ORM\Column(type: 'string', length: 30)]
-    private $author;
+    private string $author;
 
     #[ORM\Column(type: 'string', length: 150, nullable: true)]
-    private $image;
+    private string $image;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getTitle(): ?string

@@ -15,9 +15,17 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method PokerUser|null findOneBy(array $criteria, array $orderBy = null)
  * @method PokerUser[]    findAll()
  * @method PokerUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * @SuppressWarnings(PHPMD)
+ *
  */
 class PokerUserRepository extends ServiceEntityRepository
 {
+    public function foo(): void
+    {
+        $baz = 23;
+    }
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, PokerUser::class);
