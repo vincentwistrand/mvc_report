@@ -7,10 +7,12 @@ namespace App\PokerCalculations;
 * @return int
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
+* @param array<object> $cardsInHand
 */
 function SevenCardsRoyalFlush(
     array $sortPoints,
-    array $sortColour
+    array $sortColour,
+    array $cardsInHand
 ): int {
     // Royal flush
     $pointsArray = [];
@@ -28,18 +30,18 @@ function SevenCardsRoyalFlush(
     }
 
     if (count($pointsOrderedKeys) === 5) {
-        return SevenCardsRoyalFlushA($sortPoints, $sortColour, $pointsOrderedKeys);
+        return SevenCardsRoyalFlushA($sortPoints, $sortColour, $pointsOrderedKeys, $cardsInHand);
     }
 
     if (count($pointsOrderedKeys) === 6) {
-        return SevenCardsRoyalFlushB($sortPoints, $sortColour, $pointsOrderedKeys);
+        return SevenCardsRoyalFlushB($sortPoints, $sortColour, $pointsOrderedKeys, $cardsInHand);
     }
 
     if (count($pointsOrderedKeys) === 7) {
-        return SevenCardsRoyalFlushC($sortPoints, $sortColour, $pointsOrderedKeys);
+        return SevenCardsRoyalFlushC($sortPoints, $sortColour, $pointsOrderedKeys, $cardsInHand);
     }
 
-    return sevenCardsStraightFlush($sortPoints, $sortColour);
+    return sevenCardsStraightFlush($sortPoints, $sortColour, $cardsInHand);
 }
 
 /**
@@ -47,11 +49,13 @@ function SevenCardsRoyalFlush(
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
 * @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
 */
 function SevenCardsRoyalFlushA(
     array $sortPoints,
     array $sortColour,
-    $pointsOrderedKeys
+    array $pointsOrderedKeys,
+    array $cardsInHand
 ): int {
     if (
         $pointsOrderedKeys[1] === ($pointsOrderedKeys[0] + 1) &&
@@ -60,10 +64,10 @@ function SevenCardsRoyalFlushA(
         $pointsOrderedKeys[4] === ($pointsOrderedKeys[3] + 1) &&
         $pointsOrderedKeys[4] === 14
     ) {
-        return checkHandSevenCardsPartTwo($sortPoints, $sortColour, $pointsOrderedKeys);
+        return checkHandSevenCardsPartTwoA($sortPoints, $sortColour, $pointsOrderedKeys, $cardsInHand);
     }
 
-    return sevenCardsStraightFlush($sortPoints, $sortColour);
+    return sevenCardsStraightFlush($sortPoints, $sortColour, $cardsInHand);
 }
 
 /**
@@ -71,11 +75,13 @@ function SevenCardsRoyalFlushA(
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
 * @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
 */
 function SevenCardsRoyalFlushB(
     array $sortPoints,
     array $sortColour,
-    $pointsOrderedKeys
+    array $pointsOrderedKeys,
+    array $cardsInHand
 ): int {
     if (
         $pointsOrderedKeys[2] === ($pointsOrderedKeys[1] + 1) &&
@@ -84,10 +90,10 @@ function SevenCardsRoyalFlushB(
         $pointsOrderedKeys[5] === ($pointsOrderedKeys[4] + 1) &&
         $pointsOrderedKeys[5] === 14
     ) {
-        return checkHandSevenCardsPartTwo($sortPoints, $sortColour, $pointsOrderedKeys);
+        return checkHandSevenCardsPartTwoA($sortPoints, $sortColour, $pointsOrderedKeys, $cardsInHand);
     }
 
-    return sevenCardsStraightFlush($sortPoints, $sortColour);
+    return sevenCardsStraightFlush($sortPoints, $sortColour, $cardsInHand);
 }
 
 /**
@@ -95,11 +101,13 @@ function SevenCardsRoyalFlushB(
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
 * @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
 */
 function SevenCardsRoyalFlushC(
     array $sortPoints,
     array $sortColour,
-    $pointsOrderedKeys
+    array $pointsOrderedKeys,
+    array $cardsInHand
 ): int {
     if (
         $pointsOrderedKeys[3] === ($pointsOrderedKeys[2] + 1) &&
@@ -108,10 +116,10 @@ function SevenCardsRoyalFlushC(
         $pointsOrderedKeys[6] === ($pointsOrderedKeys[5] + 1) &&
         $pointsOrderedKeys[6] === 14
     ) {
-        return checkHandSevenCardsPartTwo($sortPoints, $sortColour, $pointsOrderedKeys);
+        return checkHandSevenCardsPartTwoA($sortPoints, $sortColour, $pointsOrderedKeys, $cardsInHand);
     }
 
-    return sevenCardsStraightFlush($sortPoints, $sortColour);
+    return sevenCardsStraightFlush($sortPoints, $sortColour, $cardsInHand);
 }
 
 /**
@@ -119,13 +127,14 @@ function SevenCardsRoyalFlushC(
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
 * @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
 */
-function checkHandSevenCardsPartTwo(
+function checkHandSevenCardsPartTwoA(
     array $sortPoints,
     array $sortColour,
-    array $pointsOrderedKeys
+    array $pointsOrderedKeys,
+    array $cardsInHand
 ): int {
-    // Royal flush
     $pointsNoDuplicates = [];
 
     $goneThroughtPoints = [];
@@ -146,7 +155,7 @@ function checkHandSevenCardsPartTwo(
         array_shift($pointsNoDuplicates);
     }
 
-    return checkHandSevenCardsPartTwoA($sortPoints, $sortColour, $pointsNoDuplicates);
+    return checkHandSevenCardsPartTwoB($sortPoints, $sortColour, $pointsNoDuplicates, $cardsInHand);
 }
 
 /**
@@ -154,11 +163,13 @@ function checkHandSevenCardsPartTwo(
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
 * @param array<int, object> $pointsNoDuplicates
+* @param array<object> $cardsInHand
 */
-function checkHandSevenCardsPartTwoA(
+function checkHandSevenCardsPartTwoB(
     array $sortPoints,
     array $sortColour,
-    array $pointsNoDuplicates
+    array $pointsNoDuplicates,
+    array $cardsInHand
 ): int {
     if (
         $pointsNoDuplicates[0]->colour === $pointsNoDuplicates[1]->colour &&
@@ -166,8 +177,36 @@ function checkHandSevenCardsPartTwoA(
         $pointsNoDuplicates[2]->colour === $pointsNoDuplicates[3]->colour &&
         $pointsNoDuplicates[3]->colour === $pointsNoDuplicates[4]->colour
     ) {
+        return SevenCardsRoyalFlushCompare($sortPoints, $sortColour, $pointsNoDuplicates, $cardsInHand);
+    }
+
+    return sevenCardsStraightFlush($sortPoints, $sortColour, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $sortColour
+* @param array<object> $pointsNoDuplicates
+* @param array<object> $cardsInHand
+*/
+function SevenCardsRoyalFlushCompare(
+    array $sortPoints,
+    array $sortColour,
+    array $pointsNoDuplicates,
+    array $cardsInHand
+): int {
+    dump(in_array($pointsNoDuplicates[3], $cardsInHand));
+    dump($cardsInHand[0]);
+    if (
+        in_array($pointsNoDuplicates[0], $cardsInHand) ||
+        in_array($pointsNoDuplicates[1], $cardsInHand) ||
+        in_array($pointsNoDuplicates[2], $cardsInHand) ||
+        in_array($pointsNoDuplicates[3], $cardsInHand) ||
+        in_array($pointsNoDuplicates[4], $cardsInHand)
+    ) {
         return 1000;
     }
 
-    return sevenCardsStraightFlush($sortPoints, $sortColour);
+    return sevenCardsStraightFlush($sortPoints, $sortColour, $cardsInHand);
 }

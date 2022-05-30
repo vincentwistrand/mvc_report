@@ -6,128 +6,328 @@ namespace App\PokerCalculations;
 * @return int
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
+* @param array<object> $cardsInHand
 */
-function cHSevenFour(
+function sevenCardsFullHouse(
     array $sortPoints,
-    array $sortColour
+    array $sortColour,
+    array $cardsInHand
 ): int {
     // Full house
     if (
         $sortPoints[0]->points === $sortPoints[1]->points && $sortPoints[2]->points === $sortPoints[3]->points &&
-        $sortPoints[3]->points === $sortPoints[4]->points ||
-        $sortPoints[0]->points === $sortPoints[1]->points && $sortPoints[3]->points === $sortPoints[4]->points &&
-        $sortPoints[4]->points === $sortPoints[5]->points
+        $sortPoints[3]->points === $sortPoints[4]->points
     ) {
-        $totalPoints = checkFullHouseCards($sortPoints);
-        return $totalPoints;
+        if (
+            in_array($sortPoints[0], $cardsInHand) ||
+            in_array($sortPoints[1], $cardsInHand) ||
+            in_array($sortPoints[2], $cardsInHand) ||
+            in_array($sortPoints[3], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
     }
-    return cHSevenFourPartTwo($sortPoints, $sortColour);
+    return sevenCardsFullHouseTwo($sortPoints, $sortColour, $cardsInHand);
 }
 
 /**
 * @return int
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
+* @param array<object> $cardsInHand
 */
-function cHSevenFourPartTwo(
+function sevenCardsFullHouseTwo(
     array $sortPoints,
-    array $sortColour
+    array $sortColour,
+    array $cardsInHand
+): int {
+    // Full house
+    if (
+        $sortPoints[0]->points === $sortPoints[1]->points && $sortPoints[3]->points === $sortPoints[4]->points &&
+        $sortPoints[4]->points === $sortPoints[5]->points
+    ) {
+        if (
+            in_array($sortPoints[0], $cardsInHand) ||
+            in_array($sortPoints[1], $cardsInHand) ||
+            in_array($sortPoints[3], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand) ||
+            in_array($sortPoints[5], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
+    }
+    return sevenCardsFullHouseThree($sortPoints, $sortColour, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $sortColour
+* @param array<object> $cardsInHand
+*/
+function sevenCardsFullHouseThree(
+    array $sortPoints,
+    array $sortColour,
+    array $cardsInHand
 ): int {
     // Full house
     if (
         $sortPoints[0]->points === $sortPoints[1]->points && $sortPoints[4]->points === $sortPoints[5]->points &&
-        $sortPoints[5]->points === $sortPoints[6]->points ||
-        $sortPoints[1]->points === $sortPoints[2]->points && $sortPoints[3]->points === $sortPoints[4]->points &&
-        $sortPoints[4]->points === $sortPoints[5]->points
+        $sortPoints[5]->points === $sortPoints[6]->points
     ) {
-        $totalPoints = checkFullHouseCards($sortPoints);
-        return $totalPoints;
+        if (
+            in_array($sortPoints[0], $cardsInHand) ||
+            in_array($sortPoints[1], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand) ||
+            in_array($sortPoints[5], $cardsInHand) ||
+            in_array($sortPoints[6], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
     }
-    return cHSevenFourPartThree($sortPoints, $sortColour);
+    return sevenCardsFullHouseFour($sortPoints, $sortColour, $cardsInHand);
 }
 
 /**
 * @return int
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
+* @param array<object> $cardsInHand
 */
-function cHSevenFourPartThree(
+function sevenCardsFullHouseFour(
     array $sortPoints,
-    array $sortColour
+    array $sortColour,
+    array $cardsInHand
+): int {
+    // Full house
+    if (
+        $sortPoints[1]->points === $sortPoints[2]->points && $sortPoints[3]->points === $sortPoints[4]->points &&
+        $sortPoints[4]->points === $sortPoints[5]->points
+    ) {
+        if (
+            in_array($sortPoints[1], $cardsInHand) ||
+            in_array($sortPoints[2], $cardsInHand) ||
+            in_array($sortPoints[3], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand) ||
+            in_array($sortPoints[5], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
+    }
+    return sevenCardsFullHouseFive($sortPoints, $sortColour, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $sortColour
+* @param array<object> $cardsInHand
+*/
+function sevenCardsFullHouseFive(
+    array $sortPoints,
+    array $sortColour,
+    array $cardsInHand
 ): int {
     // Full house
     if (
         $sortPoints[1]->points === $sortPoints[2]->points && $sortPoints[4]->points === $sortPoints[5]->points &&
-        $sortPoints[5]->points === $sortPoints[6]->points ||
+        $sortPoints[5]->points === $sortPoints[6]->points
+    ) {
+        if (
+            in_array($sortPoints[1], $cardsInHand) ||
+            in_array($sortPoints[2], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand) ||
+            in_array($sortPoints[5], $cardsInHand) ||
+            in_array($sortPoints[6], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
+    }
+    return sevenCardsFullHouseSix($sortPoints, $sortColour, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $sortColour
+* @param array<object> $cardsInHand
+*/
+function sevenCardsFullHouseSix(
+    array $sortPoints,
+    array $sortColour,
+    array $cardsInHand
+): int {
+    // Full house
+    if (
         $sortPoints[2]->points === $sortPoints[3]->points && $sortPoints[4]->points === $sortPoints[5]->points &&
         $sortPoints[5]->points === $sortPoints[6]->points
     ) {
-        $totalPoints = checkFullHouseCards($sortPoints);
-        return $totalPoints;
+        if (
+            in_array($sortPoints[2], $cardsInHand) ||
+            in_array($sortPoints[3], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand) ||
+            in_array($sortPoints[5], $cardsInHand) ||
+            in_array($sortPoints[6], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
     }
-    return cHSevenFourPartFour($sortPoints, $sortColour);
+    return sevenCardsFullHouseSeven($sortPoints, $sortColour, $cardsInHand);
 }
 
 /**
 * @return int
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
+* @param array<object> $cardsInHand
 */
-function cHSevenFourPartFour(
+function sevenCardsFullHouseSeven(
     array $sortPoints,
-    array $sortColour
+    array $sortColour,
+    array $cardsInHand
 ): int {
     // Full house
     if (
         $sortPoints[0]->points === $sortPoints[1]->points && $sortPoints[1]->points === $sortPoints[2]->points &&
-        $sortPoints[3]->points === $sortPoints[4]->points ||
+        $sortPoints[3]->points === $sortPoints[4]->points
+    ) {
+        if (
+            in_array($sortPoints[0], $cardsInHand) ||
+            in_array($sortPoints[1], $cardsInHand) ||
+            in_array($sortPoints[2], $cardsInHand) ||
+            in_array($sortPoints[3], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
+    }
+    return sevenCardsFullHouseEight($sortPoints, $sortColour, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $sortColour
+* @param array<object> $cardsInHand
+*/
+function sevenCardsFullHouseEight(
+    array $sortPoints,
+    array $sortColour,
+    array $cardsInHand
+): int {
+    // Full house
+    if (
         $sortPoints[0]->points === $sortPoints[1]->points && $sortPoints[1]->points === $sortPoints[2]->points &&
         $sortPoints[4]->points === $sortPoints[5]->points
     ) {
-        $totalPoints = checkFullHouseCards($sortPoints);
-        return $totalPoints;
+        if (
+            in_array($sortPoints[0], $cardsInHand) ||
+            in_array($sortPoints[1], $cardsInHand) ||
+            in_array($sortPoints[2], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand) ||
+            in_array($sortPoints[5], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
     }
-    return cHSevenFourPartFive($sortPoints, $sortColour);
+    return sevenCardsFullHouseNine($sortPoints, $sortColour, $cardsInHand);
 }
 
 /**
 * @return int
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
+* @param array<object> $cardsInHand
 */
-function cHSevenFourPartFive(
+function sevenCardsFullHouseNine(
     array $sortPoints,
-    array $sortColour
+    array $sortColour,
+    array $cardsInHand
 ): int {
     // Full house
     if (
         $sortPoints[0]->points === $sortPoints[1]->points && $sortPoints[1]->points === $sortPoints[2]->points &&
-        $sortPoints[5]->points === $sortPoints[6]->points ||
+        $sortPoints[5]->points === $sortPoints[6]->points
+    ) {
+        if (
+            in_array($sortPoints[0], $cardsInHand) ||
+            in_array($sortPoints[1], $cardsInHand) ||
+            in_array($sortPoints[2], $cardsInHand) ||
+            in_array($sortPoints[5], $cardsInHand) ||
+            in_array($sortPoints[6], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
+    }
+    return sevenCardsFullHouseTen($sortPoints, $sortColour, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $sortColour
+* @param array<object> $cardsInHand
+*/
+function sevenCardsFullHouseTen(
+    array $sortPoints,
+    array $sortColour,
+    array $cardsInHand
+): int {
+    // Full house
+    if (
         $sortPoints[1]->points === $sortPoints[2]->points && $sortPoints[2]->points === $sortPoints[3]->points &&
         $sortPoints[4]->points === $sortPoints[5]->points
     ) {
-        $totalPoints = checkFullHouseCards($sortPoints);
-        return $totalPoints;
+        if (
+            in_array($sortPoints[1], $cardsInHand) ||
+            in_array($sortPoints[2], $cardsInHand) ||
+            in_array($sortPoints[3], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand) ||
+            in_array($sortPoints[5], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
     }
-    return cHSevenFourPartSix($sortPoints, $sortColour);
+    return sevenCardsFullHouseEleven($sortPoints, $sortColour, $cardsInHand);
 }
 
 /**
 * @return int
 * @param array<object> $sortPoints
 * @param array<object> $sortColour
+* @param array<object> $cardsInHand
 */
-function cHSevenFourPartSix(
+function sevenCardsFullHouseEleven(
     array $sortPoints,
-    array $sortColour
+    array $sortColour,
+    array $cardsInHand
 ): int {
     // Full house
     if (
         $sortPoints[2]->points === $sortPoints[3]->points && $sortPoints[3]->points === $sortPoints[4]->points &&
         $sortPoints[5]->points === $sortPoints[6]->points
     ) {
-        $totalPoints = checkFullHouseCards($sortPoints);
-        return $totalPoints;
+        if (
+            in_array($sortPoints[2], $cardsInHand) ||
+            in_array($sortPoints[3], $cardsInHand) ||
+            in_array($sortPoints[4], $cardsInHand) ||
+            in_array($sortPoints[5], $cardsInHand) ||
+            in_array($sortPoints[6], $cardsInHand)
+        ) {
+            $totalPoints = checkFullHouseCards($sortPoints);
+            return $totalPoints;
+        }
     }
-    return cHSevenFive($sortPoints, $sortColour);
+    return sevenCardsFlush($sortPoints, $sortColour, $cardsInHand);
 }

@@ -5,9 +5,11 @@ namespace App\PokerCalculations;
 /**
 * @return int
 * @param array<object> $sortPoints
+* @param array<object> $cardsInHand
 */
-function cHSevenSix(
-    array $sortPoints
+function sevenCardsStraight(
+    array $sortPoints,
+    array $cardsInHand
 ): int {
     // Straight
     $pointsArray = [];
@@ -35,7 +37,7 @@ function cHSevenSix(
         }
     }
 
-    return cHSevenSixA($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates);
+    return sevenCardsStraightOne($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
 }
 
 /**
@@ -43,16 +45,16 @@ function cHSevenSix(
 * @param array<object> $sortPoints
 * @param array<object> $objectsNoDuplicates
 * @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
 */
-function cHSevenSixA(
+function sevenCardsStraightOne(
     array $sortPoints,
-    $pointsOrderedKeys,
-    $objectsNoDuplicates
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
 ): int {
     if (
-        count($pointsOrderedKeys) === 5 ||
-        count($pointsOrderedKeys) === 6 ||
-        count($pointsOrderedKeys) === 7
+        count($pointsOrderedKeys) === 5
     ) {
         if (
             $pointsOrderedKeys[1] === ($pointsOrderedKeys[0] + 1) &&
@@ -60,12 +62,16 @@ function cHSevenSixA(
             $pointsOrderedKeys[3] === ($pointsOrderedKeys[2] + 1) &&
             $pointsOrderedKeys[4] === ($pointsOrderedKeys[3] + 1)
         ) {
-            $totalPoints = checkStraightCards($objectsNoDuplicates);
-            return $totalPoints;
+            return includesStartCardsOne(
+                $sortPoints,
+                $pointsOrderedKeys,
+                $objectsNoDuplicates,
+                $cardsInHand
+            );
         }
     }
 
-    return cHSevenSixB($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates);
+    return sevenCardsStraightTwo($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
 }
 
 /**
@@ -73,15 +79,43 @@ function cHSevenSixA(
 * @param array<object> $sortPoints
 * @param array<object> $objectsNoDuplicates
 * @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
 */
-function cHSevenSixB(
+function includesStartCardsOne(
     array $sortPoints,
-    $pointsOrderedKeys,
-    $objectsNoDuplicates
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
 ): int {
     if (
-        count($pointsOrderedKeys) === 6 ||
-        count($pointsOrderedKeys) === 7
+        in_array($objectsNoDuplicates[0], $cardsInHand) ||
+        in_array($objectsNoDuplicates[1], $cardsInHand) ||
+        in_array($objectsNoDuplicates[2], $cardsInHand) ||
+        in_array($objectsNoDuplicates[3], $cardsInHand) ||
+        in_array($objectsNoDuplicates[4], $cardsInHand)
+    ) {
+        $totalPoints = checkStraightCards($objectsNoDuplicates);
+        return $totalPoints;
+    }
+
+    return sevenCardsStraightTwo($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $objectsNoDuplicates
+* @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
+*/
+function sevenCardsStraightTwo(
+    array $sortPoints,
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
+): int {
+    if (
+        count($pointsOrderedKeys) === 6
     ) {
         if (
             $pointsOrderedKeys[2] === ($pointsOrderedKeys[1] + 1) &&
@@ -89,12 +123,16 @@ function cHSevenSixB(
             $pointsOrderedKeys[4] === ($pointsOrderedKeys[3] + 1) &&
             $pointsOrderedKeys[5] === ($pointsOrderedKeys[4] + 1)
         ) {
-            $totalPoints = cSTwo($objectsNoDuplicates);
-            return $totalPoints;
+            return includesStartCardsTwo(
+                $sortPoints,
+                $pointsOrderedKeys,
+                $objectsNoDuplicates,
+                $cardsInHand
+            );
         }
     }
 
-    return cHSevenSixC($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates);
+    return sevenCardsStraightThree($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
 }
 
 /**
@@ -102,11 +140,101 @@ function cHSevenSixB(
 * @param array<object> $sortPoints
 * @param array<object> $objectsNoDuplicates
 * @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
 */
-function cHSevenSixC(
+function includesStartCardsTwo(
     array $sortPoints,
-    $pointsOrderedKeys,
-    $objectsNoDuplicates
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
+): int {
+    if (
+        in_array($objectsNoDuplicates[1], $cardsInHand) ||
+        in_array($objectsNoDuplicates[2], $cardsInHand) ||
+        in_array($objectsNoDuplicates[3], $cardsInHand) ||
+        in_array($objectsNoDuplicates[4], $cardsInHand) ||
+        in_array($objectsNoDuplicates[5], $cardsInHand)
+    ) {
+        $totalPoints = checkStraightCards($objectsNoDuplicates);
+        return $totalPoints;
+    }
+
+    return sevenCardsStraightThree($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $objectsNoDuplicates
+* @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
+*/
+function sevenCardsStraightThree(
+    array $sortPoints,
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
+): int {
+    if (
+        count($pointsOrderedKeys) === 6
+    ) {
+        if (
+            $pointsOrderedKeys[1] === ($pointsOrderedKeys[0] + 1) &&
+            $pointsOrderedKeys[2] === ($pointsOrderedKeys[1] + 1) &&
+            $pointsOrderedKeys[3] === ($pointsOrderedKeys[2] + 1) &&
+            $pointsOrderedKeys[4] === ($pointsOrderedKeys[3] + 1)
+        ) {
+            return includesStartCardsThree(
+                $sortPoints,
+                $pointsOrderedKeys,
+                $objectsNoDuplicates,
+                $cardsInHand
+            );
+        }
+    }
+
+    return sevenCardsStraightFour($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $objectsNoDuplicates
+* @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
+*/
+function includesStartCardsThree(
+    array $sortPoints,
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
+): int {
+    if (
+        in_array($objectsNoDuplicates[0], $cardsInHand) ||
+        in_array($objectsNoDuplicates[1], $cardsInHand) ||
+        in_array($objectsNoDuplicates[2], $cardsInHand) ||
+        in_array($objectsNoDuplicates[3], $cardsInHand) ||
+        in_array($objectsNoDuplicates[4], $cardsInHand)
+    ) {
+        $totalPoints = checkStraightCards($objectsNoDuplicates);
+        return $totalPoints;
+    }
+
+    return sevenCardsStraightFour($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $objectsNoDuplicates
+* @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
+*/
+function sevenCardsStraightFour(
+    array $sortPoints,
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
 ): int {
     if (count($pointsOrderedKeys) === 7) {
         if (
@@ -115,10 +243,157 @@ function cHSevenSixC(
             $pointsOrderedKeys[5] === ($pointsOrderedKeys[4] + 1) &&
             $pointsOrderedKeys[6] === ($pointsOrderedKeys[5] + 1)
         ) {
-            $totalPoints = cSTwo($objectsNoDuplicates);
-            return $totalPoints;
+            dump('båt');
+            return includesStartCardsFour(
+                $sortPoints,
+                $pointsOrderedKeys,
+                $objectsNoDuplicates,
+                $cardsInHand
+            );
         }
     }
 
-    return cHSevenSeven($sortPoints);
+    return sevenCardsStraightFive($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $objectsNoDuplicates
+* @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
+*/
+function includesStartCardsFour(
+    array $sortPoints,
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
+): int {
+    if (
+        in_array($objectsNoDuplicates[2], $cardsInHand) ||
+        in_array($objectsNoDuplicates[3], $cardsInHand) ||
+        in_array($objectsNoDuplicates[4], $cardsInHand) ||
+        in_array($objectsNoDuplicates[5], $cardsInHand) ||
+        in_array($objectsNoDuplicates[6], $cardsInHand)
+    ) {
+        $totalPoints = cSThree($objectsNoDuplicates);
+        return $totalPoints;
+    }
+
+    return sevenCardsStraightFive($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $objectsNoDuplicates
+* @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
+*/
+function sevenCardsStraightFive(
+    array $sortPoints,
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
+): int {
+    if (count($pointsOrderedKeys) === 7) {
+        if (
+            $pointsOrderedKeys[2] === ($pointsOrderedKeys[1] + 1) &&
+            $pointsOrderedKeys[3] === ($pointsOrderedKeys[2] + 1) &&
+            $pointsOrderedKeys[4] === ($pointsOrderedKeys[3] + 1) &&
+            $pointsOrderedKeys[5] === ($pointsOrderedKeys[4] + 1)
+        ) {
+            return includesStartCardsFive(
+                $sortPoints,
+                $pointsOrderedKeys,
+                $objectsNoDuplicates,
+                $cardsInHand
+            );
+        }
+    }
+
+    return sevenCardsStraightSix($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $objectsNoDuplicates
+* @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
+*/
+function includesStartCardsFive(
+    array $sortPoints,
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
+): int {
+    if (
+        in_array($objectsNoDuplicates[1], $cardsInHand) ||
+        in_array($objectsNoDuplicates[2], $cardsInHand) ||
+        in_array($objectsNoDuplicates[3], $cardsInHand) ||
+        in_array($objectsNoDuplicates[4], $cardsInHand) ||
+        in_array($objectsNoDuplicates[5], $cardsInHand)
+    ) {
+        $totalPoints = cSTwo($objectsNoDuplicates);
+        return $totalPoints;
+    }
+
+    return sevenCardsStraightSix($sortPoints, $pointsOrderedKeys, $objectsNoDuplicates, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $objectsNoDuplicates
+* @param array<int> $pointsOrderedKeys
+* @param array<object> $cardsInHand
+*/
+function sevenCardsStraightSix(
+    array $sortPoints,
+    array $pointsOrderedKeys,
+    array $objectsNoDuplicates,
+    array $cardsInHand
+): int {
+    if (count($pointsOrderedKeys) === 7) {
+        if (
+            $pointsOrderedKeys[1] === ($pointsOrderedKeys[0] + 1) &&
+            $pointsOrderedKeys[2] === ($pointsOrderedKeys[1] + 1) &&
+            $pointsOrderedKeys[3] === ($pointsOrderedKeys[2] + 1) &&
+            $pointsOrderedKeys[4] === ($pointsOrderedKeys[3] + 1)
+        ) {
+            return includesStartCardsSix(
+                $sortPoints,
+                $objectsNoDuplicates,
+                $cardsInHand
+            );
+        }
+    }
+
+    return sevenCardsThreeOfAKind($sortPoints, $cardsInHand);
+}
+
+/**
+* @return int
+* @param array<object> $sortPoints
+* @param array<object> $objectsNoDuplicates
+* @param array<object> $cardsInHand
+*/
+function includesStartCardsSix(
+    array $sortPoints,
+    array $objectsNoDuplicates,
+    array $cardsInHand
+): int {
+    if (
+        in_array($objectsNoDuplicates[0], $cardsInHand) ||
+        in_array($objectsNoDuplicates[1], $cardsInHand) ||
+        in_array($objectsNoDuplicates[2], $cardsInHand) ||
+        in_array($objectsNoDuplicates[3], $cardsInHand) ||
+        in_array($objectsNoDuplicates[4], $cardsInHand)
+    ) {
+        $totalPoints = checkStraightCards($objectsNoDuplicates);
+        return $totalPoints;
+    }
+
+    return sevenCardsThreeOfAKind($sortPoints, $cardsInHand);
 }

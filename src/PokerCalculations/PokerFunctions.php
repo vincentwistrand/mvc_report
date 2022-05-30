@@ -283,11 +283,20 @@ function manageBank(
     $bankCards = $game->getBankCards();
     $tableCards = $game->getTableCards();
 
+    $bankCardsObjects = [];
+
+    foreach ($bankCards as $card) {
+        $bankCardsObjects[] = (object) [
+            'colour' => $card->getColour(),
+            'points' => intval($card->getPoints())
+        ];
+    }
+
     $sortedCards = sortBankAndTableCards($bankCards, $tableCards);
 
     $bankCardsColour = $sortedCards[0];
     $bankCardsPoints = $sortedCards[1];
-    $tableCardsColour = $sortedCards[2];
+    //$tableCardsColour = $sortedCards[2];
     $tableCardsPoints = $sortedCards[3];
     $totalBankCards = $sortedCards[4];
 
@@ -343,16 +352,15 @@ function manageBank(
     }
 
     if (count($totalBankCards) === 7) {
-        $cardPoints = checkHandSevenCards($bankCardsPoints, $bankCardsColour);
-        $tablePoints = checkHandFiveCards($tableCardsPoints, $tableCardsColour);
+        $cardPoints = checkHandSevenCards($bankCardsPoints, $bankCardsColour, $bankCardsObjects);
+        //$tablePoints = checkHandFiveCards($tableCardsPoints, $tableCardsColour);
 
         //dump($cardPoints);
         //dump($tablePoints);
 
         sevenBankCards(
             $cardPoints,
-            $tablePoints,
-            $bet,
+            //$tablePoints,
             $bankCardsColour,
             $bankCardsPoints,
             $doctrine,
@@ -584,14 +592,12 @@ function sixBankCards(
  * If bank and table cards together is 7 cards
  * @return void
  * @param int $cardPoints
- * @param int $tablePoints
  * @param array<object> $bankCardsColour
  * @param array<object> $bankCardsPoints
  *
  */
 function sevenBankCards(
     int $cardPoints,
-    int $tablePoints,
     array $bankCardsColour,
     array $bankCardsPoints,
     ManagerRegistry $doctrine,
@@ -601,7 +607,7 @@ function sevenBankCards(
     $bankMove = $session->get('BankMove');
     $playerMove = $session->get('PlayerMove');
 
-    if ($cardPoints >= 100 && $cardPoints > $tablePoints && $bankMove === '') {
+    if ($cardPoints >= 100 && $bankMove === '') {
         if ($playerMove === 'check') {
             $game->addToPot(10);
             $session->set('PokerComment', 'Bank raises with 10$, your turn');
@@ -634,7 +640,6 @@ function sevenBankCards(
  * @param array<object> $bankCardsColour
  * @param array<object> $bankCardsPoints
  * @param object $game
- * @param int $bet
  *
  */
 function endOfGame(
@@ -648,45 +653,11 @@ function endOfGame(
     $session->set('BankMove', '');
     $game->setGameOver();
 
-    // Put player cards and table cards in an array and make one array sorted by points and
-    // one array sorted by colours to make it easier to count points
-    $playerCards = $game->getPlayerCards();
-    $tableCards = $game->getTableCards();
+    $endPoints = checkpoints($game, $bankCardsColour, $bankCardsPoints);
 
-    $totalPlayerCards = [];
-
-    foreach ($playerCards as $card) {
-        $totalPlayerCards[] = $card;
-    }
-
-    foreach ($tableCards as $card) {
-        $totalPlayerCards[] = $card;
-    }
-
-    $playerCardsObjects = [];
-
-    foreach ($totalPlayerCards as $card) {
-        $playerCardsObjects[] = (object) [
-            'colour' => $card->getColour(),
-            'points' => intval($card->getPoints())
-        ];
-    }
-
-    usort($playerCardsObjects, function ($objectA, $objectB) {
-        return strcmp($objectA->colour, $objectB->colour);
-    });
-
-    $playerCardsColour = $playerCardsObjects;
-
-    usort($playerCardsObjects, function ($objectA, $objectB) {
-        return $objectA->points - $objectB->points;
-    });
-
-    $playerCardsPoints = $playerCardsObjects;
-
-    // Check points
-    $playerCardPoints = checkHandSevenCards($playerCardsPoints, $playerCardsColour);
-    $bankCardPoints = checkHandSevenCards($bankCardsPoints, $bankCardsColour);
+    $playerCardPoints = $endPoints[0];
+    $bankCardPoints = $endPoints[1];
+    ;
 
     dump('Player points: ' . $playerCardPoints);
     dump('Bank points: ' . $bankCardPoints);
@@ -729,6 +700,80 @@ function endOfGame(
     }
 
     $session->set('PokerComment', 'Bank is the winner of ' . $game->getPot() . '$!');
+}
+
+/**
+ * Calculate winner
+ * @return array<int>
+ * @param object $game
+ * @param array<object> $bankCardsColour
+ * @param array<object> $bankCardsPoints
+ */
+function checkPoints(
+    object $game,
+    array $bankCardsColour,
+    array $bankCardsPoints
+): array {
+    // Put player cards and table cards in an array and make one array sorted by points and
+    // one array sorted by colours to make it easier to count points
+    $bankCards = $game->getBankCards();
+    $playerCards = $game->getPlayerCards();
+    $tableCards = $game->getTableCards();
+
+    $totalPlayerCards = [];
+
+    foreach ($playerCards as $card) {
+        $totalPlayerCards[] = $card;
+    }
+
+    foreach ($tableCards as $card) {
+        $totalPlayerCards[] = $card;
+    }
+
+    $bankCardsObjects = [];
+
+    foreach ($bankCards as $card) {
+        $bankCardsObjects[] = (object) [
+            'colour' => $card->getColour(),
+            'points' => intval($card->getPoints())
+        ];
+    }
+
+    $playerCardsObjects = [];
+
+    foreach ($playerCards as $card) {
+        $playerCardsObjects[] = (object) [
+            'colour' => $card->getColour(),
+            'points' => intval($card->getPoints())
+        ];
+    }
+
+    $allPlayerObjects = [];
+
+    foreach ($totalPlayerCards as $card) {
+        $allPlayerObjects[] = (object) [
+            'colour' => $card->getColour(),
+            'points' => intval($card->getPoints())
+        ];
+    }
+
+    usort($allPlayerObjects, function ($objectA, $objectB) {
+        return strcmp($objectA->colour, $objectB->colour);
+    });
+
+    $playerCardsColour = $allPlayerObjects;
+
+    usort($allPlayerObjects, function ($objectA, $objectB) {
+        return $objectA->points - $objectB->points;
+    });
+
+    $playerCardsPoints = $allPlayerObjects;
+
+    // Check points
+    $playerCardPoints = checkHandSevenCards($playerCardsPoints, $playerCardsColour, $playerCardsObjects);
+    $bankCardPoints = checkHandSevenCards($bankCardsPoints, $bankCardsColour, $bankCardsObjects);
+
+    return [$playerCardPoints, $bankCardPoints];
 }
 
 /**
