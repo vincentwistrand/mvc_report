@@ -17,7 +17,7 @@ class PokerController extends AbstractController
 {
     /**
     * @Route(
-    *       "/pokergame",
+    *       "/proj/pokergame",
     *       name="pokergame",
     *       methods={"GET","HEAD"}
     * )
@@ -38,64 +38,85 @@ class PokerController extends AbstractController
 
         //Testing-----------------------------------------------------
 
-        //$testCards = [];
-        //$testCards[] = new Card(
-        //    '',
-        //    'Hjarter',
-        //    '10'
-        //);
-        //$testCards[] = new Card(
-        //    '',
-        //    'Hjarter',
-        //    '5'
-        //);
-        //$testCards[] = new Card(
-        //    '',
-        //    'Ruter',
-        //    '11'
-        //);
-        //$testCards[] = new Card(
-        //    '',
-        //    'Hjarter',
-        //    '12'
-        //);
-        //$testCards[] = new Card(
-        //    '',
-        //    'Ruter',
-        //    '13'
-        //);
-        //$testCards[] = new Card(
-        //    '',
-        //    'Hjarter',
-        //    '9'
-        //);
+        $testHandCards = [];
+        $testHandCards[] = new Card(
+            '',
+            'Klover',
+            '3'
+        );
+        $testHandCards[] = new Card(
+            '',
+            'Ruter',
+            '5'
+        );
 
-        //$newTestObject = [];
+        $newTestHandObject = [];
 
-        //foreach ($testCards as $card) {
-        //    $newTestObject[] = (object) [
-        //        'colour' => $card->getColour(),
-        //        'points' => intval($card->getPoints())
-        //    ];
-        //}
+        foreach ($testHandCards as $card) {
+            $newTestHandObject[] = (object) [
+                'colour' => $card->getColour(),
+                'points' => intval($card->getPoints())
+            ];
+        }
 
-        ////sort by colours
-        //usort($newTestObject, function ($objectA, $objectB) {
-        //    return strcmp($objectA->colour, $objectB->colour);
-        //});
+        $testAllCards = [];
+        $testAllCards[] = new Card(
+            '',
+            'Klover',
+            '3'
+        );
+        $testAllCards[] = new Card(
+            '',
+            'Hjarter',
+            '4'
+        );
+        $testAllCards[] = new Card(
+            '',
+            'Ruter',
+            '5'
+        );
+        $testAllCards[] = new Card(
+            '',
+            'Spader',
+            '6'
+        );
+        $testAllCards[] = new Card(
+            '',
+            'Spader',
+            '7'
+        );
+        $testAllCards[] = new Card(
+            '',
+            'Ruter',
+            '8'
+        );
+        $testAllCards[] = new Card(
+            '',
+            'Hjarter',
+            '9'
+        );
 
-        //$colour = $newTestObject;
+        $newTestObject = [];
+        foreach ($testAllCards as $card) {
+            $newTestObject[] = (object) [
+                'colour' => $card->getColour(),
+                'points' => intval($card->getPoints())
+            ];
+        }
 
-        ////sort by points
-        //usort($newTestObject, function ($objectA, $objectB) {
-        //    return $objectA->points - $objectB->points;
-        //});
+        //sort by colours
+        usort($newTestObject, function ($objectA, $objectB) {
+            return strcmp($objectA->colour, $objectB->colour);
+        });
 
-        //$points = $newTestObject;
+        $colour = $newTestObject;
 
-
-        //dump(\App\PokerCalculations\checkHandSixCards($points, $colour));
-
+        //sort by points
+        usort($newTestObject, function ($objectA, $objectB) {
+            return $objectA->points - $objectB->points;
+        });
+        $points = $newTestObject;
+        dump(\App\PokerCalculations\checkHandSevenCards($points, $colour, $newTestHandObject));
         //-----------------------------------------------------------------------
 
         return $this->render('poker/game.html.twig', $data);
@@ -103,7 +124,7 @@ class PokerController extends AbstractController
 
     /**
     * @Route(
-    *       "/pokergame",
+    *       "/proj/pokergame",
     *       name="pokergame_post",
     *       methods={"POST"}
     * )
@@ -116,23 +137,9 @@ class PokerController extends AbstractController
         $result = \App\PokerCalculations\managePokerGame($session, $request, $doctrine);
 
         switch ($result[0]) {
-            case 'Deal cards':
-                return $this->render('poker/game.html.twig', $result[2]);
-            case 'Fold':
-                return $this->render('poker/game.html.twig', $result[2]);
             case 'Restart':
                 return $this->redirectToRoute('pokergame');
-            case 'Bet 10$':
-                return $this->render('poker/game.html.twig', $result[2]);
-            case 'Raise 10$':
-                return $this->render('poker/game.html.twig', $result[2]);
-            case 'Re-raise 10$':
-                return $this->render('poker/game.html.twig', $result[2]);
-            case 'Check':
-                return $this->render('poker/game.html.twig', $result[2]);
-            case 'Call':
-                return $this->render('poker/game.html.twig', $result[2]);
         }
-        return $this->redirectToRoute('pokergame');
+        return $this->render('poker/game.html.twig', $result[2]);
     }
 }
