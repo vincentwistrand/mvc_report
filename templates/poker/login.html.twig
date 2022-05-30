@@ -43,7 +43,7 @@
         {% if user.getType == 'ordinary' %}
             <h2>Du är inloggad som {{ user.name }}!</h2><br><br>
             <div class="update_delete_buttons">
-                <div style="text-align: center;"><a id="poker_user_button" href="{{ path('poker_user_by_id', {id: user.getId}) }}">Profilsida</a></div>
+                <div style="text-align: center;"><a id="poker_user_button" href="{{ path('poker_user_by_id', {userId: user.getId}) }}">Profilsida</a></div>
                 <div style="text-align: center;"><a id="poker_user_button" href="{{ path('logout_poker') }}">Logga ut</a></div>
             </div>
         {% endif %}
