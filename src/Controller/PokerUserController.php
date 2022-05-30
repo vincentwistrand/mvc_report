@@ -17,7 +17,7 @@ class PokerUserController extends AbstractController
 {
     /**
     * @Route(
-    *       "/loginpoker",
+    *       "/proj/loginpoker",
     *       name="login_poker",
     *       methods={"GET","HEAD"}
     * )
@@ -25,7 +25,6 @@ class PokerUserController extends AbstractController
     public function loginPoker(
         SessionInterface $session
     ): Response {
-        //$session->set('CurrentPokerUser', null);
         $user = $session->get('CurrentPokerUser');
 
         return $this->render('poker/login.html.twig', [
@@ -36,7 +35,7 @@ class PokerUserController extends AbstractController
 
     /**
     * @Route(
-    *       "/loginpoker",
+    *       "/proj/loginpoker",
     *       name="login_process_poker",
     *       methods={"POST"}
     * )
@@ -68,7 +67,7 @@ class PokerUserController extends AbstractController
 
     /**
     * @Route(
-    *       "/logoutpoker",
+    *       "/proj/logoutpoker",
     *       name="logout_poker",
     *       methods={"GET","HEAD"}
     * )
@@ -83,7 +82,7 @@ class PokerUserController extends AbstractController
 
     /**
     * @Route(
-    *       "/pokeruser/create",
+    *       "/proj/pokeruser/create",
     *       name="create_user_poker",
     *       methods={"GET","HEAD"}
     * )
@@ -97,7 +96,7 @@ class PokerUserController extends AbstractController
 
     /**
     * @Route(
-    *      "/pokeruser/create",
+    *      "/proj/pokeruser/create",
     *      name="create_user_poker_process",
     *      methods={"POST"}
     * )
@@ -141,7 +140,7 @@ class PokerUserController extends AbstractController
     }
 
     /**
-    * @Route("/pokeruser", name="poker_user")
+    * @Route("/proj/pokeruser", name="poker_user")
     */
     public function showAllPokerUsers(
         pokeruserRepository $pokeruserRepository,
@@ -169,7 +168,7 @@ class PokerUserController extends AbstractController
     }
 
     /**
-    * @Route("/pokeruser/show/{userId}", name="poker_user_by_id")
+    * @Route("/proj/pokeruser/show/{userId}", name="poker_user_by_id")
     */
     public function showPokerUserById(
         pokeruserRepository $pokeruserRepository,
@@ -193,7 +192,7 @@ class PokerUserController extends AbstractController
     }
 
     /**
-    * @Route("/pokeruser/delete/{userId}", name="poker_user_delete_by_id")
+    * @Route("/proj/pokeruser/delete/{userId}", name="poker_user_delete_by_id")
     */
     public function deletePokerUserById(
         ManagerRegistry $doctrine,
@@ -229,7 +228,7 @@ class PokerUserController extends AbstractController
 
     /**
     * @Route(
-    *   "/pokeruser/update/{userId}",
+    *   "/proj/pokeruser/update/{userId}",
     *    name="poker_user_update",
     *    methods={"GET","HEAD"}
     * )
@@ -258,7 +257,7 @@ class PokerUserController extends AbstractController
 
     /**
     * @Route(
-    *       "/pokeruser/update/{userId}",
+    *       "/proj/pokeruser/update/{userId}",
     *       name="poker_user_update_process",
     *       methods={"POST"}
     * )
