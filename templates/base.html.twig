@@ -37,6 +37,7 @@ function myFunction() {
                 <a href="{{ path("book") }}" {% if app.request.pathinfo == "/book" %}class="active"{% endif %}>Bibliotek</a>
                 <a href="{{ path("login") }}" {% if app.request.pathinfo == "/login" %}class="active"{% endif %}>Användare</a>
                 <a href="{{ path("metrics") }}" {% if app.request.pathinfo == "/metrics" %}class="active"{% endif %}>Metrics</a>
+                <a href="{{ path("about_poker") }}" {% if app.request.pathinfo == "/proj" %}class="active"{% endif %}>Projekt</a>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
                 </a>
