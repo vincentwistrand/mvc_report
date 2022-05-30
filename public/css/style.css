@@ -432,12 +432,16 @@ select {
 }
 
 .poker_user_container a {
-    color: 'white';
+    /*color: 'white';*/
     text-decoration: none;
 }
 
 .poker_user_container a:visited,
 .game_flex a {
+    color: rgb(242, 242, 20);
+}
+
+.poker_user_container a:link {
     color: rgb(242, 242, 20);
 }
 
