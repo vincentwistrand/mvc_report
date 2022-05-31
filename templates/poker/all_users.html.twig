@@ -11,6 +11,8 @@
         {% if current_user.type == 'admin' %}
             <a href="{{ path('poker_user') }}">Alla konton</a><br><br>
         {% endif %}
+        <a href="{{ path('home') }}">Reportsidan</a>
+        <a href="{{ path('about_poker') }}">Aboutsidan</a>
         <a href="{{ path('logout_poker') }}">Logga ut</a><br><br>
     </div><br><br>
     <h1 style="text-align: center; color: white;">{{ title }}</h1>
