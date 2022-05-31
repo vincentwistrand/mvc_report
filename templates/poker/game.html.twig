@@ -42,7 +42,8 @@
     </div>
 
     {% if player_hand == [] and table_cards == [] %}
-        <form method="post" style="height: 130px; position: relative; top: 150px;"><input type="submit" name="deal" value="Deal cards"></form>
+        <h1 style="color: yellow; position: relative; top: 50px;">Texas Hold'em!</h1>
+        <form method="post" style="height: 130px; position: relative; top: 100px;"><input class="poker_button" type="submit" name="deal" value="Deal cards"></form>
     {% endif %}
     {% if table_cards == [] and player_hand != [] %}
         <div style="height: 180px;"></div>
@@ -60,38 +61,38 @@
             <div style="height: 140px;"></div>
         {% endif %}
         {% if player_hand != [] and table_cards == [] %}
-            <form style="height: 27px;" method="post" class="buttons_flex">
+            <form style="height: 35px;" method="post" class="buttons_flex">
                 {% if bank_move != 'raise' %}
-                    <input type="submit" name="ten" value="Bet 10$">
+                    <input class="poker_button" type="submit" name="ten" value="Bet 10$">
                 {% endif %}
                 {% if bank_move == 'raise' %}
-                    <div><input type="submit" name=" call" value="Call"></div>
-                    <div><input type="submit" name="twenty" value="Re-raise 10$"></div>
+                    <div><input class="poker_button" type="submit" name=" call" value="Call"></div>
+                    <div><input class="poker_button" type="submit" name="twenty" value="Re-raise 10$"></div>
                 {% endif %}
-                <input type="submit" name="fold" value="Fold">
+                <input class="poker_button" type="submit" name="fold" value="Fold">
             </form>
         {% endif %}
         {% if player_hand != [] and table_cards != [] %}
-            <form style="height: 27px;" method="post" class="buttons_flex">
+            <form style="height: 35px;" method="post" class="buttons_flex">
                 {% if bank_move == 'raise' %}
-                    <div><input type="submit" name="call" value="Call"></div>
-                    <div><input type="submit" name="twenty" value="Re-raise 10$"></div>
+                    <div><input class="poker_button" type="submit" name="call" value="Call"></div>
+                    <div><input class="poker_button" type="submit" name="twenty" value="Re-raise 10$"></div>
                 {% endif %}
                 {% if bank_move == 're-raise' %}
-                    <div><input type="submit" name="call" value="Call"></div>
-                    <div><input type="submit" name="twenty" value="Re-raise 10$"></div>
+                    <div><input class="poker_button" type="submit" name="call" value="Call"></div>
+                    <div><input class="poker_button" type="submit" name="twenty" value="Re-raise 10$"></div>
                 {% endif %}
                 {% if bank_move != 'raise' and bank_move != 're-raise' %}
-                    <div><input type="submit" name="check" value="Check"></div>
-                    <div><input type="submit" name="ten" value="Bet 10$"></div>
+                    <div><input class="poker_button" type="submit" name="check" value="Check"></div>
+                    <div><input class="poker_button" type="submit" name="ten" value="Bet 10$"></div>
                 {% endif %}
-                <div><input type="submit" name="fold" value="Fold"></div>
+                <div><input class="poker_button" type="submit" name="fold" value="Fold"></div>
             </form>
         {% endif %}
     {% endif %}
     {% if game_over %}
         <form style="height: 27px;" method="post" class="buttons_flex">
-            <div><input type="submit" name="restart" value="Restart"></div>
+            <div><input class="poker_button" type="submit" name="restart" value="Restart"></div>
         </form>
     {% endif %}
 
