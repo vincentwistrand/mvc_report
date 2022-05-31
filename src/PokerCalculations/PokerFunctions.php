@@ -625,6 +625,10 @@ function sevenBankCards(
         $game->addToPot(10);
     }
 
+    if ($playerMove === 'bet') {
+        $game->addToPot(10);
+    }
+
     endOfGame(
         $bankCardsColour,
         $bankCardsPoints,
@@ -686,7 +690,7 @@ function endOfGame(
             return;
         }
 
-        $session->set('PokerComment', 'Bank is the winner of ' . $game->getPot() . '$!');
+        $session->set('PokerComment', 'Bank is the winner of the pot! (' . $game->getPot() . '$)');
     }
 
     if ($playerCardPoints > $bankCardPoints) {
@@ -699,7 +703,7 @@ function endOfGame(
         return;
     }
 
-    $session->set('PokerComment', 'Bank is the winner of ' . $game->getPot() . '$!');
+    $session->set('PokerComment', 'Bank is the winner of the pot! (' . $game->getPot() . '$)');
 }
 
 /**
