@@ -90,7 +90,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "phpdoc": "tools/phpdoc/phpdoc",
+        "phpdoc": "tools/phpdoc/phpdoc -d ./src -t ./docs/api",
         "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
         "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src",
         "phpcs": "tools/php-codesniffer/vendor/bin/phpcs --standard=PSR12 src",
