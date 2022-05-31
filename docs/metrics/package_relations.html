@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2022-05-08 19:54:55        , with PHPMetrics v2.8.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2022-05-30 19:02:18        , with PHPMetrics v2.8.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -270,13 +270,12 @@
         "relations": [
             "Symfony\\Bundle\\FrameworkBundle\\Controller",
             "Symfony\\Component\\HttpFoundation",
-            "App\\Repository",
             "Symfony\\Component\\Routing\\Annotation",
             "Doctrine\\Persistence",
-            "App\\Entity",
+            "App\\Repository",
             "Symfony\\Component\\HttpFoundation\\Session",
-            "App\\Card",
-            "App\\Dice"
+            "App\\Entity",
+            "App\\Card"
         ]
     },
     {
@@ -290,15 +289,6 @@
         "relations": []
     },
     {
-        "name": "App\\Repository",
-        "size": 3000,
-        "relations": [
-            "Doctrine\\Bundle\\DoctrineBundle\\Repository",
-            "Doctrine\\Persistence",
-            "App\\Entity"
-        ]
-    },
-    {
         "name": "Symfony\\Component\\Routing\\Annotation",
         "size": 3000,
         "relations": []
@@ -309,12 +299,21 @@
         "relations": []
     },
     {
-        "name": "App\\Entity",
+        "name": "App\\Repository",
+        "size": 3000,
+        "relations": [
+            "Doctrine\\Bundle\\DoctrineBundle\\Repository",
+            "Doctrine\\Persistence",
+            "App\\Entity"
+        ]
+    },
+    {
+        "name": "Symfony\\Component\\HttpFoundation\\Session",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "Symfony\\Component\\HttpFoundation\\Session",
+        "name": "App\\Entity",
         "size": 3000,
         "relations": []
     },

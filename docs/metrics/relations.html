@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2022-05-08 19:54:55        , with PHPMetrics v2.8.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2022-05-30 19:02:18        , with PHPMetrics v2.8.1 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -295,16 +295,22 @@
         "relations": []
     },
     {
-        "name": "\\App\\Controller\\BookController",
+        "name": "\\App\\Card\\Poker",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\AboutPokerController",
         "size": 3000,
         "relations": [
             "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
             "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\App\\Repository\\BookRepository",
             "\\Symfony\\Component\\Routing\\Annotation\\Route",
             "\\Symfony\\Component\\HttpFoundation\\Request",
             "\\Doctrine\\Persistence\\ManagerRegistry",
-            "\\App\\Entity\\Book"
+            "\\App\\Repository\\PokerUserRepository",
+            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "\\App\\Entity\\PokerUser"
         ]
     },
     {
@@ -316,15 +322,6 @@
         "name": "\\Symfony\\Component\\HttpFoundation\\Response",
         "size": 3000,
         "relations": []
-    },
-    {
-        "name": "\\App\\Repository\\BookRepository",
-        "size": 3000,
-        "relations": [
-            "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
-            "\\Doctrine\\Persistence\\ManagerRegistry",
-            "\\App\\Entity\\Book"
-        ]
     },
     {
         "name": "\\Symfony\\Component\\Routing\\Annotation\\Route",
@@ -340,6 +337,47 @@
         "name": "\\Doctrine\\Persistence\\ManagerRegistry",
         "size": 3000,
         "relations": []
+    },
+    {
+        "name": "\\App\\Repository\\PokerUserRepository",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry",
+            "\\App\\Entity\\PokerUser"
+        ]
+    },
+    {
+        "name": "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Entity\\PokerUser",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\BookController",
+        "size": 3000,
+        "relations": [
+            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Repository\\BookRepository",
+            "\\Symfony\\Component\\Routing\\Annotation\\Route",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\Doctrine\\Persistence\\ManagerRegistry",
+            "\\App\\Entity\\Book"
+        ]
+    },
+    {
+        "name": "\\App\\Repository\\BookRepository",
+        "size": 3000,
+        "relations": [
+            "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "\\Doctrine\\Persistence\\ManagerRegistry",
+            "\\App\\Entity\\Book"
+        ]
     },
     {
         "name": "\\App\\Entity\\Book",
@@ -359,11 +397,6 @@
         ]
     },
     {
-        "name": "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
-        "size": 3000,
-        "relations": []
-    },
-    {
         "name": "\\App\\Controller\\CardController",
         "size": 3000,
         "relations": [
@@ -374,89 +407,6 @@
             "\\Symfony\\Component\\Routing\\Annotation\\Route",
             "\\Symfony\\Component\\HttpFoundation\\Request",
             "\\App\\Card\\Player"
-        ]
-    },
-    {
-        "name": "\\App\\Controller\\DiceController",
-        "size": 3000,
-        "relations": [
-            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
-            "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\App\\Dice\\Dice",
-            "\\Symfony\\Component\\Routing\\Annotation\\Route"
-        ]
-    },
-    {
-        "name": "\\App\\Dice\\Dice",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Controller\\DiceGraphicController",
-        "size": 3000,
-        "relations": [
-            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
-            "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\App\\Dice\\DiceGraphic",
-            "\\Symfony\\Component\\Routing\\Annotation\\Route"
-        ]
-    },
-    {
-        "name": "\\App\\Dice\\DiceGraphic",
-        "size": 3000,
-        "relations": [
-            "\\App\\Dice\\Dice"
-        ]
-    },
-    {
-        "name": "\\App\\Controller\\DiceHandController",
-        "size": 3000,
-        "relations": [
-            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
-            "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\Symfony\\Component\\Routing\\Annotation\\Route",
-            "\\Symfony\\Component\\HttpFoundation\\Request",
-            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
-            "\\App\\Dice\\DiceHand",
-            "\\App\\Dice\\Dice"
-        ]
-    },
-    {
-        "name": "\\App\\Dice\\DiceHand",
-        "size": 3000,
-        "relations": [
-            "\\App\\Dice\\Dice"
-        ]
-    },
-    {
-        "name": "\\App\\Controller\\FormLoginController",
-        "size": 3000,
-        "relations": [
-            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
-            "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\Symfony\\Component\\Routing\\Annotation\\Route",
-            "\\Symfony\\Component\\HttpFoundation\\Request"
-        ]
-    },
-    {
-        "name": "\\App\\Controller\\FormSearchController",
-        "size": 3000,
-        "relations": [
-            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
-            "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\Symfony\\Component\\HttpFoundation\\Request",
-            "\\Symfony\\Component\\Routing\\Annotation\\Route"
-        ]
-    },
-    {
-        "name": "\\App\\Controller\\FormSessionController",
-        "size": 3000,
-        "relations": [
-            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
-            "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\Symfony\\Component\\Routing\\Annotation\\Route",
-            "\\Symfony\\Component\\HttpFoundation\\Request",
-            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface"
         ]
     },
     {
@@ -481,29 +431,31 @@
         ]
     },
     {
-        "name": "\\App\\Controller\\ProductController",
+        "name": "\\App\\Controller\\PokerController",
         "size": 3000,
         "relations": [
             "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
             "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\Doctrine\\Persistence\\ManagerRegistry",
-            "\\App\\Entity\\Product",
+            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "\\App\\Card\\Poker",
+            "\\App\\Card\\Card",
             "\\Symfony\\Component\\Routing\\Annotation\\Route",
-            "\\App\\Repository\\ProductRepository"
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\Doctrine\\Persistence\\ManagerRegistry"
         ]
     },
     {
-        "name": "\\App\\Entity\\Product",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Repository\\ProductRepository",
+        "name": "\\App\\Controller\\PokerUserController",
         "size": 3000,
         "relations": [
-            "\\Doctrine\\Bundle\\DoctrineBundle\\Repository\\ServiceEntityRepository",
+            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "\\Symfony\\Component\\Routing\\Annotation\\Route",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\App\\Repository\\PokerUserRepository",
             "\\Doctrine\\Persistence\\ManagerRegistry",
-            "\\App\\Entity\\Product"
+            "\\App\\Entity\\PokerUser"
         ]
     },
     {
@@ -548,6 +500,25 @@
         "name": "\\App\\Entity\\User",
         "size": 3000,
         "relations": []
+    },
+    {
+        "name": "\\App\\Dice\\Dice",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Dice\\DiceGraphic",
+        "size": 3000,
+        "relations": [
+            "\\App\\Dice\\Dice"
+        ]
+    },
+    {
+        "name": "\\App\\Dice\\DiceHand",
+        "size": 3000,
+        "relations": [
+            "\\App\\Dice\\Dice"
+        ]
     },
     {
         "name": "\\App\\Kernel",
