@@ -78,9 +78,9 @@ class PokerTest extends TestCase
     {
         $poker_game = new Poker();
         $poker_game->newRound('Player');
-        $this->assertEquals(false, $poker_game->getGameOver());
+        $this->assertEquals(false, $poker_game->hasGameEnded());
         $poker_game->setGameOver();
-        $this->assertEquals(true, $poker_game->getGameOver());
+        $this->assertEquals(true, $poker_game->hasGameEnded());
     }
 
     /**
